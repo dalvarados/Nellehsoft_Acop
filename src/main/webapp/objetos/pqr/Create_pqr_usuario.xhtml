@@ -28,7 +28,7 @@
                         <h:selectOneRadio  id="opcionPqr" layout="lineDirection" value="#{pqrController.opcionPqr}">
                             <f:selectItem itemLabel="Tercero" itemValue="Tercero" />
                             <f:selectItem itemLabel="Propiedad" itemValue="Propiedad" />
-                         <p:ajax event="click" update="opcionPqr idNivel2 idNivel3 idTercero"/>
+                         <p:ajax event="click" update="idNivel2 idNivel3 idTercero"/>
                         </h:selectOneRadio>
                         <p:outputLabel value="#{bundle.CreatePqrLabel_idTercero}" for="idTercero" />
                         <p:selectOneMenu disabled="#{pqrController.opcionPqr ne 'Tercero'}" id="idTercero" value="#{pqrController.selected.idTercero}" >

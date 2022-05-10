@@ -31,11 +31,20 @@ public class UsuarioController implements Serializable {
     private Usuario selected;
     private Usuario sesion;
     private String usuario_acop;
+    private String confirmar_contraseña;
     private String contrasena_acop;   
     private Usuario user;  
     private String redireccion=null;     
     
     public UsuarioController() {
+    }
+
+    public String getConfirmar_contraseña() {
+        return confirmar_contraseña;
+    }
+
+    public void setConfirmar_contraseña(String confirmar_contraseña) {
+        this.confirmar_contraseña = confirmar_contraseña;
     }
 
     public UsuarioFacade getEjbFacade() {
