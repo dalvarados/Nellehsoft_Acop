@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{usuarioController.templateDinamico()}">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListEstadoDeCuentaTitle}"></h:outputText>
+            <f:event type="preRenderView" listener="#{estadoDeCuentaController.obtener_estado_de_cuenta()}" />
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="EstadoDeCuentaListForm">
+                <br></br><br></br>
+                <p:panel header="#{bundle.ListEstadoDeCuentaTitle}">
+                    <br></br><br></br>
+                    <p:dataTable id="datalist" value="#{estadoDeCuentaController.lista_estadodecuenta}" var="item"
+                                 selectionMode="single" selection="#{estadoDeCuentaController.selected}"
+                                 paginator="true" paginatorPosition="bottom"
+                                 rowKey="#{item.id}" emptyMessage="Copropietario sin deuda pendiente"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+<!--                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>-->
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEstadoDeCuentaTitle_fechaCreacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaCreacion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEstadoDeCuentaTitle_fechaCorte}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaCorte}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEstadoDeCuentaTitle_valor}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.valor}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListEstadoDeCuentaTitle_estado}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estado}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="nombreUsuario"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idUsuario.nombreUsuario}"/>
+                        </p:column>
+                        <f:facet name="footer">
+<!--                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="{bundle.Create}" actionListener="{estadoDeCuentaController.prepareCreate}" update=":EstadoDeCuentaCreateForm" oncomplete="PF('EstadoDeCuentaCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="{bundle.View}" update=":EstadoDeCuentaViewForm" oncomplete="PF('EstadoDeCuentaViewDialog').show()" disabled="{empty estadoDeCuentaController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="{bundle.Edit}" update=":EstadoDeCuentaEditForm" oncomplete="PF('EstadoDeCuentaEditDialog').show()" disabled="{empty estadoDeCuentaController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="{bundle.Delete}" actionListener="{estadoDeCuentaController.destroy}" update=":growl,datalist" disabled="{empty estadoDeCuentaController.selected}"/>-->
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+<!--            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>-->
+        </ui:define>
+    </ui:composition>
+
+</html>

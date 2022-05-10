@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>    
+        <title>::: NellehSoft - ACOP</title>         
+
+        </h:head>
+    <style>
+    body { 
+    background: url(../resources/imagenes/fondo_principal.jpg) ;
+    background-repeat: no-repeat; 
+    background-size: 100%
+    }
+    </style>
+    <body>
+       <p:growl id="growl" life="5000"  showDetail="true" escape="false"/>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+        <table  border="0" style="width: 100%;height: 100%"> 
+            <tr>
+                <td align="left" valign="top">
+                    
+                    <h:graphicImage  library="imagenes"   style="width: 28%; height: 62%;" 
+                                     name="logo_nellehsoft_ok.png"/>
+                    <br></br><br></br><br></br><br></br>
+                    <br></br><br></br>
+                </td>
+            </tr>
+            <tr>                       
+            <td align="left" valign="top">           
+               <h:form>               
+                   <table width="30%" border="0"  cellpadding="0" cellspacing="0">
+                    <tr>                     
+                    </tr>
+
+<tr>
+                 <td>
+                     <br></br><br></br>
+               <p:dialog id="dialog" width="550" widgetVar="dlg" visible="true" closable="false" 
+                         showEffect="clip" draggable="false" resizable="false" 
+                         style="box-shadow: 7px 10px 5px #303030;">                      
+                    <p:panelGrid  columns="2" style="margin: 0 auto">
+                    <h2>Sesion finalizada correctamente</h2>                    
+
+                    <p:commandLink  style="font-size: 12px" value="Iniciar Sesion"  
+                                    action="/index.xhtml?faces-redirect=true"/>                    
+                    </p:panelGrid>                 
+               </p:dialog>
+                 </td>
+                        <br></br><br></br><br></br><br></br>
+                  </tr>
+                      
+                 </table>
+                   
+                </h:form>                    
+            </td>
+            </tr>
+            <tr><td></td></tr>
+            <tr><td></td></tr>
+
+            <tr>
+                <td style="width: 100%;height: 100%">
+                    <br></br><br></br><br></br><br></br>
+                    <br></br><br></br><br></br><br></br>
+                    <br></br><br></br><br></br>
+                    <br></br><br></br>
+
+                </td>                
+            </tr>
+            <tr>
+                <br></br> 
+                <td bgcolor="blue">
+                    <br></br>                    
+                </td>  
+            </tr>
+        </table>
+</body>
+</html>
+

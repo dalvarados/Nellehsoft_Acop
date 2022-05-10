@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title><ui:insert name="title">Default Title</ui:insert></title>
+        <h:outputStylesheet library="css" name="jsfcrud.css"/>
+        <h:outputScript library="js" name="jsfcrud.js"/>
+        <f:event type="preRenderView" listener="#{plantillaController.obtenerCopropiedad()}" />
+    </h:head>
+    <h:body>
+      <p:growl id="growl" life="3000" />
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="30" header="#{bundle.AppName}">                  
+            </p:layoutUnit>
+
+            <p:layoutUnit position="west" size="320">
+             <p:growl  id="msgs"  showDetail="true" />
+               <h:form id="form">
+                <br></br><br></br>
+                     <p:panel header="Menu">
+                       <p:accordionPanel  id="idAccPanel" widgetVar="basic">                                 
+                           <p:tab  title="Inicio" >
+                                <h:panelGrid columns="1">
+                                    <p:commandLink   style="font-size: 12px" value="Noticias" action="/paginas/principal_usuario.xhtml?faces-redirect=true"/>
+                                 </h:panelGrid>                               
+                           </p:tab>    
+
+                           <p:tab  title="Perfil" >
+                                <h:panelGrid columns="1">
+                                    <p:commandLink   style="font-size: 12px" value="Aministrar" action="/objetos/propietario/List_perfil_usuario.xhtml?faces-redirect=true"/>
+                                    <p:commandLink   style="font-size: 12px" value="Estado de cuenta" action="/objetos/estadoDeCuenta/List_estadoCuenta.xhtml?faces-redirect=true"/>
+                                 </h:panelGrid>                               
+                           </p:tab>    
+                           <p:tab  title="Pqr" >
+                                <h:panelGrid columns="1">
+                                    <p:commandLink   style="font-size: 12px" value="Administrar" action="/objetos/pqr/List_pqr_usuario.xhtml?faces-redirect=true"/>
+                                </h:panelGrid> 
+                           </p:tab>                     
+                           <p:tab  title="Reservas" >
+                               <h:panelGrid columns="1">
+                                    <p:commandLink   style="font-size: 12px" value="Administrar" action="/objetos/reserva/List_reserva_usuario.xhtml?faces-redirect=true"/>
+                                </h:panelGrid> 
+                           </p:tab>                     
+                           <p:tab  title="Mensajes" >
+                               <h:panelGrid columns="1">
+                                    <p:commandLink   style="font-size: 12px" value="Visualizar" action="#"/>
+                                </h:panelGrid>
+                           </p:tab>                     
+                           <p:tab  title="Sesion" >
+                               <h:panelGrid columns="1">
+                               <h:form> 
+                            <p:commandLink   style="font-size: small" value="Cerrar Sesion" 
+                                             actionListener="#{plantillaController.cerrarSesion()}" 
+                                             action="/paginas/sesionFinalizada.xhtml?faces-redirect=true"/>
+                            </h:form>
+                                </h:panelGrid>
+                           </p:tab> 
+                        </p:accordionPanel> 
+                     </p:panel>                  
+                    <table width="100%" border="1" id="tableAccordeon">
+                        <tr>
+                            <td colspan="2">
+                                <h:graphicImage  library="imagenes"   style="width: 100%; height: 330%;" name="icono_empresa.png"/>
+                            </td>
+                        </tr>
+                     <tr>
+                        <td>
+                            <h:outputText  style="width:10%;font-weight: bold" value="Nombre: "/> 
+                        </td>
+                        <td>
+                            <h:outputText  style="alignment-baseline: middle" value="#{plantillaController.objeto_copropiedad.nombre}"/><br></br>  
+                        </td>
+                     </tr>
+                     <tr>
+                         <br></br>
+                        <td>
+                            <h:outputText style="width: 10%;font-weight: bold" value="Direccion: "/> 
+                        </td>
+                         <br></br><td><h:outputText value="#{plantillaController.objeto_copropiedad.direccion}"/><br></br></td>
+                     </tr>
+                     <tr>
+                          <br></br>
+                        <td>
+                            <h:outputText style="width: 10%;font-weight: bold" value="Telefono: "/> 
+                        </td>
+                         <br></br><td><h:outputText value="#{plantillaController.objeto_copropiedad.telefono}"/><br></br></td>
+                     </tr>
+                        <tr>
+                          <br></br>
+                        <td>
+                            <h:outputText style="width: 10%;font-weight: bold" value="Nit: "/> 
+                        </td>
+                          <br></br><td><h:outputText value="#{plantillaController.objeto_copropiedad.nit}"/><br></br></td>
+                     </tr>
+                    </table>                
+                </h:form>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <table  border="0" cellpadding="5" cellspacing="0" width="105%">
+                <tbody>
+                    <td width="71%"> </td>
+                    <td width="30"><label></label></td>
+                    <td width="5%" align="right"><label style="font-size: 11px">Bienvenido:</label></td>
+                    <td width="12%" align="left">
+                        <h:outputText style="font-size: 11px;text-orientation: sideways-left" 
+                                      value="#{usuarioController.usuario_logeado().nombres.concat(' ')
+                                               .concat(usuarioController.usuario_logeado().apellidos)}" />
+                    </td>                     
+                    <td width="12%" align="left">
+                        <h:form> 
+                            <p:commandLink   style="font-size: small" value="Cerrar Sesion" 
+                                             actionListener="#{plantillaController.cerrarSesion()}" 
+                                             action="/paginas/sesionFinalizada.xhtml?faces-redirect=true"/>
+                        </h:form>
+                    </td>
+                    </tbody>
+                </table>                
+                
+                <ui:insert name="body"/>
+            </p:layoutUnit>
+
+        </p:layout>
+
+    </h:body>
+
+</html>

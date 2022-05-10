@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="Nivel2EditDlg" widgetVar="Nivel2EditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditNivel2Title}">
+            <h:form id="Nivel2EditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{nivel2Controller.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateNivel1Label_tipo}" for="tipo" />
+                        <p:selectOneMenu id="tipo" value="#{nivel2Controller.selected.idTipo}" >
+                            <f:selectItems value="#{tipoNivelController.itemsAvailableSelectOne}"
+                                           var="idtipoNivelItem"
+                                           itemValue="#{idtipoNivelItem}" itemLabel="#{idtipoNivelItem.nombre}"/>
+                        </p:selectOneMenu> 
+                        <p:outputLabel value="#{bundle.EditNivel2Label_referencia}" for="referencia" />
+                        <p:inputText id="referencia" value="#{nivel2Controller.selected.referencia}" title="#{bundle.EditNivel2Title_referencia}" />
+                        <p:outputLabel value="#{bundle.EditNivel2Label_idNivel1}" for="idNivel1" />
+                        <p:selectOneMenu id="idNivel1" value="#{nivel2Controller.selected.idNivel1}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{nivel1Controller.itemsAvailableSelectOne}"
+                                           var="idNivel1Item"
+                                           itemValue="#{idNivel1Item}" itemLabel="#{idNivel1Item.referencia}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{nivel2Controller.update}" value="#{bundle.Save}" update="display,:Nivel2ListForm:datalist,:growl" oncomplete="handleSubmit(args, 'Nivel2EditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="Nivel2EditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

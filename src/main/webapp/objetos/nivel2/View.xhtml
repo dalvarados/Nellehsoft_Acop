@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="Nivel2ViewDlg" widgetVar="Nivel2ViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewNivel2Title}">
+            <h:form id="Nivel2ViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{nivel2Controller.selected != null}">
+                        <h:outputText value="#{bundle.ViewNivel2Label_id}"/>
+                        <h:outputText value="#{nivel2Controller.selected.id}" title="#{bundle.ViewNivel2Title_id}"/>
+                        <h:outputText value="#{bundle.ViewNivel2Label_tipo}"/>
+                        <h:outputText value="#{nivel2Controller.selected.idTipo.nombre}" title="#{bundle.ViewNivel2Title_tipo}"/>
+                        <h:outputText value="#{bundle.ViewNivel2Label_referencia}"/>
+                        <h:outputText value="#{nivel2Controller.selected.referencia}" title="#{bundle.ViewNivel2Title_referencia}"/>
+                        <h:outputText value="#{bundle.ViewNivel2Label_idNivel1}"/>
+                        <h:outputText value="#{nivel2Controller.selected.idNivel1}" title="#{bundle.ViewNivel2Title_idNivel1}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="Nivel2ViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

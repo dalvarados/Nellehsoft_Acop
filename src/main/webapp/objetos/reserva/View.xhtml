@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReservaViewDlg" widgetVar="ReservaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewReservaTitle}">
+            <h:form id="ReservaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reservaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewReservaLabel_id}"/>
+                        <h:outputText value="#{reservaController.selected.id}" title="#{bundle.ViewReservaTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewReservaLabel_fechaCreacion}"/>
+                        <h:outputText value="#{reservaController.selected.fechaCreacion}" title="#{bundle.ViewReservaTitle_fechaCreacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewReservaLabel_cantAsistentes}"/>
+                        <h:outputText value="#{reservaController.selected.cantAsistentes}" title="#{bundle.ViewReservaTitle_cantAsistentes}"/>
+                        <h:outputText value="#{bundle.ViewReservaLabel_fechaInicio}"/>
+                        <h:outputText value="#{reservaController.selected.fechaInicio}" title="#{bundle.ViewReservaTitle_fechaInicio}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewReservaLabel_fechaFin}"/>
+                        <h:outputText value="#{reservaController.selected.fechaFin}" title="#{bundle.ViewReservaTitle_fechaFin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewReservaLabel_asunto}"/>
+                        <h:outputText value="#{reservaController.selected.asunto}" title="#{bundle.ViewReservaTitle_asunto}"/>
+                        <h:outputText value="#{bundle.ViewReservaLabel_descripcion}"/>
+                        <h:outputText value="#{reservaController.selected.descripcion}" title="#{bundle.ViewReservaTitle_descripcion}"/>
+                        <h:outputText value="#{bundle.ViewReservaLabel_estado}"/>
+                        <h:outputText value="#{reservaController.selected.estado}" title="#{bundle.ViewReservaTitle_estado}"/>
+                        <h:outputText value="#{bundle.ViewReservaLabel_idTipoReserva}"/>
+                        <h:outputText value="#{reservaController.selected.idTipoReserva}" title="#{bundle.ViewReservaTitle_idTipoReserva}"/>
+                        <h:outputText value="#{bundle.ViewReservaLabel_idNivel2}"/>
+                        <h:outputText value="#{reservaController.selected.idNivel2}" title="#{bundle.ViewReservaTitle_idNivel2}"/>
+                        <h:outputText value="#{bundle.ViewReservaLabel_idNivel3}"/>
+                        <h:outputText value="#{reservaController.selected.idNivel3}" title="#{bundle.ViewReservaTitle_idNivel3}"/>
+                        <h:outputText value="#{bundle.ViewReservaLabel_idUsuario}"/>
+                        <h:outputText value="#{reservaController.selected.idUsuario}" title="#{bundle.ViewReservaTitle_idUsuario}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ReservaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

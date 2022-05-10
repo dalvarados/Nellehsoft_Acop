@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <Resource id="jdni_acop" type="javax.sql.DataSource">#Sat Apr 09 19:16:14 COT 2022
+jdbcDriver=com.mysql.jdbc.Driver
+password=6510351
+userName=root
+jdbcUrl=jdbc\:mysql\://localhost\:3306/bd_acop?zeroDateTimeBehavior\=convertToNull
+</Resource>
+</resources>

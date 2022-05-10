@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PropietarioEditDlg" widgetVar="PropietarioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPropietarioTitle}">
+            <h:form id="PropietarioEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{propietarioController.selected != null}">
+                        <p:outputLabel  value="#{bundle.CreatePropietarioLabel_fechaCreacion}" for="fechaCreacion" />
+                        <p:calendar  id="fechaCreacion" pattern="yyyy/MM/dd" value="#{propietarioController.selected.fechaCreacion}" title="#{bundle.EditPropietarioTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditPropietarioRequiredMessage_fechaCreacion}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreatePropietarioLabel_tipoIdentificacion}" for="tipoIdentificacion" />
+                        <p:selectOneMenu  id="tipoIdentificacion" value="#{propietarioController.selected.tipoIdentificacion}">                        
+                        <f:selectItem itemLabel="Cedula Ciudadania" itemValue="Cedula Ciudadania" />
+                        <f:selectItem itemLabel="Cedula Extranjeria" itemValue="Cedula Extranjeria" />
+                        <f:selectItem itemLabel="Pasaporte" itemValue="Pasaporte" />
+                        <f:selectItem itemLabel="Nit" itemValue="Nit" />  
+                        </p:selectOneMenu>                          
+                        <p:outputLabel value="#{bundle.CreatePropietarioLabel_identificacion}" for="identificacion" />
+                        <p:inputText  id="identificacion" value="#{propietarioController.selected.identificacion}" title="#{bundle.CreatePropietarioTitle_identificacion}" />
+                        <p:outputLabel value="#{bundle.CreatePropietarioLabel_nombre}" for="nombre" />
+                        <p:inputText  id="nombre" value="#{propietarioController.selected.nombre}" title="#{bundle.CreatePropietarioTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.CreatePropietarioLabel_apellidos}" for="apellidos" />
+                        <p:inputText  id="apellidos" value="#{propietarioController.selected.apellidos}" title="#{bundle.CreatePropietarioTitle_apellidos}" />
+                        <p:outputLabel value="#{bundle.CreatePropietarioLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{propietarioController.selected.telefono}" title="#{bundle.CreatePropietarioTitle_telefono}" />
+                        <p:outputLabel value="#{bundle.CreatePropietarioLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{propietarioController.selected.correo}" title="#{bundle.CreatePropietarioTitle_correo}" />
+                        <p:outputLabel value="#{bundle.CreatePropietarioLabel_idRol}" for="idRol" />
+                        <p:selectOneMenu  id="idRol" value="#{propietarioController.selected.idRol}" >
+                            <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
+                                           var="idRolItem"
+                                           itemValue="#{idRolItem}" itemLabel="#{idRolItem.nombre}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{propietarioController.update}" value="#{bundle.Save}" update="display,:PropietarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PropietarioEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PropietarioEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

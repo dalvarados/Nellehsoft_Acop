@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SegumientoMantnoCreateDlg" widgetVar="SegumientoMantnoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSegumientoMantnoTitle}">
+            <h:form id="SegumientoMantnoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{segumientoMantnoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSegumientoMantnoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{segumientoMantnoController.selected.id}" title="#{bundle.CreateSegumientoMantnoTitle_id}" required="true" requiredMessage="#{bundle.CreateSegumientoMantnoRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateSegumientoMantnoLabel_fechaCreacion}" for="fechaCreacion" />
+                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" value="#{segumientoMantnoController.selected.fechaCreacion}" title="#{bundle.EditSegumientoMantnoTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditSegumientoMantnoRequiredMessage_fechaCreacion}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateSegumientoMantnoLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{segumientoMantnoController.selected.descripcion}" title="#{bundle.CreateSegumientoMantnoTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.CreateSegumientoMantnoLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{segumientoMantnoController.selected.estado}" title="#{bundle.CreateSegumientoMantnoTitle_estado}" />
+                        <p:outputLabel value="#{bundle.CreateSegumientoMantnoLabel_idMantenimiento}" for="idMantenimiento" />
+                        <p:selectOneMenu id="idMantenimiento" value="#{segumientoMantnoController.selected.idMantenimiento}" required="true" requiredMessage="#{bundle.EditSegumientoMantnoRequiredMessage_idMantenimiento}">
+                            <f:selectItems value="#{mantenimientoController.itemsAvailableSelectOne}"
+                                           var="idMantenimientoItem"
+                                           itemValue="#{idMantenimientoItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateSegumientoMantnoLabel_idUsuario}" for="idUsuario" />
+                        <p:selectOneMenu id="idUsuario" value="#{segumientoMantnoController.selected.idUsuario}" required="true" requiredMessage="#{bundle.EditSegumientoMantnoRequiredMessage_idUsuario}">
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="idUsuarioItem"
+                                           itemValue="#{idUsuarioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{segumientoMantnoController.create}" value="#{bundle.Save}" update="display,:SegumientoMantnoListForm:datalist,:growl" oncomplete="handleSubmit(args,'SegumientoMantnoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SegumientoMantnoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

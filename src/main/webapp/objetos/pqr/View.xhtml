@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PqrViewDlg" widgetVar="PqrViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPqrTitle}">
+            <h:form id="PqrViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{pqrController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPqrLabel_id}"/>
+                        <h:outputText value="#{pqrController.selected.id}" title="#{bundle.ViewPqrTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewPqrLabel_fechaCreacion}"/>
+                        <h:outputText value="#{pqrController.selected.fechaCreacion}" title="#{bundle.ViewPqrTitle_fechaCreacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPqrLabel_asunto}"/>
+                        <h:outputText value="#{pqrController.selected.asunto}" title="#{bundle.ViewPqrTitle_asunto}"/>
+                        <h:outputText value="#{bundle.ViewPqrLabel_descripcion}"/>
+                        <h:outputText value="#{pqrController.selected.descripcion}" title="#{bundle.ViewPqrTitle_descripcion}"/>
+                        <h:outputText value="#{bundle.ViewPqrLabel_estado}"/>
+                        <h:outputText value="#{pqrController.selected.estado}" title="#{bundle.ViewPqrTitle_estado}"/>
+                        <h:outputText value="#{bundle.ViewPqrLabel_adjunto}"/>
+                        <h:outputText value="#{pqrController.selected.adjunto}" title="#{bundle.ViewPqrTitle_adjunto}"/>
+                        <h:outputText value="#{bundle.ViewPqrLabel_idTipoPqr}"/>
+                        <h:outputText value="#{pqrController.selected.idTipoPqr}" title="#{bundle.ViewPqrTitle_idTipoPqr}"/>
+                        <h:outputText value="#{bundle.ViewPqrLabel_idNivel2}"/>
+                        <h:outputText value="#{pqrController.selected.idNivel2}" title="#{bundle.ViewPqrTitle_idNivel2}"/>
+                        <h:outputText value="#{bundle.ViewPqrLabel_idNivel3}"/>
+                        <h:outputText value="#{pqrController.selected.idNivel3}" title="#{bundle.ViewPqrTitle_idNivel3}"/>
+                        <h:outputText value="#{bundle.ViewPqrLabel_idTercero}"/>
+                        <h:outputText value="#{pqrController.selected.idTercero}" title="#{bundle.ViewPqrTitle_idTercero}"/>
+                        <h:outputText value="#{bundle.ViewPqrLabel_idUsuario}"/>
+                        <h:outputText value="#{pqrController.selected.idUsuario}" title="#{bundle.ViewPqrTitle_idUsuario}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PqrViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

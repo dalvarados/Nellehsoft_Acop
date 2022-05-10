@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MantenimientoCreateDlg" widgetVar="MantenimientoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMantenimientoTitle}">
+            <h:form id="MantenimientoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{mantenimientoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateMantenimientoLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{mantenimientoController.selected.id}" title="#{bundle.CreateMantenimientoTitle_id}" required="true" requiredMessage="#{bundle.CreateMantenimientoRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.CreateMantenimientoLabel_fechaCreacion}" for="fechaCreacion" />
+                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" value="#{mantenimientoController.selected.fechaCreacion}" title="#{bundle.EditMantenimientoTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditMantenimientoRequiredMessage_fechaCreacion}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateMantenimientoLabel_fechaInicio}" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy" value="#{mantenimientoController.selected.fechaInicio}" title="#{bundle.EditMantenimientoTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditMantenimientoRequiredMessage_fechaInicio}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateMantenimientoLabel_fechaFin}" for="fechaFin" />
+                        <p:calendar id="fechaFin" pattern="MM/dd/yyyy" value="#{mantenimientoController.selected.fechaFin}" title="#{bundle.EditMantenimientoTitle_fechaFin}" required="true" requiredMessage="#{bundle.EditMantenimientoRequiredMessage_fechaFin}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateMantenimientoLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{mantenimientoController.selected.descripcion}" title="#{bundle.CreateMantenimientoTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.CreateMantenimientoLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{mantenimientoController.selected.estado}" title="#{bundle.CreateMantenimientoTitle_estado}" />
+                        <p:outputLabel value="#{bundle.CreateMantenimientoLabel_idNivel2}" for="idNivel2" />
+                        <p:selectOneMenu id="idNivel2" value="#{mantenimientoController.selected.idNivel2}" >
+                            <f:selectItems value="#{nivel2Controller.itemsAvailableSelectOne}"
+                                           var="idNivel2Item"
+                                           itemValue="#{idNivel2Item}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateMantenimientoLabel_idNivel3}" for="idNivel3" />
+                        <p:selectOneMenu id="idNivel3" value="#{mantenimientoController.selected.idNivel3}" >
+                            <f:selectItems value="#{nivel3Controller.itemsAvailableSelectOne}"
+                                           var="idNivel3Item"
+                                           itemValue="#{idNivel3Item}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateMantenimientoLabel_idTercero}" for="idTercero" />
+                        <p:selectOneMenu id="idTercero" value="#{mantenimientoController.selected.idTercero}" >
+                            <f:selectItems value="#{terceroController.itemsAvailableSelectOne}"
+                                           var="idTerceroItem"
+                                           itemValue="#{idTerceroItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateMantenimientoLabel_idUsuario}" for="idUsuario" />
+                        <p:selectOneMenu id="idUsuario" value="#{mantenimientoController.selected.idUsuario}" >
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="idUsuarioItem"
+                                           itemValue="#{idUsuarioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{mantenimientoController.create}" value="#{bundle.Save}" update="display,:MantenimientoListForm:datalist,:growl" oncomplete="handleSubmit(args,'MantenimientoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="MantenimientoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

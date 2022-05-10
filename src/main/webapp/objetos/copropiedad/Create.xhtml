@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CopropiedadCreateDlg" widgetVar="CopropiedadCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCopropiedadTitle}">
+            <h:form id="CopropiedadCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{copropiedadController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCopropiedadLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{copropiedadController.selected.nombre}" title="#{bundle.CreateCopropiedadTitle_nombre}" />
+                        <p:outputLabel value="#{bundle.CreateCopropiedadLabel_nit}" for="nit" />
+                        <p:inputText id="nit" value="#{copropiedadController.selected.nit}" title="#{bundle.CreateCopropiedadTitle_nit}" />
+                        <p:outputLabel value="#{bundle.CreateCopropiedadLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{copropiedadController.selected.direccion}" title="#{bundle.CreateCopropiedadTitle_direccion}" />
+                        <p:outputLabel value="#{bundle.CreateCopropiedadLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{copropiedadController.selected.telefono}" title="#{bundle.CreateCopropiedadTitle_telefono}" />
+                        <p:outputLabel value="#{bundle.CreateCopropiedadLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{copropiedadController.selected.correo}" title="#{bundle.CreateCopropiedadTitle_correo}" />
+                        <p:outputLabel value="#{bundle.CreateCopropiedadLabel_idTercero}" for="idTercero" />
+                        <p:selectOneMenu id="idTercero" value="#{copropiedadController.selected.idTercero}" >
+                            <f:selectItems value="#{terceroController.itemsAvailableSelectOne}"
+                                           var="idTerceroItem"
+                                           itemValue="#{idTerceroItem}" itemLabel="#{idTerceroItem.nombre}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{copropiedadController.create}" value="#{bundle.Save}" update="display,:CopropiedadListForm:datalist,:growl" oncomplete="handleSubmit(args,'CopropiedadCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CopropiedadCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PropietarioViewDlg" widgetVar="PropietarioViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPropietarioTitle}">
+            <h:form id="PropietarioViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{propietarioController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPropietarioLabel_id}"/>
+                        <h:outputText value="#{propietarioController.selected.id}" title="#{bundle.ViewPropietarioTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewPropietarioLabel_fechaCreacion}"/>
+                        <h:outputText value="#{propietarioController.selected.fechaCreacion}" title="#{bundle.ViewPropietarioTitle_fechaCreacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPropietarioLabel_tipoIdentificacion}"/>
+                        <h:outputText value="#{propietarioController.selected.tipoIdentificacion}" title="#{bundle.ViewPropietarioTitle_tipoIdentificacion}"/>
+                        <h:outputText value="#{bundle.ViewPropietarioLabel_identificacion}"/>
+                        <h:outputText value="#{propietarioController.selected.identificacion}" title="#{bundle.ViewPropietarioTitle_identificacion}"/>
+                        <h:outputText value="#{bundle.ViewPropietarioLabel_nombre}"/>
+                        <h:outputText value="#{propietarioController.selected.nombre}" title="#{bundle.ViewPropietarioTitle_nombre}"/>
+                        <h:outputText value="#{bundle.ViewPropietarioLabel_apellidos}"/>
+                        <h:outputText value="#{propietarioController.selected.apellidos}" title="#{bundle.ViewPropietarioTitle_apellidos}"/>
+                        <h:outputText value="#{bundle.ViewPropietarioLabel_telefono}"/>
+                        <h:outputText value="#{propietarioController.selected.telefono}" title="#{bundle.ViewPropietarioTitle_telefono}"/>
+                        <h:outputText value="#{bundle.ViewPropietarioLabel_correo}"/>
+                        <h:outputText value="#{propietarioController.selected.correo}" title="#{bundle.ViewPropietarioTitle_correo}"/>
+                        <h:outputText value="#{bundle.ViewPropietarioLabel_idUsuario}"/>
+                        <h:outputText value="#{propietarioController.selected.idUsuario}" title="#{bundle.ViewPropietarioTitle_idUsuario}"/>
+                        <h:outputText value="#{bundle.ViewPropietarioLabel_idRol}"/>
+                        <h:outputText value="#{propietarioController.selected.idRol}" title="#{bundle.ViewPropietarioTitle_idRol}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PropietarioViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

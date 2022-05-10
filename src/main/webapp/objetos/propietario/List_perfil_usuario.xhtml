@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{usuarioController.templateDinamico()}">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPropietarioTitle}"></h:outputText>
+            <f:event type="preRenderView" listener="#{propietarioController.obtener_propietario()}" />
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="PropietarioListForm">
+                <br></br><br></br>
+                <p:panel header="#{bundle.ListPropietarioTitle}">
+                    <br></br><br></br>
+                    <p:dataTable id="datalist" value="#{propietarioController.lista_propietario}" var="item"
+                                 selectionMode="single" selection="#{propietarioController.selected}"
+                                 paginator="true" paginatorPosition="bottom"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="viewButton editButton "/>
+                        <p:ajax event="rowUnselect" update=" viewButton editButton "/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPropietarioTitle_fechaCreacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaCreacion}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPropietarioTitle_tipoIdentificacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.tipoIdentificacion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPropietarioTitle_identificacion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.identificacion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPropietarioTitle_nombre}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombre}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPropietarioTitle_apellidos}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.apellidos}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPropietarioTitle_telefono}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telefono}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPropietarioTitle_correo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.correo}"/>
+                        </p:column>
+                       <!--- <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="{bundle.ListPropietarioTitle_idUsuario}"/>
+                            </f:facet>
+                            <h:outputText value="{item.idUsuario}"/>
+                        </p:column>/-->
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPropietarioTitle_idRol}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idRol.nombre}"/>
+                        </p:column>
+                        <f:facet name="footer">
+<!--                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="{bundle.Create}" actionListener="{propietarioController.prepareCreate}" update=":PropietarioCreateForm" oncomplete="PF('PropietarioCreateDialog').show()"/>-->
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PropietarioViewForm" oncomplete="PF('PropietarioViewDialog').show()" disabled="#{empty propietarioController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PropietarioEditForm" oncomplete="PF('PropietarioEditDialog').show()" disabled="#{empty propietarioController.selected}"/>
+<!--                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="{bundle.Delete}" actionListener="{propietarioController.destroy}" update=":growl,datalist" disabled="{empty propietarioController.selected}"/>-->
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+<!--            <ui:include src="Create.xhtml"/>-->
+            <ui:include src="Edit_propietario_usuario.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

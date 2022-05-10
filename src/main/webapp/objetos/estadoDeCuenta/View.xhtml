@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstadoDeCuentaViewDlg" widgetVar="EstadoDeCuentaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEstadoDeCuentaTitle}">
+            <h:form id="EstadoDeCuentaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{estadoDeCuentaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEstadoDeCuentaLabel_id}"/>
+                        <h:outputText value="#{estadoDeCuentaController.selected.id}" title="#{bundle.ViewEstadoDeCuentaTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewEstadoDeCuentaLabel_fechaCreacion}"/>
+                        <h:outputText value="#{estadoDeCuentaController.selected.fechaCreacion}" title="#{bundle.ViewEstadoDeCuentaTitle_fechaCreacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEstadoDeCuentaLabel_fechaCorte}"/>
+                        <h:outputText value="#{estadoDeCuentaController.selected.fechaCorte}" title="#{bundle.ViewEstadoDeCuentaTitle_fechaCorte}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewEstadoDeCuentaLabel_valor}"/>
+                        <h:outputText value="#{estadoDeCuentaController.selected.valor}" title="#{bundle.ViewEstadoDeCuentaTitle_valor}"/>
+                        <h:outputText value="#{bundle.ViewEstadoDeCuentaLabel_estado}"/>
+                        <h:outputText value="#{estadoDeCuentaController.selected.estado}" title="#{bundle.ViewEstadoDeCuentaTitle_estado}"/>
+                        <h:outputText value="#{bundle.ViewEstadoDeCuentaLabel_idPropietario}"/>
+                        <h:outputText value="#{estadoDeCuentaController.selected.idPropietario}" title="#{bundle.ViewEstadoDeCuentaTitle_idPropietario}"/>
+                        <h:outputText value="#{bundle.ViewEstadoDeCuentaLabel_idUsuario}"/>
+                        <h:outputText value="#{estadoDeCuentaController.selected.idUsuario}" title="#{bundle.ViewEstadoDeCuentaTitle_idUsuario}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EstadoDeCuentaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

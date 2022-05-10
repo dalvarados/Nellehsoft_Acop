@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ReservaEditDlg" widgetVar="ReservaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditReservaTitle}">
+            <h:form id="ReservaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{reservaController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditReservaLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{reservaController.selected.id}" title="#{bundle.EditReservaTitle_id}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_id}"/>
+                        <p:outputLabel value="#{bundle.EditReservaLabel_fechaCreacion}" for="fechaCreacion" />
+                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" value="#{reservaController.selected.fechaCreacion}" title="#{bundle.EditReservaTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_fechaCreacion}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditReservaLabel_cantAsistentes}" for="cantAsistentes" />
+                        <p:inputText id="cantAsistentes" value="#{reservaController.selected.cantAsistentes}" title="#{bundle.EditReservaTitle_cantAsistentes}" />
+                        <p:outputLabel value="#{bundle.EditReservaLabel_fechaInicio}" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy" value="#{reservaController.selected.fechaInicio}" title="#{bundle.EditReservaTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_fechaInicio}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditReservaLabel_fechaFin}" for="fechaFin" />
+                        <p:calendar id="fechaFin" pattern="MM/dd/yyyy" value="#{reservaController.selected.fechaFin}" title="#{bundle.EditReservaTitle_fechaFin}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_fechaFin}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditReservaLabel_asunto}" for="asunto" />
+                        <p:inputText id="asunto" value="#{reservaController.selected.asunto}" title="#{bundle.EditReservaTitle_asunto}" />
+                        <p:outputLabel value="#{bundle.EditReservaLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{reservaController.selected.descripcion}" title="#{bundle.EditReservaTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.EditReservaLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{reservaController.selected.estado}" title="#{bundle.EditReservaTitle_estado}" />
+                        <p:outputLabel value="#{bundle.EditReservaLabel_idTipoReserva}" for="idTipoReserva" />
+                        <p:selectOneMenu id="idTipoReserva" value="#{reservaController.selected.idTipoReserva}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_idTipoReserva}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{tipoReservaController.itemsAvailableSelectOne}"
+                                           var="idTipoReservaItem"
+                                           itemValue="#{idTipoReservaItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditReservaLabel_idNivel2}" for="idNivel2" />
+                        <p:selectOneMenu id="idNivel2" value="#{reservaController.selected.idNivel2}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{nivel2Controller.itemsAvailableSelectOne}"
+                                           var="idNivel2Item"
+                                           itemValue="#{idNivel2Item}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditReservaLabel_idNivel3}" for="idNivel3" />
+                        <p:selectOneMenu id="idNivel3" value="#{reservaController.selected.idNivel3}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{nivel3Controller.itemsAvailableSelectOne}"
+                                           var="idNivel3Item"
+                                           itemValue="#{idNivel3Item}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditReservaLabel_idUsuario}" for="idUsuario" />
+                        <p:selectOneMenu id="idUsuario" value="#{reservaController.selected.idUsuario}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="idUsuarioItem"
+                                           itemValue="#{idUsuarioItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{reservaController.update}" value="#{bundle.Save}" update="display,:ReservaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ReservaEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ReservaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

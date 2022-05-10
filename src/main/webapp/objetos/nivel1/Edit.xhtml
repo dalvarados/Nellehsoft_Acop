@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="Nivel1EditDlg" widgetVar="Nivel1EditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditNivel1Title}">
+            <h:form id="Nivel1EditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{nivel1Controller.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateNivel1Label_tipo}" for="tipo" />
+                        <p:selectOneMenu id="tipo" value="#{nivel1Controller.selected.idTipo}" >
+                            <f:selectItems value="#{tipoNivelController.itemsAvailableSelectOne}"
+                                           var="idtipoNivelItem"
+                                           itemValue="#{idtipoNivelItem}" itemLabel="#{idtipoNivelItem.nombre}"/>
+                        </p:selectOneMenu> 
+                        <p:outputLabel value="#{bundle.EditNivel1Label_referencia}" for="referencia" />
+                        <p:inputText id="referencia" value="#{nivel1Controller.selected.referencia}" title="#{bundle.EditNivel1Title_referencia}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{nivel1Controller.update}" value="#{bundle.Save}" update="display,:Nivel1ListForm:datalist,:growl" oncomplete="handleSubmit(args, 'Nivel1EditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="Nivel1EditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

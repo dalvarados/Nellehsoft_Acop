@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{usuarioController.templateDinamico()}">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListPropietarioNivel3Title}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="PropietarioNivel3ListForm">
+                <p:panel header="#{bundle.ListPropietarioNivel3Title}">
+                    <p:dataTable id="datalist" value="#{propietarioNivel3Controller.items}" var="item"
+                                 selectionMode="single" selection="#{propietarioNivel3Controller.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.id}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPropietarioNivel3Title_id}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPropietarioNivel3Title_idNivel3}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idNivel3.idNivel2.idNivel1.referencia.concat(' ')
+                                                                                  .concat(item.idNivel3.idNivel2.idTipo.nombre).concat(' ')
+                                                                                  .concat(item.idNivel3.idNivel2.referencia).concat(' ')
+                                                                                  .concat(item.idNivel3.idTipo.nombre).concat(' ')
+                                                                                  .concat(item.idNivel3.referencia)}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListPropietarioNivel3Title_idPropietario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idPropietario.nombre.concat(' ').concat(item.idPropietario.apellidos)}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{propietarioNivel3Controller.prepareCreate}" update=":PropietarioNivel3CreateForm" oncomplete="PF('PropietarioNivel3CreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PropietarioNivel3ViewForm" oncomplete="PF('PropietarioNivel3ViewDialog').show()" disabled="#{empty propietarioNivel3Controller.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PropietarioNivel3EditForm" oncomplete="PF('PropietarioNivel3EditDialog').show()" disabled="#{empty propietarioNivel3Controller.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{propietarioNivel3Controller.destroy}" update=":growl,datalist" disabled="#{empty propietarioNivel3Controller.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

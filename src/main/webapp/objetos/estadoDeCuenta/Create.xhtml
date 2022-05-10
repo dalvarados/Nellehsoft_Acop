@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstadoDeCuentaCreateDlg" widgetVar="EstadoDeCuentaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateEstadoDeCuentaTitle}">
+            <h:form id="EstadoDeCuentaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{estadoDeCuentaController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateEstadoDeCuentaLabel_fechaCreacion}" for="fechaCreacion" />
+                        <p:calendar id="fechaCreacion" pattern="yyyy/MM/dd" value="#{estadoDeCuentaController.selected.fechaCreacion}" title="#{bundle.EditEstadoDeCuentaTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditEstadoDeCuentaRequiredMessage_fechaCreacion}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEstadoDeCuentaLabel_fechaCorte}" for="fechaCorte" />
+                        <p:calendar id="fechaCorte" pattern="yyyy/MM/dd" value="#{estadoDeCuentaController.selected.fechaCorte}" title="#{bundle.EditEstadoDeCuentaTitle_fechaCorte}" required="true" requiredMessage="#{bundle.EditEstadoDeCuentaRequiredMessage_fechaCorte}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateEstadoDeCuentaLabel_valor}" for="valor" />
+                        <p:inputText id="valor" value="#{estadoDeCuentaController.selected.valor}" title="#{bundle.CreateEstadoDeCuentaTitle_valor}" />
+                        <p:outputLabel value="#{bundle.CreateEstadoDeCuentaLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{estadoDeCuentaController.selected.estado}" title="#{bundle.CreateEstadoDeCuentaTitle_estado}" />
+                        <p:outputLabel value="#{bundle.CreateEstadoDeCuentaLabel_idPropietario}" for="idPropietario" />
+                        <p:selectOneMenu id="idPropietario" value="#{estadoDeCuentaController.selected.idPropietario}" required="true" requiredMessage="#{bundle.EditEstadoDeCuentaRequiredMessage_idPropietario}">
+                            <f:selectItems value="#{propietarioController.itemsAvailableSelectOne}"
+                                           var="idPropietarioItem"
+                                           itemValue="#{idPropietarioItem}" itemLabel="#{idPropietarioItem.nombre.concat(' ').concat(idPropietarioItem.apellidos)}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateEstadoDeCuentaLabel_idUsuario}" for="idUsuario" />
+                        <p:selectOneMenu id="idUsuario" value="#{estadoDeCuentaController.selected.idUsuario}" required="true" requiredMessage="#{bundle.EditEstadoDeCuentaRequiredMessage_idUsuario}">
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="idUsuarioItem"
+                                           itemValue="#{idUsuarioItem}" itemLabel="#{idUsuarioItem.nombreUsuario}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estadoDeCuentaController.create}" value="#{bundle.Save}" update="display,:EstadoDeCuentaListForm:datalist,:growl" oncomplete="handleSubmit(args,'EstadoDeCuentaCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EstadoDeCuentaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
