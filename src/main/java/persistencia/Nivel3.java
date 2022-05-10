@@ -38,7 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Nivel3.findByReferencia", query = "SELECT n FROM Nivel3 n WHERE n.referencia = :referencia")
     , @NamedQuery(name = "Nivel3.findByCapacidad", query = "SELECT n FROM Nivel3 n WHERE n.capacidad = :capacidad")
     , @NamedQuery(name = "Nivel3.findByMedidas", query = "SELECT n FROM Nivel3 n WHERE n.medidas = :medidas")
-    , @NamedQuery(name = "Nivel3.findByIdNivel2", query = "SELECT e FROM Nivel3 e JOIN E.idNivel2 AS a WHERE a.id=e.idNivel2.id and  a.id = :idNivel2")        })
+    , @NamedQuery(name = "Nivel3.findByIdNivel2", query = "SELECT e FROM Nivel3 e WHERE e.idNivel2.id=:idNivel2")        
+})
 public class Nivel3 implements Serializable {
 
     private static final long serialVersionUID = 1L;

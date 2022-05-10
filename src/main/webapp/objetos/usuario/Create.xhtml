@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="4" rendered="#{usuarioController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_fechaCreacion}" for="fechaCreacion" />
-                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" value="#{usuarioController.selected.fechaCreacion}" title="#{bundle.EditUsuarioTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_fechaCreacion}" showOn="button"/>
+                        <p:calendar id="fechaCreacion" pattern="yyyy/MM/dd" value="#{usuarioController.selected.fechaCreacion}" title="#{bundle.EditUsuarioTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_fechaCreacion}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_nombreUsuario}" for="nombreUsuario" />
                         <p:inputText id="nombreUsuario" value="#{usuarioController.selected.nombreUsuario}" title="#{bundle.CreateUsuarioTitle_nombreUsuario}" />
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_nombres}" for="nombres" />
@@ -21,7 +21,9 @@
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_apellidos}" for="apellidos" />
                         <p:inputText id="apellidos" value="#{usuarioController.selected.apellidos}" title="#{bundle.CreateUsuarioTitle_apellidos}" />
                         <p:outputLabel value="contraseña" for="contrasena" />
-                        <p:inputText id="contrasena" value="#{usuarioController.selected.contrasena}" title="contraseña" />
+                        <p:password id="contrasena" value="#{usuarioController.selected.contrasena}" title="contraseña" />
+                        <p:outputLabel value="confirmar contraseña" for="confirmar_contrasena" />
+                        <p:password id="confirmar_contrasena" value="#{usuarioController.confirmar_contraseña}" title="contraseña" />
                         <p:outputLabel value="#{bundle.CreateUsuarioLabel_idRol}" for="idRol" />
                         <p:selectOneMenu id="idRol" value="#{usuarioController.selected.idRol}" >
                             <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
