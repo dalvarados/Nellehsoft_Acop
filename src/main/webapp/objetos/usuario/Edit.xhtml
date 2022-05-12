@@ -20,6 +20,10 @@
                         <p:inputText id="nombres" value="#{usuarioController.selected.nombres}" title="#{bundle.EditUsuarioTitle_nombres}" />
                         <p:outputLabel value="#{bundle.EditUsuarioLabel_apellidos}" for="apellidos" />
                         <p:inputText id="apellidos" value="#{usuarioController.selected.apellidos}" title="#{bundle.EditUsuarioTitle_apellidos}" />
+                        <p:outputLabel value="contraseña" for="contrasena" />
+                        <p:password id="contrasena" value="#{usuarioController.selected.contrasena}" title="contraseña" />
+                        <p:outputLabel value="confirmar contraseña" for="confirmar_contrasena" />
+                        <p:password id="confirmar_contrasena" value="#{usuarioController.confirmar_contraseña}" title="contraseña" />
                         <p:outputLabel value="#{bundle.EditUsuarioLabel_idRol}" for="idRol" />
                         <p:selectOneMenu id="idRol" value="#{usuarioController.selected.idRol}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>

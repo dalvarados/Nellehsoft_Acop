@@ -34,7 +34,7 @@
                         <p:selectOneMenu id="idNivel3" value="#{mantenimientoController.selected.idNivel3}" >
                             <f:selectItems value="#{nivel3Controller.itemsAvailableSelectOne}"
                                            var="idNivel3Item"
-                                           itemValue="#{idNivel3Item}"/>
+                                           itemValue="#{idNivel3Item.referencia}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateMantenimientoLabel_idTercero}" for="idTercero" />
                         <p:selectOneMenu id="idTercero" value="#{mantenimientoController.selected.idTercero}" >

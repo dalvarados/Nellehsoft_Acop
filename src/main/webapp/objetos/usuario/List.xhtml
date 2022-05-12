@@ -27,12 +27,12 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
 
-                        <p:column>
+<!--                        <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListUsuarioTitle_id}"/>
+                                <h:outputText value="{bundle.ListUsuarioTitle_id}"/>
                             </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
+                            <h:outputText value="{item.id}"/>
+                        </p:column>-->
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsuarioTitle_fechaCreacion}"/>
@@ -63,13 +63,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsuarioTitle_idRol}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idRol}"/>
+                            <h:outputText value="#{item.idRol.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListUsuarioTitle_idPropietario}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idPropietario}"/>
+                            <h:outputText value="#{item.idPropietario.nombre}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{usuarioController.prepareCreate}" update=":UsuarioCreateForm" oncomplete="PF('UsuarioCreateDialog').show()"/>
