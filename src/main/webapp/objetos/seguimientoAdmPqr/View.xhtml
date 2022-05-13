@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SeguimientoAdmPqrViewDlg" widgetVar="SeguimientoAdmPqrViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSeguimientoAdmPqrTitle}">
+            <h:form id="SeguimientoAdmPqrViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{seguimientoAdmPqrController.selected != null}">
+                        <h:outputText value="#{bundle.ViewSeguimientoAdmPqrLabel_id}"/>
+                        <h:outputText value="#{seguimientoAdmPqrController.selected.id}" title="#{bundle.ViewSeguimientoAdmPqrTitle_id}"/>
+                        <h:outputText value="#{bundle.ViewSeguimientoAdmPqrLabel_fechaCreacion}"/>
+                        <h:outputText value="#{seguimientoAdmPqrController.selected.fechaCreacion}" title="#{bundle.ViewSeguimientoAdmPqrTitle_fechaCreacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewSeguimientoAdmPqrLabel_descripcion}"/>
+                        <h:outputText value="#{seguimientoAdmPqrController.selected.descripcion}" title="#{bundle.ViewSeguimientoAdmPqrTitle_descripcion}"/>
+                        <h:outputText value="#{bundle.ViewSeguimientoAdmPqrLabel_estado}"/>
+                        <h:outputText value="#{seguimientoAdmPqrController.selected.estado}" title="#{bundle.ViewSeguimientoAdmPqrTitle_estado}"/>
+                        <h:outputText value="#{bundle.ViewSeguimientoAdmPqrLabel_idPqr}"/>
+                        <h:outputText value="#{seguimientoAdmPqrController.selected.idPqr}" title="#{bundle.ViewSeguimientoAdmPqrTitle_idPqr}"/>
+                        <h:outputText value="#{bundle.ViewSeguimientoAdmPqrLabel_idUsuario}"/>
+                        <h:outputText value="#{seguimientoAdmPqrController.selected.idUsuario}" title="#{bundle.ViewSeguimientoAdmPqrTitle_idUsuario}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="SeguimientoAdmPqrViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

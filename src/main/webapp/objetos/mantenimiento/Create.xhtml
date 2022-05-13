@@ -12,8 +12,6 @@
             <h:form id="MantenimientoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{mantenimientoController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateMantenimientoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{mantenimientoController.selected.id}" title="#{bundle.CreateMantenimientoTitle_id}" required="true" requiredMessage="#{bundle.CreateMantenimientoRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.CreateMantenimientoLabel_fechaCreacion}" for="fechaCreacion" />
                         <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" value="#{mantenimientoController.selected.fechaCreacion}" title="#{bundle.EditMantenimientoTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditMantenimientoRequiredMessage_fechaCreacion}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateMantenimientoLabel_fechaInicio}" for="fechaInicio" />
@@ -47,7 +45,7 @@
                         <p:selectOneMenu id="idUsuario" value="#{mantenimientoController.selected.idUsuario}" >
                             <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
                                            var="idUsuarioItem"
-                                           itemValue="#{idUsuarioItem}"/>
+                                           itemValue="#{idUsuarioItem}" itemLabel="#{idUsuarioItem.nombres}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{mantenimientoController.create}" value="#{bundle.Save}" update="display,:MantenimientoListForm:datalist,:growl" oncomplete="handleSubmit(args,'MantenimientoCreateDialog');"/>

@@ -12,8 +12,6 @@
             <h:form id="MantenimientoViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{mantenimientoController.selected != null}">
-                        <h:outputText value="#{bundle.ViewMantenimientoLabel_id}"/>
-                        <h:outputText value="#{mantenimientoController.selected.id}" title="#{bundle.ViewMantenimientoTitle_id}"/>
                         <h:outputText value="#{bundle.ViewMantenimientoLabel_fechaCreacion}"/>
                         <h:outputText value="#{mantenimientoController.selected.fechaCreacion}" title="#{bundle.ViewMantenimientoTitle_fechaCreacion}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
