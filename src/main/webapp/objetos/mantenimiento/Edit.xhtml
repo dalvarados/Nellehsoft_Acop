@@ -12,8 +12,6 @@
             <h:form id="MantenimientoEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{mantenimientoController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditMantenimientoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{mantenimientoController.selected.id}" title="#{bundle.EditMantenimientoTitle_id}" required="true" requiredMessage="#{bundle.EditMantenimientoRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditMantenimientoLabel_fechaCreacion}" for="fechaCreacion" />
                         <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" value="#{mantenimientoController.selected.fechaCreacion}" title="#{bundle.EditMantenimientoTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditMantenimientoRequiredMessage_fechaCreacion}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditMantenimientoLabel_fechaInicio}" for="fechaInicio" />

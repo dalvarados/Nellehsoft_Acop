@@ -31,12 +31,6 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListReservaTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListReservaTitle_fechaCreacion}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaCreacion}">
@@ -93,13 +87,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListReservaTitle_idNivel2}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idNivel2}"/>
+                            <h:outputText value="#{item.idNivel2.referencia}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListReservaTitle_idNivel3}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idNivel3}"/>
+                            <h:outputText value="#{item.idNivel3.referencia}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{reservaController.prepareCreate}" update=":ReservaCreateForm" oncomplete="PF('ReservaCreateDialog').show()"/>

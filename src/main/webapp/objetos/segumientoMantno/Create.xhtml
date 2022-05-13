@@ -12,8 +12,6 @@
             <h:form id="SegumientoMantnoCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{segumientoMantnoController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateSegumientoMantnoLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{segumientoMantnoController.selected.id}" title="#{bundle.CreateSegumientoMantnoTitle_id}" required="true" requiredMessage="#{bundle.CreateSegumientoMantnoRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.CreateSegumientoMantnoLabel_fechaCreacion}" for="fechaCreacion" />
                         <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" value="#{segumientoMantnoController.selected.fechaCreacion}" title="#{bundle.EditSegumientoMantnoTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditSegumientoMantnoRequiredMessage_fechaCreacion}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateSegumientoMantnoLabel_descripcion}" for="descripcion" />
@@ -30,7 +28,7 @@
                         <p:selectOneMenu id="idUsuario" value="#{segumientoMantnoController.selected.idUsuario}" required="true" requiredMessage="#{bundle.EditSegumientoMantnoRequiredMessage_idUsuario}">
                             <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
                                            var="idUsuarioItem"
-                                           itemValue="#{idUsuarioItem}"/>
+                                           itemValue="#{idUsuarioItem}" itemLabel="#{idUsuarioItem.nombres}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{segumientoMantnoController.create}" value="#{bundle.Save}" update="display,:SegumientoMantnoListForm:datalist,:growl" oncomplete="handleSubmit(args,'SegumientoMantnoCreateDialog');"/>

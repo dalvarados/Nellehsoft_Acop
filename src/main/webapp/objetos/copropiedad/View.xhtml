@@ -12,8 +12,6 @@
             <h:form id="CopropiedadViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{copropiedadController.selected != null}">
-                        <h:outputText value="#{bundle.ViewCopropiedadLabel_id}"/>
-                        <h:outputText value="#{copropiedadController.selected.id}" title="#{bundle.ViewCopropiedadTitle_id}"/>
                         <h:outputText value="#{bundle.ViewCopropiedadLabel_nombre}"/>
                         <h:outputText value="#{copropiedadController.selected.nombre}" title="#{bundle.ViewCopropiedadTitle_nombre}"/>
                         <h:outputText value="#{bundle.ViewCopropiedadLabel_nit}"/>
@@ -25,7 +23,7 @@
                         <h:outputText value="#{bundle.ViewCopropiedadLabel_correo}"/>
                         <h:outputText value="#{copropiedadController.selected.correo}" title="#{bundle.ViewCopropiedadTitle_correo}"/>
                         <h:outputText value="#{bundle.ViewCopropiedadLabel_idTercero}"/>
-                        <h:outputText value="#{copropiedadController.selected.idTercero}" title="#{bundle.ViewCopropiedadTitle_idTercero}"/>
+                        <h:outputText value="#{copropiedadController.selected.idTercero.nombre}" title="#{bundle.ViewCopropiedadTitle_idTercero}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="CopropiedadViewDialog.hide()"/>
                 </h:panelGroup>

@@ -12,8 +12,6 @@
             <h:form id="ReservaEditForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{reservaController.selected != null}">
-                        <p:outputLabel value="#{bundle.EditReservaLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{reservaController.selected.id}" title="#{bundle.EditReservaTitle_id}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditReservaLabel_fechaCreacion}" for="fechaCreacion" />
                         <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" value="#{reservaController.selected.fechaCreacion}" title="#{bundle.EditReservaTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_fechaCreacion}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditReservaLabel_cantAsistentes}" for="cantAsistentes" />
@@ -33,28 +31,28 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{tipoReservaController.itemsAvailableSelectOne}"
                                            var="idTipoReservaItem"
-                                           itemValue="#{idTipoReservaItem}"/>
+                                           itemValue="#{idTipoReservaItem}" itemLabel="#{idTipoReservaItem.nombre}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditReservaLabel_idNivel2}" for="idNivel2" />
                         <p:selectOneMenu id="idNivel2" value="#{reservaController.selected.idNivel2}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{nivel2Controller.itemsAvailableSelectOne}"
                                            var="idNivel2Item"
-                                           itemValue="#{idNivel2Item}"/>
+                                           itemValue="#{idNivel2Item}" itemLabel="#{idNivel2Item.referencia}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditReservaLabel_idNivel3}" for="idNivel3" />
                         <p:selectOneMenu id="idNivel3" value="#{reservaController.selected.idNivel3}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{nivel3Controller.itemsAvailableSelectOne}"
                                            var="idNivel3Item"
-                                           itemValue="#{idNivel3Item}"/>
+                                           itemValue="#{idNivel3Item}" itemLabel="#{idNivel3Item.referencia}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditReservaLabel_idUsuario}" for="idUsuario" />
                         <p:selectOneMenu id="idUsuario" value="#{reservaController.selected.idUsuario}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
                                            var="idUsuarioItem"
-                                           itemValue="#{idUsuarioItem}"/>
+                                           itemValue="#{idUsuarioItem}" itemLabel="#{idUsuarioItem.nombres}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{reservaController.update}" value="#{bundle.Save}" update="display,:ReservaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ReservaEditDialog');"/>

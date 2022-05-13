@@ -89,7 +89,8 @@ public class Usuario implements Serializable {
     private Propietario idPropietario;
     @OneToMany(mappedBy = "idUsuario")
     private Collection<Reserva> reservaCollection;
-
+    private Collection<SeguimientoUsuarioPqr> seguimientoUsuarioPqrCollection;
+    private Collection<SeguimientoAdmPqr> seguimientoAdmPqrCollection;
     public Usuario() {
     }
 
@@ -150,6 +151,24 @@ public class Usuario implements Serializable {
         this.contrasena = contrasena;
     }
 
+    @XmlTransient
+    public Collection<SeguimientoUsuarioPqr> getSeguimientoUsuarioPqrCollection() {
+        return seguimientoUsuarioPqrCollection;
+    }
+
+    public void setSeguimientoUsuarioPqrCollection(Collection<SeguimientoUsuarioPqr> seguimientoUsuarioPqrCollection) {
+        this.seguimientoUsuarioPqrCollection = seguimientoUsuarioPqrCollection;
+    }
+    
+    @XmlTransient
+    public Collection<SeguimientoAdmPqr> getSeguimientoAdmPqrCollection() {
+        return seguimientoAdmPqrCollection;
+    }
+
+    public void setSeguimientoAdmPqrCollection(Collection<SeguimientoAdmPqr> seguimientoAdmPqrCollection) {
+        this.seguimientoAdmPqrCollection = seguimientoAdmPqrCollection;
+    }
+    
     @XmlTransient
     public Collection<Tercero> getTerceroCollection() {
         return terceroCollection;

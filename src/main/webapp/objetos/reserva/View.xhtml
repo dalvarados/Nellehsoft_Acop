@@ -12,8 +12,6 @@
             <h:form id="ReservaViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{reservaController.selected != null}">
-                        <h:outputText value="#{bundle.ViewReservaLabel_id}"/>
-                        <h:outputText value="#{reservaController.selected.id}" title="#{bundle.ViewReservaTitle_id}"/>
                         <h:outputText value="#{bundle.ViewReservaLabel_fechaCreacion}"/>
                         <h:outputText value="#{reservaController.selected.fechaCreacion}" title="#{bundle.ViewReservaTitle_fechaCreacion}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -35,13 +33,13 @@
                         <h:outputText value="#{bundle.ViewReservaLabel_estado}"/>
                         <h:outputText value="#{reservaController.selected.estado}" title="#{bundle.ViewReservaTitle_estado}"/>
                         <h:outputText value="#{bundle.ViewReservaLabel_idTipoReserva}"/>
-                        <h:outputText value="#{reservaController.selected.idTipoReserva}" title="#{bundle.ViewReservaTitle_idTipoReserva}"/>
+                        <h:outputText value="#{reservaController.selected.idTipoReserva.nombre}" title="#{bundle.ViewReservaTitle_idTipoReserva}"/>
                         <h:outputText value="#{bundle.ViewReservaLabel_idNivel2}"/>
-                        <h:outputText value="#{reservaController.selected.idNivel2}" title="#{bundle.ViewReservaTitle_idNivel2}"/>
+                        <h:outputText value="#{reservaController.selected.idNivel2.referencia}" title="#{bundle.ViewReservaTitle_idNivel2}"/>
                         <h:outputText value="#{bundle.ViewReservaLabel_idNivel3}"/>
-                        <h:outputText value="#{reservaController.selected.idNivel3}" title="#{bundle.ViewReservaTitle_idNivel3}"/>
+                        <h:outputText value="#{reservaController.selected.idNivel3.referencia}" title="#{bundle.ViewReservaTitle_idNivel3}"/>
                         <h:outputText value="#{bundle.ViewReservaLabel_idUsuario}"/>
-                        <h:outputText value="#{reservaController.selected.idUsuario}" title="#{bundle.ViewReservaTitle_idUsuario}"/>
+                        <h:outputText value="#{reservaController.selected.idUsuario.nombres}" title="#{bundle.ViewReservaTitle_idUsuario}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="ReservaViewDialog.hide()"/>
                 </h:panelGroup>
