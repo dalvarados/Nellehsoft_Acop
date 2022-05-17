@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{mantenimientoController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateMantenimientoLabel_fechaCreacion}" for="fechaCreacion" />
-                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" value="#{mantenimientoController.selected.fechaCreacion}" title="#{bundle.EditMantenimientoTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditMantenimientoRequiredMessage_fechaCreacion}" showOn="button"/>
+                        <p:calendar disabled="true" id="fechaCreacion" pattern="MM/dd/yyyy" value="#{mantenimientoController.fechaActual}" title="#{bundle.EditMantenimientoTitle_fechaCreacion}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateMantenimientoLabel_fechaInicio}" for="fechaInicio" />
                         <p:calendar id="fechaInicio" pattern="MM/dd/yyyy" value="#{mantenimientoController.selected.fechaInicio}" title="#{bundle.EditMantenimientoTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditMantenimientoRequiredMessage_fechaInicio}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateMantenimientoLabel_fechaFin}" for="fechaFin" />
@@ -40,12 +40,6 @@
                                            var="idTerceroItem"
                                            itemValue="#{idTerceroItem}" itemLabel="#{idTerceroItem.nombre}"/>
                             
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateMantenimientoLabel_idUsuario}" for="idUsuario" />
-                        <p:selectOneMenu id="idUsuario" value="#{mantenimientoController.selected.idUsuario}" >
-                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
-                                           var="idUsuarioItem"
-                                           itemValue="#{idUsuarioItem}" itemLabel="#{idUsuarioItem.nombres}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{mantenimientoController.create}" value="#{bundle.Save}" update="display,:MantenimientoListForm:datalist,:growl" oncomplete="handleSubmit(args,'MantenimientoCreateDialog');"/>

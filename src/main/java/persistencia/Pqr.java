@@ -41,6 +41,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Pqr.findByFechaCreacion", query = "SELECT p FROM Pqr p WHERE p.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "Pqr.findByAsunto", query = "SELECT p FROM Pqr p WHERE p.asunto = :asunto")
     , @NamedQuery(name = "Pqr.findByDescripcion", query = "SELECT p FROM Pqr p WHERE p.descripcion = :descripcion")
+    , @NamedQuery(name = "Pqr.findByIdUsuario", query = "SELECT e FROM Pqr e JOIN E.idUsuario AS a WHERE a.id=e.idUsuario.id and  a.id = :id")        
     , @NamedQuery(name = "Pqr.findByEstado", query = "SELECT p FROM Pqr p WHERE p.estado = :estado")})
 public class Pqr implements Serializable {
 

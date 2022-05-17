@@ -6,6 +6,7 @@ import controlador.util.JsfUtil.PersistAction;
 import negocio.ReservaFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -29,12 +30,30 @@ public class ReservaController implements Serializable {
     private List<Reserva> items = null;
     private Reserva selected;
     private Usuario user;
+    private Date fechaActual;
+    private List<Reserva> Lista_reserva = null;
 
     public ReservaController() {
     }
 
+    public Date getFechaActual() {
+        return fechaActual;
+    }
+
+    public void setFechaActual(Date fechaActual) {
+        this.fechaActual = fechaActual;
+    }
+
     public Reserva getSelected() {
         return selected;
+    }
+
+    public List<Reserva> getLista_reserva() {
+        return Lista_reserva;
+    }
+
+    public void setLista_reserva(List<Reserva> Lista_reserva) {
+        this.Lista_reserva = Lista_reserva;
     }
 
     public void setSelected(Reserva selected) {
@@ -53,6 +72,8 @@ public class ReservaController implements Serializable {
 
     public Reserva prepareCreate() {
         selected = new Reserva();
+        java.util.Date fecha=new Date();
+        setFechaActual(fecha);
         initializeEmbeddableKey();
         return selected;
     }
@@ -166,5 +187,8 @@ public class ReservaController implements Serializable {
         }
 
     }
-
+  public void obtenerReserva(){
+      user =(Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+      Lista_reserva =ejbFacade.obtenerReserva(user.getId());
+  }
 }

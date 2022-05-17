@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="4" rendered="#{pqrController.selected != null}">
                         <p:outputLabel value="#{bundle.CreatePqrLabel_fechaCreacion}" for="fechaCreacion" />
-                        <p:calendar id="fechaCreacion" pattern="yyyy/MM/dd" value="#{pqrController.selected.fechaCreacion}" title="#{bundle.EditPqrTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditPqrRequiredMessage_fechaCreacion}" showOn="button"/>
+                        <p:calendar disabled="true" id="fechaCreacion" pattern="yyyy/MM/dd" value="#{pqrController.selected.fechaCreacion}" title="#{bundle.EditPqrTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditPqrRequiredMessage_fechaCreacion}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreatePqrLabel_asunto}" for="asunto" />
                         <p:inputText id="asunto" value="#{pqrController.selected.asunto}" title="#{bundle.CreatePqrTitle_asunto}" />
                         <p:outputLabel value="#{bundle.CreatePqrLabel_descripcion}" for="descripcion" />
@@ -54,7 +54,7 @@
                                            itemValue="#{idTerceroItem}" itemLabel="#{idTerceroItem.nombre}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatePqrLabel_idUsuario}" for="idUsuario" />
-                        <p:selectOneMenu id="idUsuario" value="#{pqrController.selected.idUsuario}" >
+                        <p:selectOneMenu disabled= "true" id="idUsuario" value="#{pqrController.selected.idUsuario}" >
                             <f:selectItem itemLabel="" itemValue="" />
                             <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
                                            var="idUsuarioItem"

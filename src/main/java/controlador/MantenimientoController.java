@@ -6,6 +6,7 @@ import controlador.util.JsfUtil.PersistAction;
 import negocio.MantenimientoFacade;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -28,9 +29,18 @@ public class MantenimientoController implements Serializable {
     private negocio.MantenimientoFacade ejbFacade;
     private List<Mantenimiento> items = null;
     private Mantenimiento selected;
+    private Date fechaActual;
     private Usuario user;
 
     public MantenimientoController() {
+    }
+
+    public Date getFechaActual() {
+        return fechaActual;
+    }
+
+    public void setFechaActual(Date fechaActual) {
+        this.fechaActual = fechaActual;
     }
 
     public Mantenimiento getSelected() {
@@ -53,6 +63,8 @@ public class MantenimientoController implements Serializable {
 
     public Mantenimiento prepareCreate() {
         selected = new Mantenimiento();
+        java.util.Date fecha=new Date();
+        setFechaActual(fecha);
         initializeEmbeddableKey();
         return selected;
     }
