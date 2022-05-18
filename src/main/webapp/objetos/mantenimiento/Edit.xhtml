@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{mantenimientoController.selected != null}">
                         <p:outputLabel value="#{bundle.EditMantenimientoLabel_fechaCreacion}" for="fechaCreacion" />
-                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" value="#{mantenimientoController.selected.fechaCreacion}" title="#{bundle.EditMantenimientoTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditMantenimientoRequiredMessage_fechaCreacion}" showOn="button"/>
+                        <p:calendar disabled= "true" id="fechaCreacion" pattern="MM/dd/yyyy" value="#{mantenimientoController.selected.fechaCreacion}" title="#{bundle.EditMantenimientoTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditMantenimientoRequiredMessage_fechaCreacion}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditMantenimientoLabel_fechaInicio}" for="fechaInicio" />
                         <p:calendar id="fechaInicio" pattern="MM/dd/yyyy" value="#{mantenimientoController.selected.fechaInicio}" title="#{bundle.EditMantenimientoTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditMantenimientoRequiredMessage_fechaInicio}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditMantenimientoLabel_fechaFin}" for="fechaFin" />
@@ -27,28 +27,28 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{nivel2Controller.itemsAvailableSelectOne}"
                                            var="idNivel2Item"
-                                           itemValue="#{idNivel2Item}"/>
+                                           itemValue="#{idNivel2Item.referencia}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditMantenimientoLabel_idNivel3}" for="idNivel3" />
                         <p:selectOneMenu id="idNivel3" value="#{mantenimientoController.selected.idNivel3}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{nivel3Controller.itemsAvailableSelectOne}"
                                            var="idNivel3Item"
-                                           itemValue="#{idNivel3Item}"/>
+                                           itemValue="#{idNivel3Item.referencia}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditMantenimientoLabel_idTercero}" for="idTercero" />
                         <p:selectOneMenu id="idTercero" value="#{mantenimientoController.selected.idTercero}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{terceroController.itemsAvailableSelectOne}"
                                            var="idTerceroItem"
-                                           itemValue="#{idTerceroItem}"/>
+                                           itemValue="#{idTerceroItem.nombre}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditMantenimientoLabel_idUsuario}" for="idUsuario" />
                         <p:selectOneMenu id="idUsuario" value="#{mantenimientoController.selected.idUsuario}" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
                                            var="idUsuarioItem"
-                                           itemValue="#{idUsuarioItem}"/>
+                                           itemValue="#{idUsuarioItem.nombres.concat(' ').concat(idUsuarioItem.apellidos)}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{mantenimientoController.update}" value="#{bundle.Save}" update="display,:MantenimientoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MantenimientoEditDialog');"/>

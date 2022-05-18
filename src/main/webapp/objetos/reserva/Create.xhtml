@@ -13,13 +13,13 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{reservaController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateReservaLabel_fechaCreacion}" for="fechaCreacion" />
-                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" value="#{reservaController.selected.fechaCreacion}" title="#{bundle.EditReservaTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_fechaCreacion}" showOn="button"/>
+                        <p:calendar disabled="true" id="fechaCreacion" pattern="yyyy/MM/dd" value="#{reservaController.fechaActual}" title="#{bundle.EditReservaTitle_fechaCreacion}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateReservaLabel_cantAsistentes}" for="cantAsistentes" />
                         <p:inputText id="cantAsistentes" value="#{reservaController.selected.cantAsistentes}" title="#{bundle.CreateReservaTitle_cantAsistentes}" />
                         <p:outputLabel value="#{bundle.CreateReservaLabel_fechaInicio}" for="fechaInicio" />
-                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy" value="#{reservaController.selected.fechaInicio}" title="#{bundle.EditReservaTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_fechaInicio}" showOn="button"/>
+                        <p:calendar id="fechaInicio" pattern="yyyy/MM/dd" value="#{reservaController.selected.fechaInicio}" title="#{bundle.EditReservaTitle_fechaInicio}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_fechaInicio}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateReservaLabel_fechaFin}" for="fechaFin" />
-                        <p:calendar id="fechaFin" pattern="MM/dd/yyyy" value="#{reservaController.selected.fechaFin}" title="#{bundle.EditReservaTitle_fechaFin}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_fechaFin}" showOn="button"/>
+                        <p:calendar id="fechaFin" pattern="yyyy/MM/dd" value="#{reservaController.selected.fechaFin}" title="#{bundle.EditReservaTitle_fechaFin}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_fechaFin}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateReservaLabel_asunto}" for="asunto" />
                         <p:inputText id="asunto" value="#{reservaController.selected.asunto}" title="#{bundle.CreateReservaTitle_asunto}" />
                         <p:outputLabel value="#{bundle.CreateReservaLabel_descripcion}" for="descripcion" />
@@ -43,12 +43,6 @@
                             <f:selectItems value="#{nivel3Controller.itemsAvailableSelectOne}"
                                            var="idNivel3Item"
                                            itemValue="#{idNivel3Item}" itemLabel="#{idNivel3Item.referencia}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateReservaLabel_idUsuario}" for="idUsuario" />
-                        <p:selectOneMenu id="idUsuario" value="#{reservaController.selected.idUsuario}" >
-                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
-                                           var="idUsuarioItem"
-                                           itemValue="#{idUsuarioItem}" itemLabel="#{idUsuarioItem.nombres}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{reservaController.create}" value="#{bundle.Save}" update="display,:ReservaListForm:datalist,:growl" oncomplete="handleSubmit(args,'ReservaCreateDialog');"/>

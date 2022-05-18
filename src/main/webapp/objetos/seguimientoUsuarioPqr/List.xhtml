@@ -29,12 +29,6 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSeguimientoUsuarioPqrTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSeguimientoUsuarioPqrTitle_fechaCreacion}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaCreacion}">
@@ -58,12 +52,6 @@
                                 <h:outputText value="#{bundle.ListSeguimientoUsuarioPqrTitle_idSegAdmPqr}"/>
                             </f:facet>
                             <h:outputText value="#{item.idSegAdmPqr}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSeguimientoUsuarioPqrTitle_idUsuario}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idUsuario}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{seguimientoUsuarioPqrController.prepareCreate}" update=":SeguimientoUsuarioPqrCreateForm" oncomplete="PF('SeguimientoUsuarioPqrCreateDialog').show()"/>

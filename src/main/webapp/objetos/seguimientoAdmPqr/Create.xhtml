@@ -22,13 +22,13 @@
                         <p:selectOneMenu id="idPqr" value="#{seguimientoAdmPqrController.selected.idPqr}" >
                             <f:selectItems value="#{pqrController.itemsAvailableSelectOne}"
                                            var="idPqrItem"
-                                           itemValue="#{idPqrItem}"/>
+                                           itemValue="#{idPqrItem}" itemLabel="#{idPqrItem.asunto}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateSeguimientoAdmPqrLabel_idUsuario}" for="idUsuario" />
                         <p:selectOneMenu id="idUsuario" value="#{seguimientoAdmPqrController.selected.idUsuario}" >
                             <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
                                            var="idUsuarioItem"
-                                           itemValue="#{idUsuarioItem}"/>
+                                           itemValue="#{idUsuarioItem}" itemLabel="#{idUsuarioItem.nombreUsuario}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{seguimientoAdmPqrController.create}" value="#{bundle.Save}" update="display,:SeguimientoAdmPqrListForm:datalist,:growl" oncomplete="handleSubmit(args,'SeguimientoAdmPqrCreateDialog');"/>

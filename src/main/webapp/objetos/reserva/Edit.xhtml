@@ -13,7 +13,7 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{reservaController.selected != null}">
                         <p:outputLabel value="#{bundle.EditReservaLabel_fechaCreacion}" for="fechaCreacion" />
-                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" value="#{reservaController.selected.fechaCreacion}" title="#{bundle.EditReservaTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_fechaCreacion}" showOn="button"/>
+                        <p:calendar disabled="true" id="fechaCreacion" pattern="MM/dd/yyyy" value="#{reservaController.selected.fechaCreacion}" title="#{bundle.EditReservaTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditReservaRequiredMessage_fechaCreacion}" showOn="button"/>
                         <p:outputLabel value="#{bundle.EditReservaLabel_cantAsistentes}" for="cantAsistentes" />
                         <p:inputText id="cantAsistentes" value="#{reservaController.selected.cantAsistentes}" title="#{bundle.EditReservaTitle_cantAsistentes}" />
                         <p:outputLabel value="#{bundle.EditReservaLabel_fechaInicio}" for="fechaInicio" />
@@ -46,13 +46,6 @@
                             <f:selectItems value="#{nivel3Controller.itemsAvailableSelectOne}"
                                            var="idNivel3Item"
                                            itemValue="#{idNivel3Item}" itemLabel="#{idNivel3Item.referencia}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.EditReservaLabel_idUsuario}" for="idUsuario" />
-                        <p:selectOneMenu id="idUsuario" value="#{reservaController.selected.idUsuario}" >
-                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
-                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
-                                           var="idUsuarioItem"
-                                           itemValue="#{idUsuarioItem}" itemLabel="#{idUsuarioItem.nombres}"/>
                         </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{reservaController.update}" value="#{bundle.Save}" update="display,:ReservaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ReservaEditDialog');"/>

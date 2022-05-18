@@ -12,8 +12,6 @@
             <h:form id="PqrViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{pqrController.selected != null}">
-                        <h:outputText value="#{bundle.ViewPqrLabel_id}"/>
-                        <h:outputText value="#{pqrController.selected.id}" title="#{bundle.ViewPqrTitle_id}"/>
                         <h:outputText value="#{bundle.ViewPqrLabel_fechaCreacion}"/>
                         <h:outputText value="#{pqrController.selected.fechaCreacion}" title="#{bundle.ViewPqrTitle_fechaCreacion}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -27,15 +25,15 @@
                         <h:outputText value="#{bundle.ViewPqrLabel_adjunto}"/>
                         <h:outputText value="#{pqrController.selected.adjunto}" title="#{bundle.ViewPqrTitle_adjunto}"/>
                         <h:outputText value="#{bundle.ViewPqrLabel_idTipoPqr}"/>
-                        <h:outputText value="#{pqrController.selected.idTipoPqr}" title="#{bundle.ViewPqrTitle_idTipoPqr}"/>
+                        <h:outputText value="#{pqrController.selected.idTipoPqr.nombre}" title="#{bundle.ViewPqrTitle_idTipoPqr}"/>
                         <h:outputText value="#{bundle.ViewPqrLabel_idNivel2}"/>
-                        <h:outputText value="#{pqrController.selected.idNivel2}" title="#{bundle.ViewPqrTitle_idNivel2}"/>
+                        <h:outputText value="#{pqrController.selected.idNivel2.referencia}" title="#{bundle.ViewPqrTitle_idNivel2}"/>
                         <h:outputText value="#{bundle.ViewPqrLabel_idNivel3}"/>
-                        <h:outputText value="#{pqrController.selected.idNivel3}" title="#{bundle.ViewPqrTitle_idNivel3}"/>
+                        <h:outputText value="#{pqrController.selected.idNivel3.referencia}" title="#{bundle.ViewPqrTitle_idNivel3}"/>
                         <h:outputText value="#{bundle.ViewPqrLabel_idTercero}"/>
-                        <h:outputText value="#{pqrController.selected.idTercero}" title="#{bundle.ViewPqrTitle_idTercero}"/>
+                        <h:outputText value="#{pqrController.selected.idTercero.nombre}" title="#{bundle.ViewPqrTitle_idTercero}"/>
                         <h:outputText value="#{bundle.ViewPqrLabel_idUsuario}"/>
-                        <h:outputText value="#{pqrController.selected.idUsuario}" title="#{bundle.ViewPqrTitle_idUsuario}"/>
+                        <h:outputText value="#{pqrController.selected.idUsuario.nombres}" title="#{bundle.ViewPqrTitle_idUsuario}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="PqrViewDialog.hide()"/>
                 </h:panelGroup>
