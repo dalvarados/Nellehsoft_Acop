@@ -10,14 +10,14 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListSegumientoMantnoTitle}"></h:outputText>
+            <h:outputText value="#{bundle.ListSeguimientoAdmPqrTitle}"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="SegumientoMantnoListForm">
-                <p:panel header="#{bundle.ListSegumientoMantnoTitle}">
-                    <p:dataTable id="datalist" value="#{segumientoMantnoController.items}" var="item"
-                                 selectionMode="single" selection="#{segumientoMantnoController.selected}"
+            <h:form id="SeguimientoAdmPqrListForm">
+                <p:panel header="#{bundle.ListSeguimientoAdmPqrTitle}">
+                    <p:dataTable id="datalist" value="#{seguimientoAdmPqrController.items}" var="item"
+                                 selectionMode="single" selection="#{seguimientoAdmPqrController.selected}"
                                  paginator="true"
                                  rowKey="#{item.id}"
                                  rows="10"
@@ -29,7 +29,7 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSegumientoMantnoTitle_fechaCreacion}"/>
+                                <h:outputText value="#{bundle.ListSeguimientoAdmPqrTitle_fechaCreacion}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaCreacion}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -37,33 +37,28 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSegumientoMantnoTitle_descripcion}"/>
+                                <h:outputText value="#{bundle.ListSeguimientoAdmPqrTitle_descripcion}"/>
                             </f:facet>
                             <h:outputText value="#{item.descripcion}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSegumientoMantnoTitle_estado}"/>
+                                <h:outputText value="#{bundle.ListSeguimientoAdmPqrTitle_estado}"/>
                             </f:facet>
                             <h:outputText value="#{item.estado}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSegumientoMantnoTitle_idMantenimiento}"/>
+                                <h:outputText value="#{bundle.ListSeguimientoAdmPqrTitle_idPqr}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idMantenimiento}"/>
+                            <h:outputText value="#{item.idPqr}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListSegumientoMantnoTitle_idUsuario}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idUsuario}"/>
-                        </p:column>
+
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{segumientoMantnoController.prepareCreate}" update=":SegumientoMantnoCreateForm" oncomplete="PF('SegumientoMantnoCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SegumientoMantnoViewForm" oncomplete="PF('SegumientoMantnoViewDialog').show()" disabled="#{empty segumientoMantnoController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SegumientoMantnoEditForm" oncomplete="PF('SegumientoMantnoEditDialog').show()" disabled="#{empty segumientoMantnoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{segumientoMantnoController.destroy}" update=":growl,datalist" disabled="#{empty segumientoMantnoController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{seguimientoAdmPqrController.prepareCreate}" update=":SeguimientoAdmPqrCreateForm" oncomplete="PF('SeguimientoAdmPqrCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SeguimientoAdmPqrViewForm" oncomplete="PF('SeguimientoAdmPqrViewDialog').show()" disabled="#{empty seguimientoAdmPqrController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SeguimientoAdmPqrEditForm" oncomplete="PF('SeguimientoAdmPqrEditDialog').show()" disabled="#{empty seguimientoAdmPqrController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{seguimientoAdmPqrController.destroy}" update=":growl,datalist" disabled="#{empty seguimientoAdmPqrController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

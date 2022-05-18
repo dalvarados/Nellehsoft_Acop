@@ -10,17 +10,15 @@
 
 
         <ui:define name="title">
-            <h:outputText value="#{bundle.ListReservaTitle}"></h:outputText>
+            <h:outputText value="#{bundle.ListMantenimientoTitle}"></h:outputText>
         </ui:define>
 
         <ui:define name="body">
-            <h:form id="ReservaListForm">
-                <br></br><br></br>
-                <p:panel header="#{bundle.ListReservaTitle}">
-                    <br></br><br></br>
-                    <p:dataTable id="datalist" value="#{reservaController.items}" var="item"
-                                 selectionMode="single" selection="#{reservaController.selected}"
-                                 paginator="true" paginatorPosition="bottom"
+            <h:form id="MantenimientoListForm">
+                <p:panel header="#{bundle.ListMantenimientoTitle}">
+                    <p:dataTable id="datalist" value="#{mantenimientoController.items}" var="item"
+                                 selectionMode="single" selection="#{mantenimientoController.selected}"
+                                 paginator="true"
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
@@ -31,7 +29,7 @@
 
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListReservaTitle_fechaCreacion}"/>
+                                <h:outputText value="#{bundle.ListMantenimientoTitle_fechaCreacion}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaCreacion}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -39,13 +37,7 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListReservaTitle_cantAsistentes}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.cantAsistentes}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListReservaTitle_fechaInicio}"/>
+                                <h:outputText value="#{bundle.ListMantenimientoTitle_fechaInicio}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaInicio}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -53,7 +45,7 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListReservaTitle_fechaFin}"/>
+                                <h:outputText value="#{bundle.ListMantenimientoTitle_fechaFin}"/>
                             </f:facet>
                             <h:outputText value="#{item.fechaFin}">
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -61,45 +53,39 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListReservaTitle_asunto}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.asunto}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListReservaTitle_descripcion}"/>
+                                <h:outputText value="#{bundle.ListMantenimientoTitle_descripcion}"/>
                             </f:facet>
                             <h:outputText value="#{item.descripcion}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListReservaTitle_estado}"/>
+                                <h:outputText value="#{bundle.ListMantenimientoTitle_estado}"/>
                             </f:facet>
                             <h:outputText value="#{item.estado}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListReservaTitle_idTipoReserva}"/>
+                                <h:outputText value="#{bundle.ListMantenimientoTitle_idNivel2}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idTipoReserva.nombre}"/>
+                            <h:outputText value="#{item.idNivel2}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListReservaTitle_idNivel2}"/>
+                                <h:outputText value="#{bundle.ListMantenimientoTitle_idNivel3}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idNivel2.referencia}"/>
+                            <h:outputText value="#{item.idNivel3}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListReservaTitle_idNivel3}"/>
+                                <h:outputText value="#{bundle.ListMantenimientoTitle_idTercero}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idNivel3.referencia}"/>
+                            <h:outputText value="#{item.idTercero}"/>
                         </p:column>
                         <f:facet name="footer">
-                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{reservaController.prepareCreate}" update=":ReservaCreateForm" oncomplete="PF('ReservaCreateDialog').show()"/>
-                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":ReservaViewForm" oncomplete="PF('ReservaViewDialog').show()" disabled="#{empty reservaController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":ReservaEditForm" oncomplete="PF('ReservaEditDialog').show()" disabled="#{empty reservaController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{reservaController.destroy}" update=":growl,datalist" disabled="#{empty reservaController.selected}"/>
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{mantenimientoController.prepareCreate}" update=":MantenimientoCreateForm" oncomplete="PF('MantenimientoCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MantenimientoViewForm" oncomplete="PF('MantenimientoViewDialog').show()" disabled="#{empty mantenimientoController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MantenimientoEditForm" oncomplete="PF('MantenimientoEditDialog').show()" disabled="#{empty mantenimientoController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{mantenimientoController.destroy}" update=":growl,datalist" disabled="#{empty mantenimientoController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

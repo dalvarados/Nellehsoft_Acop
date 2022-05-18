@@ -6,6 +6,7 @@
 package persistencia;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.faces.context.FacesContext;
 import javax.persistence.Basic;
@@ -25,6 +26,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -39,6 +41,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Pqr.findByFechaCreacion", query = "SELECT p FROM Pqr p WHERE p.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "Pqr.findByAsunto", query = "SELECT p FROM Pqr p WHERE p.asunto = :asunto")
     , @NamedQuery(name = "Pqr.findByDescripcion", query = "SELECT p FROM Pqr p WHERE p.descripcion = :descripcion")
+    , @NamedQuery(name = "Pqr.findByIdUsuario", query = "SELECT e FROM Pqr e JOIN E.idUsuario AS a WHERE a.id=e.idUsuario.id and  a.id = :id")        
     , @NamedQuery(name = "Pqr.findByEstado", query = "SELECT p FROM Pqr p WHERE p.estado = :estado")})
 public class Pqr implements Serializable {
 
@@ -80,7 +83,7 @@ public class Pqr implements Serializable {
     @JoinColumn(name = "id_usuario", referencedColumnName = "id")
     @ManyToOne
     private Usuario idUsuario;
-
+    private Collection<SeguimientoAdmPqr> seguimientoAdmPqrCollection;
     public Pqr() {
     }
 
@@ -188,6 +191,15 @@ public class Pqr implements Serializable {
         return hash;
     }
 
+    @XmlTransient
+    public Collection<SeguimientoAdmPqr> getSeguimientoAdmPqrCollection() {
+        return seguimientoAdmPqrCollection;
+    }
+
+    public void setSeguimientoAdmPqrCollection(Collection<SeguimientoAdmPqr> seguimientoAdmPqrCollection) {
+        this.seguimientoAdmPqrCollection = seguimientoAdmPqrCollection;
+    }
+    
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set

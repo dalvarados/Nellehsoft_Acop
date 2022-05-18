@@ -11,6 +11,7 @@
 
         <ui:define name="title">
             <h:outputText value="#{bundle.ListReservaTitle}"></h:outputText>
+            <f:event type="preRenderView" listener="#{reservaController.obtenerReserva()}" />
         </ui:define>
 
         <ui:define name="body">
@@ -18,7 +19,7 @@
                 <br></br><br></br>
                 <p:panel header="#{bundle.ListReservaTitle}">
                     <br></br><br></br>
-                    <p:dataTable id="datalist" value="#{reservaController.items}" var="item"
+                    <p:dataTable id="datalist" value="#{reservaController.lista_reserva}" var="item"
                                  selectionMode="single" selection="#{reservaController.selected}"
                                  paginator="true" paginatorPosition="bottom"
                                  rowKey="#{item.id}"
@@ -29,12 +30,6 @@
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton "/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton "/>
 
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListReservaTitle_id}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.id}"/>
-                        </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListReservaTitle_fechaCreacion}"/>
@@ -93,13 +88,13 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListReservaTitle_idNivel2}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idNivel2}"/>
+                            <h:outputText value="#{item.idNivel2.referencia}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListReservaTitle_idNivel3}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idNivel3}"/>
+                            <h:outputText value="#{item.idNivel3.referencia}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{reservaController.prepareCreate}" update=":ReservaCreateForm" oncomplete="PF('ReservaCreateDialog').show()"/>

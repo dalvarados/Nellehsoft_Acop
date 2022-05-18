@@ -5,9 +5,12 @@
  */
 package negocio;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import persistencia.Pqr;
 import persistencia.Reserva;
 
 /**
@@ -28,5 +31,8 @@ public class ReservaFacade extends AbstractFacade<Reserva> {
     public ReservaFacade() {
         super(Reserva.class);
     }
-    
+     public List<Reserva> obtenerReserva (Integer idReserva_usuario){
+        Query sm = em.createNamedQuery("Reserva.findByIdUsuario").setParameter("id",idReserva_usuario);
+        return sm.getResultList(); 
+     }
 }

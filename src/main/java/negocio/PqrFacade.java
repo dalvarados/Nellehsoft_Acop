@@ -5,10 +5,13 @@
  */
 package negocio;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import persistencia.Pqr;
+import persistencia.Propietario;
 
 /**
  *
@@ -27,6 +30,10 @@ public class PqrFacade extends AbstractFacade<Pqr> {
 
     public PqrFacade() {
         super(Pqr.class);
+    }
+    public List<Pqr> obtenerPqr (Integer idPqr_usuario){
+        Query sm = em.createNamedQuery("Pqr.findByIdUsuario").setParameter("id",idPqr_usuario);
+        return sm.getResultList();
     }
     
 }

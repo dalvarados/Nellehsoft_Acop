@@ -1,12 +1,11 @@
 package controlador;
 
-import persistencia.Reserva;
+import persistencia.SeguimientoUsuarioPqr;
 import controlador.util.JsfUtil;
 import controlador.util.JsfUtil.PersistAction;
-import negocio.ReservaFacade;
+import negocio.SeguimientoUsuarioPqrFacade;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -19,44 +18,24 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import persistencia.Usuario;
 
-@Named("reservaController")
+@Named("seguimientoUsuarioPqrController")
 @SessionScoped
-public class ReservaController implements Serializable {
+public class SeguimientoUsuarioPqrController implements Serializable {
 
     @EJB
-    private negocio.ReservaFacade ejbFacade;
-    private List<Reserva> items = null;
-    private Reserva selected;
-    private Usuario user;
-    private Date fechaActual;
-    private List<Reserva> Lista_reserva = null;
+    private negocio.SeguimientoUsuarioPqrFacade ejbFacade;
+    private List<SeguimientoUsuarioPqr> items = null;
+    private SeguimientoUsuarioPqr selected;
 
-    public ReservaController() {
+    public SeguimientoUsuarioPqrController() {
     }
 
-    public Date getFechaActual() {
-        return fechaActual;
-    }
-
-    public void setFechaActual(Date fechaActual) {
-        this.fechaActual = fechaActual;
-    }
-
-    public Reserva getSelected() {
+    public SeguimientoUsuarioPqr getSelected() {
         return selected;
     }
 
-    public List<Reserva> getLista_reserva() {
-        return Lista_reserva;
-    }
-
-    public void setLista_reserva(List<Reserva> Lista_reserva) {
-        this.Lista_reserva = Lista_reserva;
-    }
-
-    public void setSelected(Reserva selected) {
+    public void setSelected(SeguimientoUsuarioPqr selected) {
         this.selected = selected;
     }
 
@@ -66,44 +45,39 @@ public class ReservaController implements Serializable {
     protected void initializeEmbeddableKey() {
     }
 
-    private ReservaFacade getFacade() {
+    private SeguimientoUsuarioPqrFacade getFacade() {
         return ejbFacade;
     }
 
-    public Reserva prepareCreate() {
-        selected = new Reserva();
-        java.util.Date fecha=new Date();
-        setFechaActual(fecha);
+    public SeguimientoUsuarioPqr prepareCreate() {
+        selected = new SeguimientoUsuarioPqr();
         initializeEmbeddableKey();
         return selected;
     }
 
     public void create() {
-        selected.setIdUsuario(user);
-        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ReservaCreated"));
+        persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("SeguimientoUsuarioPqrCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
     public void update() {
-        selected.setIdUsuario(user);
-        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("ReservaUpdated"));
+        persist(PersistAction.UPDATE, ResourceBundle.getBundle("/Bundle").getString("SeguimientoUsuarioPqrUpdated"));
     }
 
     public void destroy() {
-        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("ReservaDeleted"));
+        persist(PersistAction.DELETE, ResourceBundle.getBundle("/Bundle").getString("SeguimientoUsuarioPqrDeleted"));
         if (!JsfUtil.isValidationFailed()) {
             selected = null; // Remove selection
             items = null;    // Invalidate list of items to trigger re-query.
         }
     }
 
-    public List<Reserva> getItems() {
-        user =(Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-//        if (items == null) 
+    public List<SeguimientoUsuarioPqr> getItems() {
+        if (items == null) {
             items = getFacade().findAll();
-        
+        }
         return items;
     }
 
@@ -135,29 +109,29 @@ public class ReservaController implements Serializable {
         }
     }
 
-    public Reserva getReserva(java.lang.Integer id) {
+    public SeguimientoUsuarioPqr getSeguimientoUsuarioPqr(java.lang.Integer id) {
         return getFacade().find(id);
     }
 
-    public List<Reserva> getItemsAvailableSelectMany() {
+    public List<SeguimientoUsuarioPqr> getItemsAvailableSelectMany() {
         return getFacade().findAll();
     }
 
-    public List<Reserva> getItemsAvailableSelectOne() {
+    public List<SeguimientoUsuarioPqr> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
 
-    @FacesConverter(forClass = Reserva.class)
-    public static class ReservaControllerConverter implements Converter {
+    @FacesConverter(forClass = SeguimientoUsuarioPqr.class)
+    public static class SeguimientoUsuarioPqrControllerConverter implements Converter {
 
         @Override
         public Object getAsObject(FacesContext facesContext, UIComponent component, String value) {
             if (value == null || value.length() == 0) {
                 return null;
             }
-            ReservaController controller = (ReservaController) facesContext.getApplication().getELResolver().
-                    getValue(facesContext.getELContext(), null, "reservaController");
-            return controller.getReserva(getKey(value));
+            SeguimientoUsuarioPqrController controller = (SeguimientoUsuarioPqrController) facesContext.getApplication().getELResolver().
+                    getValue(facesContext.getELContext(), null, "seguimientoUsuarioPqrController");
+            return controller.getSeguimientoUsuarioPqr(getKey(value));
         }
 
         java.lang.Integer getKey(String value) {
@@ -177,18 +151,15 @@ public class ReservaController implements Serializable {
             if (object == null) {
                 return null;
             }
-            if (object instanceof Reserva) {
-                Reserva o = (Reserva) object;
+            if (object instanceof SeguimientoUsuarioPqr) {
+                SeguimientoUsuarioPqr o = (SeguimientoUsuarioPqr) object;
                 return getStringKey(o.getId());
             } else {
-                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), Reserva.class.getName()});
+                Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, "object {0} is of type {1}; expected type: {2}", new Object[]{object, object.getClass().getName(), SeguimientoUsuarioPqr.class.getName()});
                 return null;
             }
         }
 
     }
-  public void obtenerReserva(){
-      user =(Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
-      Lista_reserva =ejbFacade.obtenerReserva(user.getId());
-  }
+
 }

@@ -12,8 +12,6 @@
             <h:form id="UsuarioViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
-                        <h:outputText value="#{bundle.ViewUsuarioLabel_id}"/>
-                        <h:outputText value="#{usuarioController.selected.id}" title="#{bundle.ViewUsuarioTitle_id}"/>
                         <h:outputText value="#{bundle.ViewUsuarioLabel_fechaCreacion}"/>
                         <h:outputText value="#{usuarioController.selected.fechaCreacion}" title="#{bundle.ViewUsuarioTitle_fechaCreacion}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -24,10 +22,10 @@
                         <h:outputText value="#{usuarioController.selected.nombres}" title="#{bundle.ViewUsuarioTitle_nombres}"/>
                         <h:outputText value="#{bundle.ViewUsuarioLabel_apellidos}"/>
                         <h:outputText value="#{usuarioController.selected.apellidos}" title="#{bundle.ViewUsuarioTitle_apellidos}"/>
+                        <h:outputText value="Contraseña"/>
+                        <h:outputText value="#{usuarioController.selected.contrasena}" title="Contraseña"/>
                         <h:outputText value="#{bundle.ViewUsuarioLabel_idRol}"/>
-                        <h:outputText value="#{usuarioController.selected.idRol}" title="#{bundle.ViewUsuarioTitle_idRol}"/>
-                        <h:outputText value="#{bundle.ViewUsuarioLabel_idPropietario}"/>
-                        <h:outputText value="#{usuarioController.selected.idPropietario}" title="#{bundle.ViewUsuarioTitle_idPropietario}"/>
+                        <h:outputText value="#{usuarioController.selected.idRol.nombre}" title="#{bundle.ViewUsuarioTitle_idRol}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="UsuarioViewDialog.hide()"/>
                 </h:panelGroup>

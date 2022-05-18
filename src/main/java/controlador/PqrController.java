@@ -36,6 +36,7 @@ public class PqrController implements Serializable {
     private Usuario user;
     private Date fechaActual;
     private String opcionPqr="Propiedad";
+    private List<Pqr> Lista_pqr = null;
 
     public PqrController() {
     }
@@ -54,6 +55,14 @@ public class PqrController implements Serializable {
 
     public void setOpcionPqr(String opcionPqr) {
         this.opcionPqr = opcionPqr;
+    }
+
+    public List<Pqr> getLista_pqr() {
+        return Lista_pqr;
+    }
+
+    public void setLista_pqr(List<Pqr> Lista_pqr) {
+        this.Lista_pqr = Lista_pqr;
     }
 
     public List<Nivel3> getLista_nivel3() {
@@ -96,6 +105,7 @@ public class PqrController implements Serializable {
         }
         selected.setFechaCreacion(fechaActual);
         selected.setIdUsuario(user);
+        
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("PqrCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
@@ -205,5 +215,9 @@ public class PqrController implements Serializable {
     }
   public void obtener_nivel3_x_nivel2(){
    lista_nivel3 =ejbFacadeNivel3.obtener_nivel3_x_nivel2(selected.getIdNivel2().getId());
-  }    
+  } 
+  public void obtenerPqr(){
+      user =(Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+      Lista_pqr =ejbFacade.obtenerPqr(user.getId());
+  }
 }

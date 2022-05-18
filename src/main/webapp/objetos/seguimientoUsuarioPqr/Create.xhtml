@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SeguimientoUsuarioPqrCreateDlg" widgetVar="SeguimientoUsuarioPqrCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSeguimientoUsuarioPqrTitle}">
+            <h:form id="SeguimientoUsuarioPqrCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{seguimientoUsuarioPqrController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSeguimientoUsuarioPqrLabel_fechaCreacion}" for="fechaCreacion" />
+                        <p:calendar id="fechaCreacion" pattern="MM/dd/yyyy" value="#{seguimientoUsuarioPqrController.selected.fechaCreacion}" title="#{bundle.EditSeguimientoUsuarioPqrTitle_fechaCreacion}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateSeguimientoUsuarioPqrLabel_estado}" for="estado" />
+                        <p:inputText id="estado" value="#{seguimientoUsuarioPqrController.selected.estado}" title="#{bundle.CreateSeguimientoUsuarioPqrTitle_estado}" />
+                        <p:outputLabel value="#{bundle.CreateSeguimientoUsuarioPqrLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{seguimientoUsuarioPqrController.selected.descripcion}" title="#{bundle.CreateSeguimientoUsuarioPqrTitle_descripcion}" />
+                        <p:outputLabel value="#{bundle.CreateSeguimientoUsuarioPqrLabel_idSegAdmPqr}" for="idSegAdmPqr" />
+                        <p:selectOneMenu id="idSegAdmPqr" value="#{seguimientoUsuarioPqrController.selected.idSegAdmPqr}" >
+                            <f:selectItems value="#{seguimientoAdmPqrController.itemsAvailableSelectOne}"
+                                           var="idSegAdmPqrItem"
+                                           itemValue="#{idSegAdmPqrItem}" itemLabel="#{idSegAdmPqrItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateSeguimientoUsuarioPqrLabel_idUsuario}" for="idUsuario" />
+                        <p:selectOneMenu id="idUsuario" value="#{seguimientoUsuarioPqrController.selected.idUsuario}" >
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="idUsuarioItem"
+                                           itemValue="#{idUsuarioItem}" itemLabel="#{idUsuarioItem.nombreUsuario}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{seguimientoUsuarioPqrController.create}" value="#{bundle.Save}" update="display,:SeguimientoUsuarioPqrListForm:datalist,:growl" oncomplete="handleSubmit(args,'SeguimientoUsuarioPqrCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SeguimientoUsuarioPqrCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

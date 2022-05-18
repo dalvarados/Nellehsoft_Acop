@@ -12,8 +12,6 @@
             <h:form id="PropietarioViewForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{propietarioController.selected != null}">
-                        <h:outputText value="#{bundle.ViewPropietarioLabel_id}"/>
-                        <h:outputText value="#{propietarioController.selected.id}" title="#{bundle.ViewPropietarioTitle_id}"/>
                         <h:outputText value="#{bundle.ViewPropietarioLabel_fechaCreacion}"/>
                         <h:outputText value="#{propietarioController.selected.fechaCreacion}" title="#{bundle.ViewPropietarioTitle_fechaCreacion}">
                             <f:convertDateTime pattern="MM/dd/yyyy" />
@@ -30,10 +28,6 @@
                         <h:outputText value="#{propietarioController.selected.telefono}" title="#{bundle.ViewPropietarioTitle_telefono}"/>
                         <h:outputText value="#{bundle.ViewPropietarioLabel_correo}"/>
                         <h:outputText value="#{propietarioController.selected.correo}" title="#{bundle.ViewPropietarioTitle_correo}"/>
-                        <h:outputText value="#{bundle.ViewPropietarioLabel_idUsuario}"/>
-                        <h:outputText value="#{propietarioController.selected.idUsuario}" title="#{bundle.ViewPropietarioTitle_idUsuario}"/>
-                        <h:outputText value="#{bundle.ViewPropietarioLabel_idRol}"/>
-                        <h:outputText value="#{propietarioController.selected.idRol}" title="#{bundle.ViewPropietarioTitle_idRol}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="PropietarioViewDialog.hide()"/>
                 </h:panelGroup>
