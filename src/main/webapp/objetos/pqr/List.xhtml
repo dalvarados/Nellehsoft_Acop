@@ -28,7 +28,12 @@
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-
+                        <p:column filterBy="#{item.id}"  filterMatchMode="startsWith">
+                            <f:facet name="header">
+                                <h:outputText value="Codigo"/>
+                            </f:facet>
+                            <h:outputText value="#{item.id}"/>                                                            
+                        </p:column>
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPqrTitle_fechaCreacion}"/>
@@ -57,33 +62,15 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPqrTitle_adjunto}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.adjunto}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPqrTitle_idTipoPqr}"/>
                             </f:facet>
                             <h:outputText value="#{item.idTipoPqr.nombre}"/>
-                        </p:column>
-                        <p:column>
+                        </p:column>                        
+                        <p:column filterBy="#{item.idUsuario.nombres.concat(' ').concat(item.idUsuario.apellidos)}"  filterMatchMode="contains">
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPqrTitle_idNivel2}"/>
+                                <h:outputText value="#{bundle.ListPqrTitle_idUsuario}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idNivel2.referencia}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPqrTitle_idNivel3}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idNivel3.referencia}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPqrTitle_idTercero}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.idTercero.nombre}"/>
+                            <h:outputText value="#{item.idUsuario.nombres.concat(' ').concat(item.idUsuario.apellidos)}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{pqrController.prepareCreate}" update=":PqrCreateForm" oncomplete="PF('PqrCreateDialog').show()"/>

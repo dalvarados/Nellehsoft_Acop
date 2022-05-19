@@ -18,14 +18,13 @@
         <p:layout fullPage="true">
             <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
                 <h:form id="menuForm">
-                    <p:menubar>
-                        <p:menuitem value="#{bundle.Home}" outcome="/paginas/principal_admin.xhtml" icon="ui-icon-home"/>
+                    <p:menubar autoDisplay="false">
+                        <p:menuitem  value="#{bundle.Home}" outcome="/paginas/principal_admin.xhtml" icon="ui-icon-home"/>
                         <p:submenu label="Servicios">
                             <p:menuitem value="Mantenimiento" outcome="/objetos/mantenimiento/List_adm.xhtml" />
                             <p:menuitem value="Pqr" outcome="/objetos/pqr/List.xhtml" />
                             <p:menuitem value="SegPqrAdmin" outcome="/objetos/seguimientoAdmPqr/List.xhtml" />
                             <p:menuitem value="SegPqrUsuario" outcome="/objetos/seguimientoUsuarioPqr/List.xhtml" />
-                            <p:menuitem value="Pqr" outcome="/objetos/pqr/List.xhtml" />
                             <p:menuitem value="Reserva" outcome="/objetos/reserva/List.xhtml" />
                             <p:menuitem value="SegumientoMantno" outcome="/objetos/segumientoMantno/List.xhtml" />
                         </p:submenu>
@@ -36,6 +35,7 @@
                         <p:submenu label="Configuracion">
                             <p:menuitem value="Tercero" outcome="/objetos/tercero/List.xhtml" />                            
                             <p:menuitem value="TipoNivel" outcome="/objetos/tipoNivel/List.xhtml" />
+                            <p:menuitem value="EstadosPqr" outcome="/objetos/estadosPqr/List.xhtml" />
                             <p:menuitem value="TipoPqr" outcome="/objetos/tipoPqr/List.xhtml" />
                             <p:menuitem value="TipoReserva" outcome="/objetos/tipoReserva/List.xhtml" />
                             <p:menuitem value="Usuario" outcome="/objetos/usuario/List.xhtml" />

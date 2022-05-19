@@ -45,6 +45,9 @@ public class SeguimientoAdmPqr implements Serializable {
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.DATE)
     private Date fechaCreacion;
+    @Column(name = "fecha_ejecucion")
+    @Temporal(TemporalType.DATE)
+    private Date fechaEjecucion;    
     @Size(max = 250)
     @Column(name = "descripcion")
     private String descripcion;
@@ -61,6 +64,14 @@ public class SeguimientoAdmPqr implements Serializable {
     private Usuario idUsuario;
 
     public SeguimientoAdmPqr() {
+    }
+
+    public Date getFechaEjecucion() {
+        return fechaEjecucion;
+    }
+
+    public void setFechaEjecucion(Date fechaEjecucion) {
+        this.fechaEjecucion = fechaEjecucion;
     }
 
     public SeguimientoAdmPqr(Integer id) {

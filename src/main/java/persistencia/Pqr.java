@@ -68,6 +68,9 @@ public class Pqr implements Serializable {
     @Lob
     @Column(name = "adjunto")
     private byte[] adjunto;
+    @JoinColumn(name = "id_estado_pqr", referencedColumnName = "id")
+    @ManyToOne
+    private EstadosPqr idEstadoPqr;    
     @JoinColumn(name = "id_tipo_pqr", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private TipoPqr idTipoPqr;
@@ -84,9 +87,18 @@ public class Pqr implements Serializable {
     @ManyToOne
     private Usuario idUsuario;
     private Collection<SeguimientoAdmPqr> seguimientoAdmPqrCollection;
+    
     public Pqr() {
     }
 
+    public EstadosPqr getIdEstadoPqr() {
+        return idEstadoPqr;
+    }
+
+    public void setIdEstadoPqr(EstadosPqr idEstadoPqr) {
+        this.idEstadoPqr = idEstadoPqr;
+    }
+    
     public Pqr(Integer id) {
         this.id = id;
     }

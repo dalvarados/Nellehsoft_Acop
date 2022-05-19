@@ -20,6 +20,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import persistencia.Nivel3;
+import persistencia.SeguimientoAdmPqr;
 import persistencia.Usuario;
 
 @Named("pqrController")
@@ -33,12 +34,21 @@ public class PqrController implements Serializable {
     private List<Pqr> items = null;
     private List<Nivel3> lista_nivel3;
     private Pqr selected;
+    private SeguimientoAdmPqr selectedSeguimientoAdmPqr;
     private Usuario user;
     private Date fechaActual;
     private String opcionPqr="Propiedad";
     private List<Pqr> Lista_pqr = null;
 
     public PqrController() {
+    }
+
+    public SeguimientoAdmPqr getSelectedSeguimientoAdmPqr() {
+        return selectedSeguimientoAdmPqr;
+    }
+
+    public void setSelectedSeguimientoAdmPqr(SeguimientoAdmPqr selectedSeguimientoAdmPqr) {
+        this.selectedSeguimientoAdmPqr = selectedSeguimientoAdmPqr;
     }
 
     public Date getFechaActual() {
@@ -98,6 +108,11 @@ public class PqrController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+    
+    public SeguimientoAdmPqr prepareCreateSegumientoPQR() {
+        selectedSeguimientoAdmPqr = new SeguimientoAdmPqr();
+        return selectedSeguimientoAdmPqr;
+    }    
 
     public void create() {
         if (selected.getEstado()==null){
