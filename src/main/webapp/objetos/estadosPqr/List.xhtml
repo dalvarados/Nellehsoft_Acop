@@ -6,7 +6,7 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
-    <ui:composition template="/template.xhtml">
+    <ui:composition template="#{usuarioController.templateDinamico()}">
 
 
         <ui:define name="title">
@@ -41,15 +41,15 @@
                         </p:column>
                         <p:column>
                             <f:facet name="header">
-                                <h:outputText value="#{bundle.ListEstadosPqrTitle_tipoUsuario}"/>
+                                <h:outputText value="#{bundle.ListEstadosPqrTitle_idRol}"/>
                             </f:facet>
-                            <h:outputText value="#{item.tipoUsuario}"/>
+                            <h:outputText value="#{item.idRol.nombre}"/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{estadosPqrController.prepareCreate}" update=":EstadosPqrCreateForm" oncomplete="PF('EstadosPqrCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":EstadosPqrViewForm" oncomplete="PF('EstadosPqrViewDialog').show()" disabled="#{empty estadosPqrController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":EstadosPqrEditForm" oncomplete="PF('EstadosPqrEditDialog').show()" disabled="#{empty estadosPqrController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{estadosPqrController.destroy}" update=":growl,datalist" disabled="#{empty estadosPqrController.selected}"/>
+                            <p:commandButton  onclick="return confirm('Esta seguro de eliminar este registro ?')" id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{estadosPqrController.destroy}" update=":growl,datalist" disabled="#{empty estadosPqrController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

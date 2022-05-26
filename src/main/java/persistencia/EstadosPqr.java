@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package persistencia;
 
 import java.io.Serializable;
@@ -8,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -27,7 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "EstadosPqr.findAll", query = "SELECT e FROM EstadosPqr e"),
     @NamedQuery(name = "EstadosPqr.findById", query = "SELECT e FROM EstadosPqr e WHERE e.id = :id"),
     @NamedQuery(name = "EstadosPqr.findByNombre", query = "SELECT e FROM EstadosPqr e WHERE e.nombre = :nombre"),
-    @NamedQuery(name = "EstadosPqr.findByTipoUsuario", query = "SELECT e FROM EstadosPqr e WHERE e.tipoUsuario = :tipoUsuario")})
+    @NamedQuery(name = "EstadosPqr.findByEstadoPpal", query = "SELECT e FROM EstadosPqr e WHERE e.estadoPpal = :nombreEstado and e.idRol.id=:id"),
+    @NamedQuery(name = "EstadosPqr.findByNombreNoCerrada", query = "SELECT e FROM EstadosPqr e WHERE e.nombre <> 'Cerrada'")
+})
 public class EstadosPqr implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,13 +47,24 @@ public class EstadosPqr implements Serializable {
     @Size(max = 145)
     @Column(name = "nombre")
     private String nombre;
-    @Size(max = 45)
-    @Column(name = "tipo_usuario")
-    private String tipoUsuario;
+    @Size(max = 145)
+    @Column(name = "estado_ppal")
+    private String estadoPpal;    
     @OneToMany(mappedBy = "idEstadoPqr")
     private Collection<Pqr> pqrCollection;
+    @JoinColumn(name = "id_rol", referencedColumnName = "id")
+    @ManyToOne
+    private Rol idRol;
 
     public EstadosPqr() {
+    }
+
+    public String getEstadoPpal() {
+        return estadoPpal;
+    }
+
+    public void setEstadoPpal(String estadoPpal) {
+        this.estadoPpal = estadoPpal;
     }
 
     public EstadosPqr(Integer id) {
@@ -68,14 +87,6 @@ public class EstadosPqr implements Serializable {
         this.nombre = nombre;
     }
 
-    public String getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
-
     @XmlTransient
     public Collection<Pqr> getPqrCollection() {
         return pqrCollection;
@@ -83,6 +94,14 @@ public class EstadosPqr implements Serializable {
 
     public void setPqrCollection(Collection<Pqr> pqrCollection) {
         this.pqrCollection = pqrCollection;
+    }
+
+    public Rol getIdRol() {
+        return idRol;
+    }
+
+    public void setIdRol(Rol idRol) {
+        this.idRol = idRol;
     }
 
     @Override

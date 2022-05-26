@@ -26,9 +26,18 @@ public class EstadosPqrController implements Serializable {
     @EJB
     private negocio.EstadosPqrFacade ejbFacade;
     private List<EstadosPqr> items = null;
+    private List<EstadosPqr> itemsEstadoNoCerrada = null;
     private EstadosPqr selected;
 
     public EstadosPqrController() {
+    }
+
+    public List<EstadosPqr> getItemsEstadoNoCerrada() {
+        return itemsEstadoNoCerrada;
+    }
+
+    public void setItemsEstadoNoCerrada(List<EstadosPqr> itemsEstadoNoCerrada) {
+        this.itemsEstadoNoCerrada = itemsEstadoNoCerrada;
     }
 
     public EstadosPqr getSelected() {
@@ -161,5 +170,9 @@ public class EstadosPqrController implements Serializable {
         }
 
     }
+    
+    public void obtenerEstadoPqr(){
+        itemsEstadoNoCerrada=ejbFacade.obtenerEstadoPqrNoCerrada(); 
+    }       
 
 }

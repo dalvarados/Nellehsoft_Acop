@@ -22,16 +22,8 @@
                         <p:outputLabel value="#{bundle.CreatePqrLabel_idTipoPqr}" for="idTipoPqr" />
                         <p:inputText readonly="true" style="width:100%" id="idTipoPqr" value="#{pqrController.selected.idTipoPqr.nombre}" />
                         
-                        <p:outputLabel value="#{bundle.CreatePqrLabel_estado}" for="estado" />
-                        <p:selectOneMenu id="estado" value="#{pqrController.selected.estado}">
-                        <f:selectItem itemLabel="Registrado" itemValue="Registrado" />
-                        <f:selectItem itemLabel="Aprobada" itemValue="Aprobada" />
-                        <f:selectItem itemLabel="En Proceso" itemValue="En Proceso" />
-                        <f:selectItem itemLabel="Rechazada" itemValue="Rechazada" />
-                        <f:selectItem itemLabel="Solucionado" itemValue="Solucionado" />
-                        <f:selectItem itemLabel="Detenido" itemValue="Detenido" />
-                         <f:selectItem itemLabel="Cerrada" itemValue="Cerrada" />
-                        </p:selectOneMenu>                                                     
+                        <p:outputLabel value="#{bundle.CreatePqrLabel_estado}" for="estadoPqr" />
+                        <p:inputText readonly="true" style="width:100%" id="estadoPqr" value="#{pqrController.selected.idEstadoPqr.nombre}" />
                     </p:panelGrid>
                     <p:spacer height="1" />
                     <p:panelGrid  style="width:96%" columns="2">
@@ -56,41 +48,79 @@
                         <p:outputLabel value="#{bundle.CreatePqrLabel_idUsuario}" for="idUsuario" />
                         <p:inputText style="width:90%" readonly="true" id="idUsuario" value="#{pqrController.selected.idUsuario.nombres.concat(' ')
                                                         .concat(pqrController.selected.idUsuario.apellidos)}" />
-                        <p:commandButton actionListener="#{pqrController.prepareCreateSegumientoPQR()}"
-                                         value="Editar" oncomplete="PF('SeguimientoAdmPqrCreateDialog').show()"/>
+                        <p:commandButton actionListener="#{pqrController.prepareCreateSegumientoPQR}" update=":SeguimientoAdmPqrCreateForm"
+                                         value="Agregar" oncomplete="PF('SeguimientoAdmPqrCreateDialog').show()"/>
                     </p:panelGrid> 
-                
-                        
+                  </h:panelGroup>
+            </h:form>
             <p:spacer height="3" />
-            <table style="width:50%" border="0">                  
-                    <p:dataTable id="datalist" value="#{seguimientoAdmPqrController.items}" var="item"
-                                 selectionMode="single" selection="#{seguimientoAdmPqrController.selected}"
+            <p:panelGrid style="width:96%" columns="2">
+            <h:form id="PqrDatalistForm">
+                <p:panel header="Seguimiento PQR">
+            <p:dataTable id="datalist" value="#{pqrController.lista_seguimientoAdmPqr}" var="item"
+                                 selectionMode="single" selection="#{pqrController.selectedEditSeguimientoAdmPqr}" 
                                  paginator="true" paginatorPosition="bottom"
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
-
+                        <p:ajax event="rowSelect"   update="editButton "/>
+                        <p:ajax event="rowUnselect" update="editButton "/>                
+                        <p:column style="width:30%">
+                            <f:facet name="header">
+                                <h:outputText value="fecha Creacion"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaCreacion}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>                            
+                        </p:column>
                         <p:column style="width:90%">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListSeguimientoAdmPqrTitle_descripcion}"/>
                             </f:facet>
                             <h:outputText value="#{item.descripcion}"/>
                         </p:column>
-                        <p:column style="width:60%">
+                        <p:column style="width:30%">
                             <f:facet name="header">
                                 <h:outputText value="fecha Ejecucion "/>
                             </f:facet>
                             <h:outputText value="#{item.fechaEjecucion}">
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
-                            </h:outputText>
-                            
+                            </h:outputText>                            
                         </p:column>
+                        <p:column style="width:30%">
+                            <f:facet name="header">
+                                <h:outputText value="fecha Fin Ejecucion "/>
+                            </f:facet>
+                            <h:outputText value="#{item.fechaFinEjecucion}">
+                                <f:convertDateTime pattern="dd/MM/yyyy" />
+                            </h:outputText>                            
+                        </p:column>                
+                        <p:column style="width:30%">
+                            <f:facet name="header">
+                                <h:outputText value="Estado"/>
+                            </f:facet>
+                            <h:outputText value="#{item.estado}"/>
+                        </p:column>
+                        <p:column style="width:40%">
+                            <f:facet name="header">
+                                <h:outputText value="Usuario"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idUsuario.nombres.concat(' ').concat(item.idUsuario.apellidos)}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" 
+                                             actionListener="#{pqrController.actualizarListaSegumientoPqr}" 
+                                             update=":SeguimientoAdmPqrEditForm,:PqrDatalistForm:datalist" 
+                                             oncomplete="PF('SeguimientoAdmPqrEditDialog').show()"
+                                             disabled="#{empty pqrController.selectedEditSeguimientoAdmPqr}"/>
+                        </f:facet>                
                     </p:dataTable>
-               </table>
-            </h:panelGroup>
-</h:form>
+                    </p:panel>
+                </h:form>
+                 </p:panelGrid>
         </p:dialog>
            <ui:include src="Create_segumientoAdmin.xhtml"/>
+           <ui:include src="Edit_segumientoAdmin.xhtml"/>
     </ui:composition>
 </html>

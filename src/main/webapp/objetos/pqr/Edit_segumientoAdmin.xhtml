@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <p:dialog id="SeguimientoAdmPqrEditDlg" style="width:80%" widgetVar="SeguimientoAdmPqrEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSeguimientoAdmPqrTitle}">
+            <h:form id="SeguimientoAdmPqrEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="4" rendered="#{pqrController.selectedEditSeguimientoAdmPqr != null}">
+                        <p:outputLabel value="fecha Ejecucion" for="fechaEjecucion" />
+                        <p:calendar disabled="#{pqrController.selected.idEstadoPqr.nombre ne 'Aceptada'}" id="fechaEjecucion" pattern="yyyy/MM/dd" 
+                                    value="#{pqrController.selectedEditSeguimientoAdmPqr.fechaEjecucion}" showOn="button"/>
+                        <p:outputLabel value="fecha Fin Ejecucion" for="fechaFinEjecucion" />
+                        <p:calendar disabled="#{pqrController.selected.idEstadoPqr.nombre ne 'Aceptada'}" id="fechaFinEjecucion" pattern="yyyy/MM/dd" 
+                                    value="#{pqrController.selectedEditSeguimientoAdmPqr.fechaFinEjecucion}" showOn="button"/>
+                       
+                        <p:outputLabel value="#{bundle.EditSeguimientoAdmPqrLabel_descripcion}" for="descripcion" />
+                        <p:inputText disabled="#{pqrController.selected.idEstadoPqr.nombre ne 'Aceptada'}" id="descripcion" value="#{pqrController.selectedEditSeguimientoAdmPqr.descripcion}" title="#{bundle.EditSeguimientoAdmPqrTitle_descripcion}" />
+                        
+                             <p:outputLabel value="#{bundle.EditPqrLabel_estado}" for="estadoPqr" />
+                             <p:inputText disabled="true" id="estadoPqr" value="#{pqrController.selectedEditSeguimientoAdmPqr.estado}"/>            
+                    </p:panelGrid>
+                    <p:commandButton disabled="#{pqrController.selected.idEstadoPqr.nombre ne 'Aceptada'}" 
+                                     actionListener="#{pqrController.editSegumientoAdmin()}" 
+                                     value="#{bundle.Save}" update="display,:PqrEditForm,:PqrDatalistForm:datalist,:PqrDatalistForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'SeguimientoAdmPqrEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SeguimientoAdmPqrEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

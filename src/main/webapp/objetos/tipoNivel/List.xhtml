@@ -55,7 +55,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tipoNivelController.prepareCreate}" update=":TipoNivelCreateForm" oncomplete="PF('TipoNivelCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TipoNivelViewForm" oncomplete="PF('TipoNivelViewDialog').show()" disabled="#{empty tipoNivelController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TipoNivelEditForm" oncomplete="PF('TipoNivelEditDialog').show()" disabled="#{empty tipoNivelController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tipoNivelController.destroy}" update=":growl,datalist" disabled="#{empty tipoNivelController.selected}"/>
+                            <p:commandButton  onclick="return confirm('Esta seguro de eliminar este registro ?')" id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tipoNivelController.destroy}" update=":growl,datalist" disabled="#{empty tipoNivelController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

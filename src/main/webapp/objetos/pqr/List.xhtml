@@ -7,28 +7,24 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="#{usuarioController.templateDinamico()}">
-
-
         <ui:define name="title">
             <h:outputText value="#{bundle.ListPqrTitle}"></h:outputText>
         </ui:define>
-
         <ui:define name="body">
             <h:form id="PqrListForm">
                 <br></br><br></br>
-                <p:panel header="#{bundle.ListPqrTitle}">
+                <p:panel header="Listado de pqr Vigentes">
                     <br></br><br></br>
                     <p:dataTable id="datalist" value="#{pqrController.items}" var="item"
                                  selectionMode="single" selection="#{pqrController.selected}"
                                  paginator="true" paginatorPosition="bottom"
-                                 rowKey="#{item.id}"
+                                 rowKey="#{item.id}" widgetVar="estadoPqr"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
                                  >
-
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
                         <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
-                        <p:column filterBy="#{item.id}"  filterMatchMode="startsWith">
+                        <p:column style="width: 5%" filterBy="#{item.id}"  filterMatchMode="startsWith">
                             <f:facet name="header">
                                 <h:outputText value="Codigo"/>
                             </f:facet>
@@ -42,31 +38,32 @@
                                 <f:convertDateTime pattern="MM/dd/yyyy" />
                             </h:outputText>
                         </p:column>
-                        <p:column>
+                        <p:column style="width: 25%">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPqrTitle_asunto}"/>
                             </f:facet>
                             <h:outputText value="#{item.asunto}"/>
                         </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPqrTitle_descripcion}"/>
+                        <p:column filterBy="#{item.idEstadoPqr}" headerText="Estado" filterMatchMode="exact">
+                            <f:facet name="filter"> 
+                                <p:selectOneMenu onchange="PF('estadoPqr').filter()">
+                                    <f:selectItem itemLabel="Todas" itemValue="#{item.idEstadoPqr.nombre}" 
+                                                  noSelectionOption="true" />
+                                    <f:selectItems value="#{estadosPqrController.itemsEstadoNoCerrada}" 
+                                                   var="idestadoItem"
+                                                           itemValue="#{idestadoItem}" itemLabel="#{idestadoItem.nombre}"/>
+                                </p:selectOneMenu>
                             </f:facet>
-                            <h:outputText value="#{item.descripcion}"/>
-                        </p:column>
-                        <p:column>
-                            <f:facet name="header">
-                                <h:outputText value="#{bundle.ListPqrTitle_estado}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.estado}"/>
-                        </p:column>
+                            <h:outputText value="#{item.idEstadoPqr.nombre}" />
+                        </p:column>                    
+                        
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPqrTitle_idTipoPqr}"/>
                             </f:facet>
                             <h:outputText value="#{item.idTipoPqr.nombre}"/>
                         </p:column>                        
-                        <p:column filterBy="#{item.idUsuario.nombres.concat(' ').concat(item.idUsuario.apellidos)}"  filterMatchMode="contains">
+                        <p:column style="width: 30%" filterBy="#{item.idUsuario.nombres.concat(' ').concat(item.idUsuario.apellidos)}"  filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPqrTitle_idUsuario}"/>
                             </f:facet>
@@ -75,8 +72,8 @@
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{pqrController.prepareCreate}" update=":PqrCreateForm" oncomplete="PF('PqrCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PqrViewForm" oncomplete="PF('PqrViewDialog').show()" disabled="#{empty pqrController.selected}"/>
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PqrEditForm" oncomplete="PF('PqrEditDialog').show()" disabled="#{empty pqrController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{pqrController.destroy}" update=":growl,datalist" disabled="#{empty pqrController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" actionListener="#{pqrController.actualizarListaSegumientoPqr}" update=":PqrEditForm,:PqrDatalistForm:datalist" oncomplete="PF('PqrEditDialog').show()" disabled="#{empty pqrController.selected}"/>
+                            <p:commandButton id="deleteButton" onclick="return confirm('Esta seguro de eliminar este registro ?')" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{pqrController.destroy}" update=":growl,datalist" disabled="#{empty pqrController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

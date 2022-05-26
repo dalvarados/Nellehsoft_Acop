@@ -1,8 +1,10 @@
 package negocio;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import persistencia.SeguimientoAdmPqr;
 
 /**
@@ -23,5 +25,10 @@ public class SeguimientoAdmPqrFacade extends AbstractFacade<SeguimientoAdmPqr> {
     public SeguimientoAdmPqrFacade() {
         super(SeguimientoAdmPqr.class);
     }
+    
+    public List<SeguimientoAdmPqr> obtener_seguimientoAdmPqr_id (Integer idPqr){
+    Query sm = em.createNamedQuery("SeguimientoAdmPqr.findByIdPqr").setParameter("id",idPqr);
+    return sm.getResultList();
+    }     
     
 }

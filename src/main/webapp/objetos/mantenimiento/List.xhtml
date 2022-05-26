@@ -91,7 +91,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{mantenimientoController.prepareCreate}" update=":MantenimientoCreateForm" oncomplete="PF('MantenimientoCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":MantenimientoViewForm" oncomplete="PF('MantenimientoViewDialog').show()" disabled="#{empty mantenimientoController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":MantenimientoEditForm" oncomplete="PF('MantenimientoEditDialog').show()" disabled="#{empty mantenimientoController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{mantenimientoController.destroy}" update=":growl,datalist" disabled="#{empty mantenimientoController.selected}"/>
+                            <p:commandButton  onclick="return confirm('Esta seguro de eliminar este registro ?')" id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{mantenimientoController.destroy}" update=":growl,datalist" disabled="#{empty mantenimientoController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

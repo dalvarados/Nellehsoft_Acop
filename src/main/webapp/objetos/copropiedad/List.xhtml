@@ -67,7 +67,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{copropiedadController.prepareCreate}" update=":CopropiedadCreateForm" oncomplete="PF('CopropiedadCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CopropiedadViewForm" oncomplete="PF('CopropiedadViewDialog').show()" disabled="#{empty copropiedadController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CopropiedadEditForm" oncomplete="PF('CopropiedadEditDialog').show()" disabled="#{empty copropiedadController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{copropiedadController.destroy}" update=":growl,datalist" disabled="#{empty copropiedadController.selected}"/>
+                            <p:commandButton onclick="return confirm('Esta seguro de eliminar este registro ?')"  id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{copropiedadController.destroy}" update=":growl,datalist" disabled="#{empty copropiedadController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

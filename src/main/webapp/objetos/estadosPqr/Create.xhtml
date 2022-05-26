@@ -12,12 +12,14 @@
             <h:form id="EstadosPqrCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{estadosPqrController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateEstadosPqrLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{estadosPqrController.selected.id}" title="#{bundle.CreateEstadosPqrTitle_id}" required="true" requiredMessage="#{bundle.CreateEstadosPqrRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.CreateEstadosPqrLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{estadosPqrController.selected.nombre}" title="#{bundle.CreateEstadosPqrTitle_nombre}" />
-                        <p:outputLabel value="#{bundle.CreateEstadosPqrLabel_tipoUsuario}" for="tipoUsuario" />
-                        <p:inputText id="tipoUsuario" value="#{estadosPqrController.selected.tipoUsuario}" title="#{bundle.CreateEstadosPqrTitle_tipoUsuario}" />
+                        <p:outputLabel value="#{bundle.CreateEstadosPqrLabel_idRol}" for="idRol" />
+                        <p:selectOneMenu id="idRol" value="#{estadosPqrController.selected.idRol}" >
+                            <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
+                                           var="idRolItem"
+                                           itemValue="#{idRolItem}" itemLabel="#{idRolItem.nombre}"/> 
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{estadosPqrController.create}" value="#{bundle.Save}" update="display,:EstadosPqrListForm:datalist,:growl" oncomplete="handleSubmit(args,'EstadosPqrCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EstadosPqrCreateDialog.hide()"/>

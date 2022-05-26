@@ -7,20 +7,31 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-
         <p:dialog id="SeguimientoAdmPqrCreateDlg" style="width:80%" widgetVar="SeguimientoAdmPqrCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSeguimientoAdmPqrTitle}">
             <h:form id="SeguimientoAdmPqrCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="4" rendered="#{pqrController.selectedSeguimientoAdmPqr != null}">
+                        <p:outputLabel value="fecha Ejecucion" for="fechaEjecucion" />
+                        <p:calendar disabled="#{pqrController.selected.idEstadoPqr.nombre ne 'Registrada'}" id="fechaEjecucion" pattern="yyyy/MM/dd" 
+                                    value="#{pqrController.selectedSeguimientoAdmPqr.fechaEjecucion}" showOn="button"/>
+                        <p:outputLabel value="fecha Fin Ejecucion" for="fechaFinEjecucion" />
+                        <p:calendar disabled="#{pqrController.selected.idEstadoPqr.nombre ne 'Registrada'}" id="fechaFinEjecucion" pattern="yyyy/MM/dd" 
+                                    value="#{pqrController.selectedSeguimientoAdmPqr.fechaFinEjecucion}" showOn="button"/>
                        
                         <p:outputLabel value="#{bundle.CreateSeguimientoAdmPqrLabel_descripcion}" for="descripcion" />
                         <p:inputText id="descripcion" value="#{pqrController.selectedSeguimientoAdmPqr.descripcion}" title="#{bundle.CreateSeguimientoAdmPqrTitle_descripcion}" />
                         
-                        <p:outputLabel value="#{bundle.CreateSeguimientoAdmPqrLabel_estado}" for="estado" />
-                        <p:inputText id="estado" value="#{pqrController.selectedSeguimientoAdmPqr.estado}" title="#{bundle.CreateSeguimientoAdmPqrTitle_estado}" />
-                        
+                             <p:outputLabel value="#{bundle.CreatePqrLabel_estado}" for="estadoPqr" />
+                        <p:selectOneMenu id="estadoPqr" value="#{pqrController.selected.idEstadoPqr}" required="true" 
+                                         requiredMessage="#{bundle.EditPqrRequiredMessage_idTipoPqr}">
+                            <f:selectItems value="#{pqrController.lista_estado_ppal_pqr}"
+                                           var="idestadoItem"
+                                           itemValue="#{idestadoItem}" itemLabel="#{idestadoItem.nombre}"/>
+                        </p:selectOneMenu>             
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{pqrController.create}" value="#{bundle.Save}" update="display,:PqrEditForm,:growl" oncomplete="handleSubmit(args,'SeguimientoAdmPqrCreateDialog');"/>
+                    <p:commandButton actionListener="#{pqrController.createSegumientoAdmin()}" 
+                                     value="#{bundle.Save}" update="display,:PqrEditForm,:PqrDatalistForm:datalist,:growl" 
+                                     oncomplete="handleSubmit(args,'SeguimientoAdmPqrCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SeguimientoAdmPqrCreateDialog.hide()"/>
                 </h:panelGroup>
             </h:form>

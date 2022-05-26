@@ -16,8 +16,13 @@
                         <p:inputText id="id" value="#{estadosPqrController.selected.id}" title="#{bundle.EditEstadosPqrTitle_id}" required="true" requiredMessage="#{bundle.EditEstadosPqrRequiredMessage_id}"/>
                         <p:outputLabel value="#{bundle.EditEstadosPqrLabel_nombre}" for="nombre" />
                         <p:inputText id="nombre" value="#{estadosPqrController.selected.nombre}" title="#{bundle.EditEstadosPqrTitle_nombre}" />
-                        <p:outputLabel value="#{bundle.EditEstadosPqrLabel_tipoUsuario}" for="tipoUsuario" />
-                        <p:inputText id="tipoUsuario" value="#{estadosPqrController.selected.tipoUsuario}" title="#{bundle.EditEstadosPqrTitle_tipoUsuario}" />
+                        <p:outputLabel value="#{bundle.EditEstadosPqrLabel_idRol}" for="idRol" />
+                        <p:selectOneMenu id="idRol" value="#{estadosPqrController.selected.idRol}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
+                                           var="idRolItem"
+                                           itemValue="#{idRolItem}"/>
+                        </p:selectOneMenu>
                     </p:panelGrid>
                     <p:commandButton actionListener="#{estadosPqrController.update}" value="#{bundle.Save}" update="display,:EstadosPqrListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EstadosPqrEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="EstadosPqrEditDialog.hide()"/>

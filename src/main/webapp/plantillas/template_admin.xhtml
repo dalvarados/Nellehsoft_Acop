@@ -4,27 +4,29 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
-
+    <h:body>
     <h:head>
         <title><ui:insert name="title">Default Title</ui:insert></title>
         <h:outputStylesheet library="css" name="jsfcrud.css"/>
         <h:outputScript library="js" name="jsfcrud.js"/>
     </h:head>
-
-    <h:body>
-
         <p:growl id="growl" life="3000" />
-
         <p:layout fullPage="true">
+            <style type="text/css">
+                .ui-layout-unit-content{background-image:url('../resources/imagenes/26507.jpg');
+                 background-repeat:no-repeat ;background-size:100% auto; margin:0px;}
+            </style>            
             <p:layoutUnit position="north" size="65" header="#{bundle.AppName}">
                 <h:form id="menuForm">
                     <p:menubar autoDisplay="false">
                         <p:menuitem  value="#{bundle.Home}" outcome="/paginas/principal_admin.xhtml" icon="ui-icon-home"/>
                         <p:submenu label="Servicios">
                             <p:menuitem value="Mantenimiento" outcome="/objetos/mantenimiento/List_adm.xhtml" />
-                            <p:menuitem value="Pqr" outcome="/objetos/pqr/List.xhtml" />
-                            <p:menuitem value="SegPqrAdmin" outcome="/objetos/seguimientoAdmPqr/List.xhtml" />
-                            <p:menuitem value="SegPqrUsuario" outcome="/objetos/seguimientoUsuarioPqr/List.xhtml" />
+                            <p:submenu label="Pqr">
+                                <p:menuitem value="Administrar" outcome="/objetos/pqr/List.xhtml"/>                                  
+                                <p:menuitem value="Agenda Nuevos" outcome="/objetos/pqr/View_calendario_pqr_nuevos.xhtml" />
+                                <p:menuitem value="Agenda Revisados" outcome="/objetos/pqr/View_calendario_pqr_revisados.xhtml" />                            
+                            </p:submenu>                             
                             <p:menuitem value="Reserva" outcome="/objetos/reserva/List.xhtml" />
                             <p:menuitem value="SegumientoMantno" outcome="/objetos/segumientoMantno/List.xhtml" />
                         </p:submenu>
@@ -69,7 +71,7 @@
                 </table>                 
             </p:layoutUnit>
 
-            <p:layoutUnit position="south" size="60">
+            <p:layoutUnit position="south" size="40">
                 <ui:insert name="footer"/>
             </p:layoutUnit>
 

@@ -15,13 +15,18 @@
     <h:body>
       <p:growl id="growl" life="3000" />
         <p:layout fullPage="true">
+            
             <p:layoutUnit position="north" size="30" header="#{bundle.AppName}">                  
             </p:layoutUnit>
 
             <p:layoutUnit position="west" size="320">
              <p:growl  id="msgs"  showDetail="true" />
+                         <style type="text/css">
+                .ui-layout-unit-content{background-image:url('../resources/imagenes/26507.jpg');
+                 background-repeat:no-repeat ;background-size:100% auto; margin:0px;}
+            </style> 
                <h:form id="form">
-                <br></br><br></br>
+                <br></br>
                      <p:panel header="Menu">
                        <p:accordionPanel  id="idAccPanel" widgetVar="basic">                                 
                            <p:tab  title="Inicio" >

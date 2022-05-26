@@ -41,8 +41,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Pqr.findByFechaCreacion", query = "SELECT p FROM Pqr p WHERE p.fechaCreacion = :fechaCreacion")
     , @NamedQuery(name = "Pqr.findByAsunto", query = "SELECT p FROM Pqr p WHERE p.asunto = :asunto")
     , @NamedQuery(name = "Pqr.findByDescripcion", query = "SELECT p FROM Pqr p WHERE p.descripcion = :descripcion")
-    , @NamedQuery(name = "Pqr.findByIdUsuario", query = "SELECT e FROM Pqr e JOIN E.idUsuario AS a WHERE a.id=e.idUsuario.id and  a.id = :id")        
-    , @NamedQuery(name = "Pqr.findByEstado", query = "SELECT p FROM Pqr p WHERE p.estado = :estado")})
+    , @NamedQuery(name = "Pqr.findByIdUsuario", query = "SELECT e FROM Pqr e JOIN E.idUsuario AS a WHERE a.id=e.idUsuario.id and  a.id = :id")
+    , @NamedQuery(name = "Pqr.findByIdEstado", query = "SELECT e FROM Pqr e JOIN E.idEstadoPqr AS a WHERE a.id=e.idEstadoPqr.id and  a.nombre = :estadoPqr")
+    , @NamedQuery(name = "Pqr.findByIdEstadoNoCerrado", query = "SELECT e FROM Pqr e JOIN E.idEstadoPqr AS a WHERE a.id=e.idEstadoPqr.id and  a.nombre <>'Cerrada'")        
+    })
 public class Pqr implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,9 +64,6 @@ public class Pqr implements Serializable {
     @Size(max = 85)
     @Column(name = "descripcion")
     private String descripcion;
-    @Size(max = 85)
-    @Column(name = "estado")
-    private String estado;
     @Lob
     @Column(name = "adjunto")
     private byte[] adjunto;
@@ -138,14 +137,6 @@ public class Pqr implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
     }
 
     public byte[] getAdjunto() {
