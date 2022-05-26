@@ -17,7 +17,7 @@
                         <p:outputLabel value="#{bundle.CreatePqrLabel_asunto}" for="asunto" />
                         <p:inputText id="asunto" value="#{pqrController.selected.asunto}" title="#{bundle.CreatePqrTitle_asunto}" />
                         <p:outputLabel value="#{bundle.CreatePqrLabel_estado}" for="estado" />
-                        <p:inputText disabled="true" id="estado" value="#{pqrController.selected.estado}"/>                                                                              
+                        <p:inputText disabled="true" id="estado" value="#{pqrController.selected.idEstadoPqr.nombre}"/>                                                                              
                         <p:outputLabel value="#{bundle.CreatePqrLabel_idTipoPqr}" for="idTipoPqr" />
                         <p:selectOneMenu id="idTipoPqr" value="#{pqrController.selected.idTipoPqr}" required="true" requiredMessage="#{bundle.EditPqrRequiredMessage_idTipoPqr}">
                             <f:selectItems value="#{tipoPqrController.itemsAvailableSelectOne}"

@@ -43,7 +43,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{tipoReservaController.prepareCreate}" update=":TipoReservaCreateForm" oncomplete="PF('TipoReservaCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TipoReservaViewForm" oncomplete="PF('TipoReservaViewDialog').show()" disabled="#{empty tipoReservaController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TipoReservaEditForm" oncomplete="PF('TipoReservaEditDialog').show()" disabled="#{empty tipoReservaController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tipoReservaController.destroy}" update=":growl,datalist" disabled="#{empty tipoReservaController.selected}"/>
+                            <p:commandButton  onclick="return confirm('Esta seguro de eliminar este registro ?')" id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{tipoReservaController.destroy}" update=":growl,datalist" disabled="#{empty tipoReservaController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

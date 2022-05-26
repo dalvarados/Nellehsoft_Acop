@@ -19,7 +19,7 @@
                         <p:outputLabel value="#{bundle.CreatePqrLabel_descripcion}" for="descripcion" />
                         <p:inputText id="descripcion" value="#{pqrController.selected.descripcion}" title="#{bundle.CreatePqrTitle_descripcion}" />
                         <p:outputLabel value="#{bundle.CreatePqrLabel_estado}" for="estado" />
-                        <p:inputText disabled="true" id="estado" value="#{pqrController.selected.estado}"/>                        
+                        <p:inputText disabled="true" id="estado" value="#{pqrController.selected.idEstadoPqr.nombre}"/>                        
                         <p:outputLabel value="#{bundle.CreatePqrLabel_adjunto}" for="adjunto" />
                         <p:inputTextarea rows="4" cols="30" id="adjunto" value="#{pqrController.selected.adjunto}" title="#{bundle.CreatePqrTitle_adjunto}" />
                         <p:outputLabel value="#{bundle.CreatePqrLabel_idTipoPqr}" for="idTipoPqr" />

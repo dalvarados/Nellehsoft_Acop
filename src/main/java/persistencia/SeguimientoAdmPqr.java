@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "SeguimientoAdmPqr.findAll", query = "SELECT s FROM SeguimientoAdmPqr s"),
     @NamedQuery(name = "SeguimientoAdmPqr.findById", query = "SELECT s FROM SeguimientoAdmPqr s WHERE s.id = :id"),
+    @NamedQuery(name = "SeguimientoAdmPqr.findByIdPqr", query = "SELECT s FROM SeguimientoAdmPqr s WHERE s.idPqr.id = :id"),
     @NamedQuery(name = "SeguimientoAdmPqr.findByFechaCreacion", query = "SELECT s FROM SeguimientoAdmPqr s WHERE s.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "SeguimientoAdmPqr.findByDescripcion", query = "SELECT s FROM SeguimientoAdmPqr s WHERE s.descripcion = :descripcion"),
     @NamedQuery(name = "SeguimientoAdmPqr.findByEstado", query = "SELECT s FROM SeguimientoAdmPqr s WHERE s.estado = :estado")})
@@ -45,6 +46,12 @@ public class SeguimientoAdmPqr implements Serializable {
     @Column(name = "fecha_creacion")
     @Temporal(TemporalType.DATE)
     private Date fechaCreacion;
+    @Column(name = "fecha_ejecucion")
+    @Temporal(TemporalType.DATE)
+    private Date fechaEjecucion;
+    @Column(name = "fecha_fin_ejecucion")
+    @Temporal(TemporalType.DATE)
+    private Date fechaFinEjecucion;    
     @Size(max = 250)
     @Column(name = "descripcion")
     private String descripcion;
@@ -61,6 +68,22 @@ public class SeguimientoAdmPqr implements Serializable {
     private Usuario idUsuario;
 
     public SeguimientoAdmPqr() {
+    }
+
+    public Date getFechaFinEjecucion() {
+        return fechaFinEjecucion;
+    }
+
+    public void setFechaFinEjecucion(Date fechaFinEjecucion) {
+        this.fechaFinEjecucion = fechaFinEjecucion;
+    }
+
+    public Date getFechaEjecucion() {
+        return fechaEjecucion;
+    }
+
+    public void setFechaEjecucion(Date fechaEjecucion) {
+        this.fechaEjecucion = fechaEjecucion;
     }
 
     public SeguimientoAdmPqr(Integer id) {

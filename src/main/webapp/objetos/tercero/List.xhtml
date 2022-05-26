@@ -105,7 +105,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{terceroController.prepareCreate}" update=":TerceroCreateForm" oncomplete="PF('TerceroCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":TerceroViewForm" oncomplete="PF('TerceroViewDialog').show()" disabled="#{empty terceroController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":TerceroEditForm" oncomplete="PF('TerceroEditDialog').show()" disabled="#{empty terceroController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{terceroController.destroy}" update=":growl,datalist" disabled="#{empty terceroController.selected}"/>
+                            <p:commandButton  onclick="return confirm('Esta seguro de eliminar este registro ?')" id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{terceroController.destroy}" update=":growl,datalist" disabled="#{empty terceroController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>
