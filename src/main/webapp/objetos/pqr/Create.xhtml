@@ -11,28 +11,36 @@
         <p:dialog id="PqrCreateDlg" widgetVar="PqrCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreatePqrTitle}">
             <h:form id="PqrCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="4" rendered="#{pqrController.selected != null}">
+                    
+                    <p:panelGrid style="width:100%" columns="4">
                         <p:outputLabel value="#{bundle.CreatePqrLabel_fechaCreacion}" for="fechaCreacion" />
-                        <p:calendar id="fechaCreacion" pattern="yyyy/MM/dd" value="#{pqrController.selected.fechaCreacion}" title="#{bundle.EditPqrTitle_fechaCreacion}" required="true" requiredMessage="#{bundle.EditPqrRequiredMessage_fechaCreacion}" showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreatePqrLabel_asunto}" for="asunto" />
-                        <p:inputText id="asunto" value="#{pqrController.selected.asunto}" title="#{bundle.CreatePqrTitle_asunto}" />
-                        <p:outputLabel value="#{bundle.CreatePqrLabel_descripcion}" for="descripcion" />
-                        <p:inputTextarea id="descripcion" value="#{pqrController.selected.descripcion}" title="#{bundle.CreatePqrTitle_descripcion}" />
+                        <p:calendar disabled="true" id="fechaCreacion" pattern="yyyy/MM/dd" value="#{pqrController.fechaActual}" title="#{bundle.EditPqrTitle_fechaCreacion}"  showOn="button"/>
                         <p:outputLabel value="#{bundle.CreatePqrLabel_estado}" for="estado" />
-                        <p:selectOneMenu id="estado" value="#{pqrController.selected.estado}">                        
-                        <f:selectItem itemLabel="Registrado" itemValue="Registrado" />
-                        <f:selectItem itemLabel="En Proceso" itemValue="En Proceso" />
-                        <f:selectItem itemLabel="Solucionado" itemValue="Solucionado" />
-                        <f:selectItem itemLabel="Detenido" itemValue="Detenido" />  
-                        </p:selectOneMenu>                                                
+                        <p:inputText disabled="true" id="estado" value="#{pqrController.selected.idEstadoPqr}"/>                                                                              
+                    </p:panelGrid>                    
+                    <p:panelGrid style="width:100%" columns="2">
+                        <p:outputLabel  value="#{bundle.CreatePqrLabel_asunto}" for="asunto" />
+                        <p:inputText id="asunto" style="width:95%" value="#{pqrController.selected.asunto}" title="#{bundle.CreatePqrTitle_asunto}" />                        
+                       <p:outputLabel value="#{bundle.CreatePqrLabel_descripcion}" for="descripcion" />
+                       <p:inputTextarea style="width:95%" id="descripcion" value="#{pqrController.selected.descripcion}" 
+                                         title="#{bundle.CreatePqrTitle_descripcion}" />
+                    </p:panelGrid> 
+                    <p:spacer height="3"/>
+                    <p:panelGrid columns="4" rendered="#{pqrController.selected != null}">
                         <p:outputLabel value="#{bundle.CreatePqrLabel_idTipoPqr}" for="idTipoPqr" />
                         <p:selectOneMenu id="idTipoPqr" value="#{pqrController.selected.idTipoPqr}" required="true" requiredMessage="#{bundle.EditPqrRequiredMessage_idTipoPqr}">
                             <f:selectItems value="#{tipoPqrController.itemsAvailableSelectOne}"
                                            var="idTipoPqrItem"
                                            itemValue="#{idTipoPqrItem}" itemLabel="#{idTipoPqrItem.nombre}"/>
-                        </p:selectOneMenu>
+                        </p:selectOneMenu> 
+                        <p:outputLabel value="Opcion" for="opcionPqr" />
+                        <h:selectOneRadio  id="opcionPqr" layout="lineDirection" value="#{pqrController.opcionPqr}">
+                            <f:selectItem itemLabel="Tercero" itemValue="Tercero" />
+                            <f:selectItem itemLabel="Propiedad" itemValue="Propiedad" />
+                         <p:ajax event="click" update="idNivel2 idNivel3 idTercero"/>
+                        </h:selectOneRadio>
                         <p:outputLabel value="#{bundle.CreatePqrLabel_idNivel2}" for="idNivel2" />
-                        <p:selectOneMenu id="idNivel2" value="#{pqrController.selected.idNivel2}" >
+                        <p:selectOneMenu disabled="#{pqrController.opcionPqr eq 'Tercero'}" style="width:85%" id="idNivel2" value="#{pqrController.selected.idNivel2}" >
                             <f:selectItem itemLabel="" itemValue="" />
                             <f:selectItems value="#{nivel2Controller.itemsAvailableSelectOne}"
                                            var="idNivel2Item"
@@ -41,23 +49,23 @@
                                                                                    .concat(idNivel2Item.idTipo.nombre).concat(' ')
                                                                                    .concat(idNivel2Item.referencia)
                                                         }"/>
+                            <f:ajax event="change" listener="#{pqrController.obtener_nivel3_x_nivel2()}"
+                                    render="idNivel3" execute="@this idNivel3"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatePqrLabel_idNivel3}" for="idNivel3" />
-                        <p:selectOneMenu id="idNivel3" value="#{pqrController.selected.idNivel3}" >
-                            <f:selectItem itemLabel="" itemValue="" />
-                            <f:selectItems value="#{nivel3Controller.itemsAvailableSelectOne}"
+                        <p:selectOneMenu style="width:85%" disabled="#{pqrController.opcionPqr eq 'Tercero'}" id="idNivel3" value="#{pqrController.selected.idNivel3}" >
+                            <f:selectItems value="#{pqrController.lista_nivel3}"
                                            var="idNivel3Item"
                                            itemValue="#{idNivel3Item}" itemLabel="#{idNivel3Item.idTipo.nombre.concat(' ')
                                                         .concat(idNivel3Item.referencia)}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreatePqrLabel_idTercero}" for="idTercero" />
-                        <p:selectOneMenu id="idTercero" value="#{pqrController.selected.idTercero}" >
+                        <p:selectOneMenu style="width:85%" disabled="#{pqrController.opcionPqr ne 'Tercero'}" id="idTercero" value="#{pqrController.selected.idTercero}" >
                             <f:selectItem itemLabel="" itemValue="" />
                             <f:selectItems value="#{terceroController.itemsAvailableSelectOne}"
                                            var="idTerceroItem"
                                            itemValue="#{idTerceroItem}" itemLabel="#{idTerceroItem.nombre}"/>
-                        </p:selectOneMenu>
-                        
+                        </p:selectOneMenu> 
                     </p:panelGrid>
                     <p:commandButton actionListener="#{pqrController.create}" value="#{bundle.Save}" update="display,:PqrListForm:datalist,:growl" oncomplete="handleSubmit(args,'PqrCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="PqrCreateDialog.hide()"/>

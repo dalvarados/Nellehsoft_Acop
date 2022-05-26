@@ -53,6 +53,8 @@ public class Rol implements Serializable {
     private Collection<Propietario> propietarioCollection;
     @OneToMany(mappedBy = "idRol")
     private Collection<Usuario> usuarioCollection;
+    @OneToMany(mappedBy = "idRol")
+    private Collection<EstadosPqr> estadosPqrCollection;
 
     public Rol() {
     }
@@ -110,6 +112,14 @@ public class Rol implements Serializable {
 
     public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
         this.usuarioCollection = usuarioCollection;
+    }
+        @XmlTransient
+    public Collection<EstadosPqr> getEstadosPqrCollection() {
+        return estadosPqrCollection;
+    }
+
+    public void setEstadosPqrCollection(Collection<EstadosPqr> estadosPqrCollection) {
+        this.estadosPqrCollection = estadosPqrCollection;
     }
 
     @Override

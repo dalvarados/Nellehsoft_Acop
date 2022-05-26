@@ -89,7 +89,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{propietarioController.prepareCreate}" update=":PropietarioCreateForm" oncomplete="PF('PropietarioCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PropietarioViewForm" oncomplete="PF('PropietarioViewDialog').show()" disabled="#{empty propietarioController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PropietarioEditForm" oncomplete="PF('PropietarioEditDialog').show()" disabled="#{empty propietarioController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{propietarioController.destroy}" update=":growl,datalist" disabled="#{empty propietarioController.selected}"/>
+                            <p:commandButton  onclick="return confirm('Esta seguro de eliminar este registro ?')" id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{propietarioController.destroy}" update=":growl,datalist" disabled="#{empty propietarioController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{usuarioController.templateDinamico()}">
+        <ui:define name="title">
+             <f:event type="preRenderView" listener="#{seguimientoAdmPqrController.inicializarCalendario()}"/>            
+        </ui:define> 
+       <ui:define name="body" >        
+
+    <h:panelGrid columns="5" cellpadding="0">
+    <script>
+       PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero','Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+                dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+                dayNamesShort: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D','L','M','M','J','V','S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText : 'Todo el día'
+        };       
+        </script>
+      
+              <h:form id="CalendarioListForm"> 
+                <p:growl id="msgGrowl" showDetail="true" />
+                  <h3 style="margin-top: 0">Agenda PQR Revisados</h3>
+                  <p:schedule style="width: 50%" widgetVar="menuCalendario" value="#{seguimientoAdmPqrController.eventModel}" 
+                              id="shEvento" draggable="false" timeZone="America/Bogota" locale="es">
+                      
+                    <p:ajax event="eventSelect" listener="#{seguimientoAdmPqrController.seleccionado}" 
+                            update="eventoDetalle" oncomplete="PF('dialog').show();"/>
+                 </p:schedule> 
+                
+            <p:dialog widgetVar="dialog" header="Nueva Agenda" resizable="false" modal="false" showEffect="clip" >
+                <p:outputPanel id="eventoDetalle">
+                  <h:panelGrid columns="2" >
+                     <p:outputLabel value="Codigo Pqr: "/>
+                     <p:inputText style="width: 30%" readonly="true" id="idpqr" value="#{seguimientoAdmPqrController.calendarioSeguimientoAdmPqr.id}"/>                      
+                     <p:outputLabel value="Resposable: "/>
+                     <p:inputText style="width: 230%" readonly="true" value="#{seguimientoAdmPqrController.calendarioSeguimientoAdmPqr.idPqr.idUsuario.nombres.concat(' ').concat(seguimientoAdmPqrController.calendarioSeguimientoAdmPqr.idPqr.idUsuario.apellidos)}"/>                      
+                     <p:outputLabel value="Asunto"/>
+                     <p:inputText readonly="true" style="width: 230%" value="#{seguimientoAdmPqrController.calendarioSeguimientoAdmPqr.idPqr.asunto}"/>                      
+                  </h:panelGrid>
+                  <h:panelGrid columns="2">
+                     <p:outputLabel value="Descripcion "/>
+                     <p:inputTextarea readonly="true" style="width: 235%" value="#{seguimientoAdmPqrController.calendarioSeguimientoAdmPqr.idPqr.descripcion}"/>      
+                  </h:panelGrid>
+                  <p:separator/>
+                  <h:panelGrid columns="4"> 
+                     <p:outputLabel value="Detalle"/>
+                     <p:inputText readonly="true"  value="#{seguimientoAdmPqrController.calendarioSeguimientoAdmPqr.descripcion}"/>                                                                                                       
+                     <p:outputLabel value="Fecha Inicio:"/>
+                     <p:inputText readonly="true" value="#{seguimientoAdmPqrController.calendarioSeguimientoAdmPqr.fechaCreacion}">
+                                 <f:convertDateTime pattern="dd/MM/yyyy" />
+                     </p:inputText>
+                     <p:outputLabel value="Fecha Fin:"/>
+                     <p:inputText readonly="true" value="#{seguimientoAdmPqrController.calendarioSeguimientoAdmPqr.fechaFinEjecucion}" >
+                                 <f:convertDateTime pattern="dd/MM/yyyy" />
+                     </p:inputText>
+                     <p:outputLabel value="Estado"/>
+                     <p:inputText  readonly="true" value="#{seguimientoAdmPqrController.calendarioSeguimientoAdmPqr.estado}"/>   
+                  </h:panelGrid> 
+                </p:outputPanel>
+             </p:dialog>     
+    </h:form>  
+            <p:spacer width="210" height="20"> </p:spacer>
+       </h:panelGrid>
+           
+      </ui:define>
+       </ui:composition>
+</html>

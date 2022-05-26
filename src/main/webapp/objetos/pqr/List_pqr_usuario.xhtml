@@ -54,7 +54,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPqrTitle_estado}"/>
                             </f:facet>
-                            <h:outputText value="#{item.estado}"/>
+                            <h:outputText value="#{item.idEstadoPqr.nombre}"/>
                         </p:column>
                         <p:column>
                             <f:facet name="header">
@@ -90,7 +90,7 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{pqrController.prepareCreate}" update=":PqrCreateForm" oncomplete="PF('PqrCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":PqrViewForm" oncomplete="PF('PqrViewDialog').show()" disabled="#{empty pqrController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":PqrEditForm" oncomplete="PF('PqrEditDialog').show()" disabled="#{empty pqrController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{pqrController.destroy}" update=":growl,datalist" disabled="#{empty pqrController.selected}"/>
+                            <p:commandButton  onclick="return confirm('Esta seguro de eliminar este registro ?')" id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{pqrController.destroy}" update=":growl,datalist" disabled="#{empty pqrController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

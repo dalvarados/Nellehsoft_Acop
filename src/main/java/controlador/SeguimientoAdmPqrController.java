@@ -6,7 +6,10 @@ import controlador.util.JsfUtil.PersistAction;
 import negocio.SeguimientoAdmPqrFacade;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,6 +21,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.DefaultScheduleModel;
+import org.primefaces.model.ScheduleEvent;
+import org.primefaces.model.ScheduleModel;
 
 @Named("seguimientoAdmPqrController")
 @SessionScoped
@@ -25,12 +33,48 @@ public class SeguimientoAdmPqrController implements Serializable {
 
     @EJB
     private negocio.SeguimientoAdmPqrFacade ejbFacade;
+    @EJB
+    private negocio.SeguimientoAdmPqrFacade ejbFacadeSeguimientoAdmPqr;     
     private List<SeguimientoAdmPqr> items = null;
     private SeguimientoAdmPqr selected;
+    private ScheduleModel eventModel;
+    private SeguimientoAdmPqr calendarioSeguimientoAdmPqr;  
+    private List<SeguimientoAdmPqr> itemsSeguimientoAdmPqr; 
+    private String idPqrString;
 
     public SeguimientoAdmPqrController() {
     }
 
+    public List<SeguimientoAdmPqr> getItemsSeguimientoAdmPqr() {
+        return itemsSeguimientoAdmPqr;
+    }
+    
+    public String getIdPqrString() {
+        return idPqrString;
+    }
+
+    public void setIdPqrString(String idPqrString) {
+        this.idPqrString = idPqrString;
+    }
+    public void setItemsSeguimientoAdmPqr(List<SeguimientoAdmPqr> itemsSeguimientoAdmPqr) {
+        this.itemsSeguimientoAdmPqr = itemsSeguimientoAdmPqr;
+    }
+
+    public SeguimientoAdmPqr getCalendarioSeguimientoAdmPqr() {
+        return calendarioSeguimientoAdmPqr;
+    }
+
+    public void setCalendarioSeguimientoAdmPqr(SeguimientoAdmPqr calendarioSeguimientoAdmPqr) {
+        this.calendarioSeguimientoAdmPqr = calendarioSeguimientoAdmPqr;
+    }
+    
+    public ScheduleModel getEventModel() {
+        return eventModel;
+    }
+
+    public void setEventModel(ScheduleModel eventModel) {
+        this.eventModel = eventModel;
+    }
     public SeguimientoAdmPqr getSelected() {
         return selected;
     }
@@ -160,6 +204,46 @@ public class SeguimientoAdmPqrController implements Serializable {
             }
         }
 
+    }
+    
+   public void inicializarCalendario(){
+     if (isPostback() == false) {
+         cargarCalendario();  
+      }        
+   }
+   
+   public void cargarCalendario(){
+       calendarioSeguimientoAdmPqr=new SeguimientoAdmPqr();
+       eventModel=new DefaultScheduleModel();   
+       itemsSeguimientoAdmPqr = ejbFacadeSeguimientoAdmPqr.findAll();       
+       for(SeguimientoAdmPqr  ev: itemsSeguimientoAdmPqr){
+           DefaultScheduleEvent evt =new DefaultScheduleEvent();          
+           evt.setEndDate(LocalDateTime.ofInstant(ev.getFechaEjecucion().toInstant(),ZoneId.systemDefault()));
+           evt.setStartDate(LocalDateTime.ofInstant(ev.getFechaEjecucion().toInstant(),ZoneId.systemDefault()));
+           evt.setTitle(ev.getDescripcion());
+           evt.setId(ev.getIdPqr().getId().toString());
+           evt.setData(ev.getId());
+           evt.setAllDay(false);
+           evt.setEditable(true);
+           eventModel.addEvent(evt);
+       }
+    }
+   
+    private boolean isPostback(){
+     boolean rpta;
+     rpta= FacesContext.getCurrentInstance().isPostback();
+     return rpta;
+    } 
+   
+   public void seleccionado(SelectEvent selectEvent) {
+       ScheduleEvent event=(ScheduleEvent) selectEvent.getObject();       
+       for( SeguimientoAdmPqr ev : itemsSeguimientoAdmPqr){
+           if (Objects.equals(ev.getId(), event.getData())){
+               calendarioSeguimientoAdmPqr=ev;
+               setIdPqrString(ev.getIdPqr().getId().toString());
+               break;
+           }
+       }    
     }
 
 }
