@@ -49,7 +49,8 @@
                   <p:schedule  style="width: 50%" widgetVar="menuCalendario" value="#{pqrController.eventModel}" 
                                id="shEvento" timeZone="America/Bogota" locale="es">   
                     <p:ajax event="eventSelect" listener="#{pqrController.seleccionado}" update="eventoDetalle" oncomplete="PF('dialog').show();"/>
-                 </p:schedule>                 
+                    
+                  </p:schedule>                 
             <p:dialog widgetVar="dialog" header="Nueva Agenda" resizable="false" modal="false" showEffect="clip" >
                 <p:outputPanel id="eventoDetalle">
                     <h:panelGrid columns="2" >

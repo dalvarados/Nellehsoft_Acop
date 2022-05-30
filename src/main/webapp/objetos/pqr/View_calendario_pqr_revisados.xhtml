@@ -50,8 +50,10 @@
                       
                     <p:ajax event="eventSelect" listener="#{seguimientoAdmPqrController.seleccionado}" 
                             update="eventoDetalle" oncomplete="PF('dialog').show();"/>
+                    <p:ajax event="dateSelect" listener="#{seguimientoAdmPqrController.nuevoCalendar}" 
+                            update="eventoDetalle" oncomplete="PF('dialog').show();"/>                                    
                  </p:schedule> 
-                
+
             <p:dialog widgetVar="dialog" header="Nueva Agenda" resizable="false" modal="false" showEffect="clip" >
                 <p:outputPanel id="eventoDetalle">
                   <h:panelGrid columns="2" >

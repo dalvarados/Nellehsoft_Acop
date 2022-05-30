@@ -24,6 +24,7 @@
                              <p:outputLabel value="#{bundle.CreatePqrLabel_estado}" for="estadoPqr" />
                         <p:selectOneMenu id="estadoPqr" value="#{pqrController.selected.idEstadoPqr}" required="true" 
                                          requiredMessage="#{bundle.EditPqrRequiredMessage_idTipoPqr}">
+                             <f:selectItem itemLabel="" itemValue="" /> 
                             <f:selectItems value="#{pqrController.lista_estado_ppal_pqr}"
                                            var="idestadoItem"
                                            itemValue="#{idestadoItem}" itemLabel="#{idestadoItem.nombre}"/>

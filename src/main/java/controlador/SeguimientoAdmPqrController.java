@@ -8,6 +8,7 @@ import negocio.SeguimientoAdmPqrFacade;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -246,4 +247,11 @@ public class SeguimientoAdmPqrController implements Serializable {
        }    
     }
 
+    public void nuevoCalendar(SelectEvent selectEvent) {
+       ScheduleEvent event= new DefaultScheduleEvent("",(LocalDateTime)selectEvent.getObject(),(LocalDateTime)selectEvent.getObject());       
+       calendarioSeguimientoAdmPqr=new SeguimientoAdmPqr();
+       calendarioSeguimientoAdmPqr.setFechaCreacion(Date.from(event.getStartDate().atZone(ZoneId.systemDefault()).toInstant()));
+       calendarioSeguimientoAdmPqr.setFechaFinEjecucion(Date.from(event.getEndDate().atZone(ZoneId.systemDefault()).toInstant()));
+     }
+    
 }

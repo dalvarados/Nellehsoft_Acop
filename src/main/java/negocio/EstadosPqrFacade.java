@@ -4,7 +4,6 @@
  */
 package negocio;
 
-import java.math.BigInteger;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -42,7 +41,7 @@ public class EstadosPqrFacade extends AbstractFacade<EstadosPqr> {
     public List<EstadosPqr> obtenerEstadoPqrNoCerrada (){
         Query esp = em.createNamedQuery("EstadosPqr.findByNombreNoCerrada");
         return esp.getResultList();
-    }
+    }        
 
     public List<EstadosPqr> obtenerEstadoPpal (String nombreEstado,Integer id){
         Query espp = em.createNamedQuery("EstadosPqr.findByEstadoPpal").setParameter("nombreEstado",nombreEstado).setParameter("id",id);
