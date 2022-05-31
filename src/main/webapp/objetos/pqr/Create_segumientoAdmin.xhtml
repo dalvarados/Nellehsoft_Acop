@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition>
-        <p:dialog id="SeguimientoAdmPqrCreateDlg" style="width:80%" widgetVar="SeguimientoAdmPqrCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSeguimientoAdmPqrTitle}">
+        <p:dialog id="SeguimientoAdmPqrCreateDlg" style="width:80%" closable="false" widgetVar="SeguimientoAdmPqrCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSeguimientoAdmPqrTitle}">
             <h:form id="SeguimientoAdmPqrCreateForm">
                 <h:panelGroup id="display">
                     <p:panelGrid columns="4" rendered="#{pqrController.selectedSeguimientoAdmPqr != null}">
@@ -28,12 +28,14 @@
                             <f:selectItems value="#{pqrController.lista_estado_ppal_pqr}"
                                            var="idestadoItem"
                                            itemValue="#{idestadoItem}" itemLabel="#{idestadoItem.nombre}"/>
+                            <f:ajax event="change" listener="#{pqrController.habilitarEstadoReprogramado()}"
+                                    render="fechaEjecucion fechaFinEjecucion" execute="@this fechaEjecucion fechaFinEjecucion"/>                            
                         </p:selectOneMenu>             
                     </p:panelGrid>
                     <p:commandButton actionListener="#{pqrController.createSegumientoAdmin()}" 
                                      value="#{bundle.Save}" update="display,:PqrEditForm,:PqrDatalistForm:datalist,:growl" 
                                      oncomplete="handleSubmit(args,'SeguimientoAdmPqrCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SeguimientoAdmPqrCreateDialog.hide()"/>
+                    <p:commandButton value="#{bundle.Cancel}" immediate="true" oncomplete="handleSubmit(args,'SeguimientoAdmPqrCreateDialog');"/>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

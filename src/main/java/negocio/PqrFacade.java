@@ -57,6 +57,6 @@ public class PqrFacade extends AbstractFacade<Pqr> {
     public Pqr obtenerEstadoPqrId (int id){
         Query esp = em.createNamedQuery("Pqr.findById").setParameter("id",id);
         return (Pqr) esp.getSingleResult();
-    }    
+    }         
     
 }

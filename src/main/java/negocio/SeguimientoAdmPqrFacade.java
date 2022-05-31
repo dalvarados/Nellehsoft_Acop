@@ -3,6 +3,7 @@ package negocio;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import persistencia.SeguimientoAdmPqr;
@@ -29,6 +30,16 @@ public class SeguimientoAdmPqrFacade extends AbstractFacade<SeguimientoAdmPqr> {
     public List<SeguimientoAdmPqr> obtener_seguimientoAdmPqr_id (Integer idPqr){
     Query sm = em.createNamedQuery("SeguimientoAdmPqr.findByIdPqr").setParameter("id",idPqr);
     return sm.getResultList();
+    }
+       
+    public SeguimientoAdmPqr obtenerMaxPqrId (int id){
+      try {
+        Query smip = em.createNamedQuery("SeguimientoAdmPqr.findByMaxIdPqr").setParameter("id",id);
+        return (SeguimientoAdmPqr) smip.getSingleResult();
+      }catch(NoResultException e){
+         SeguimientoAdmPqr lista =null;
+         return lista;
+      }
     }     
     
 }
