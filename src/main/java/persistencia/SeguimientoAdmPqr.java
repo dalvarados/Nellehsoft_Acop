@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "SeguimientoAdmPqr.findAll", query = "SELECT s FROM SeguimientoAdmPqr s"),
     @NamedQuery(name = "SeguimientoAdmPqr.findById", query = "SELECT s FROM SeguimientoAdmPqr s WHERE s.id = :id"),
-    @NamedQuery(name = "SeguimientoAdmPqr.findByIdPqr", query = "SELECT s FROM SeguimientoAdmPqr s WHERE s.idPqr.id = :id"),
+    @NamedQuery(name = "SeguimientoAdmPqr.findByIdPqr", query = "SELECT s FROM SeguimientoAdmPqr s WHERE s.idPqr.id = :id"), 
+    @NamedQuery(name = "SeguimientoAdmPqr.findByMaxIdPqr", query = "SELECT s FROM SeguimientoAdmPqr s WHERE s.id = (SELECT  MAX(s.id) FROM SeguimientoAdmPqr s where s.idPqr.id = :id) "),    
     @NamedQuery(name = "SeguimientoAdmPqr.findByFechaCreacion", query = "SELECT s FROM SeguimientoAdmPqr s WHERE s.fechaCreacion = :fechaCreacion"),
     @NamedQuery(name = "SeguimientoAdmPqr.findByDescripcion", query = "SELECT s FROM SeguimientoAdmPqr s WHERE s.descripcion = :descripcion"),
     @NamedQuery(name = "SeguimientoAdmPqr.findByEstado", query = "SELECT s FROM SeguimientoAdmPqr s WHERE s.estado = :estado")})
