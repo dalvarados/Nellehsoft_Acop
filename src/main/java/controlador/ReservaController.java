@@ -6,8 +6,11 @@ import controlador.util.JsfUtil.PersistAction;
 import negocio.ReservaFacade;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +22,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.model.DefaultScheduleEvent;
+import org.primefaces.model.DefaultScheduleModel;
+import org.primefaces.model.ScheduleEvent;
+import org.primefaces.model.ScheduleModel;
 import persistencia.Usuario;
 
 @Named("reservaController")
@@ -28,12 +36,39 @@ public class ReservaController implements Serializable {
     @EJB
     private negocio.ReservaFacade ejbFacade;
     private List<Reserva> items = null;
+    private Reserva calendarioReserva;
+    private ScheduleModel eventModel;
+    private List<Reserva> itemsReserva;
     private Reserva selected;
     private Usuario user;
     private Date fechaActual;
     private List<Reserva> Lista_reserva = null;
 
     public ReservaController() {
+    }
+
+    public ScheduleModel getEventModel() {
+        return eventModel;
+    }
+
+    public void setEventModel(ScheduleModel eventModel) {
+        this.eventModel = eventModel;
+    }
+
+    public List<Reserva> getItemsReserva() {
+        return itemsReserva;
+    }
+
+    public void setItemsReserva(List<Reserva> itemsReserva) {
+        this.itemsReserva = itemsReserva;
+    }
+
+    public Reserva getCalendarioReserva() {
+        return calendarioReserva;
+    }
+
+    public void setCalendarioReserva(Reserva calendarioReserva) {
+        this.calendarioReserva = calendarioReserva;
     }
 
     public Date getFechaActual() {
@@ -78,11 +113,13 @@ public class ReservaController implements Serializable {
         return selected;
     }
 
-    public void create() {
+    public void create() {        
         selected.setIdUsuario(user);
+        selected.setFechaCreacion(fechaActual);
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("ReservaCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.
+            cargarCalendario();
         }
     }
 
@@ -191,4 +228,54 @@ public class ReservaController implements Serializable {
       user =(Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
       Lista_reserva =ejbFacade.obtenerReserva(user.getId());
   }
+  
+  public void inicializarCalendario(){
+     if (isPostback() == false) {
+         cargarCalendario();  
+      }  
+  }
+  
+     public void cargarCalendario(){
+         user =(Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+       calendarioReserva=new Reserva();
+       eventModel=new DefaultScheduleModel(); 
+       itemsReserva = ejbFacade.obtenerReserva(user.getId());       
+       for(Reserva  ev: itemsReserva){
+           DefaultScheduleEvent evt =new DefaultScheduleEvent();          
+           evt.setEndDate(LocalDateTime.ofInstant(ev.getFechaInicio().toInstant(),ZoneId.systemDefault()));
+           evt.setStartDate(LocalDateTime.ofInstant(ev.getFechaFin().toInstant(),ZoneId.systemDefault()));
+           evt.setTitle(ev.getDescripcion());
+           evt.setId(ev.getIdTipoReserva().getId().toString());
+           evt.setData(ev.getId());
+           evt.setAllDay(false);
+           evt.setEditable(true);
+           eventModel.addEvent(evt);
+       }
+    }
+    
+    private boolean isPostback(){
+     boolean rpta;
+     rpta= FacesContext.getCurrentInstance().isPostback();
+     return rpta;
+    }
+    
+    public void seleccionado(SelectEvent selectEvent) {
+       ScheduleEvent event=(ScheduleEvent) selectEvent.getObject();       
+       for( Reserva ev : itemsReserva){
+           if (Objects.equals(ev.getId(), event.getData())){
+               calendarioReserva=ev;
+               break;
+           }
+       }    
+    }  
+      public void nuevoReservaCalendar(SelectEvent selectEvent) {
+           java.util.Date fecha=new Date();
+           setFechaActual(fecha);
+           selected=new Reserva();               
+           selected.setFechaCreacion(fechaActual);
+       ScheduleEvent event= new DefaultScheduleEvent("",(LocalDateTime)selectEvent.getObject(),(LocalDateTime)selectEvent.getObject());       
+       selected.setFechaInicio(Date.from(event.getStartDate().atZone(ZoneId.systemDefault()).toInstant()));
+       selected.setFechaFin(Date.from(event.getEndDate().atZone(ZoneId.systemDefault()).toInstant()));
+      }
+
 }
