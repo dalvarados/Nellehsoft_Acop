@@ -43,8 +43,17 @@ public class ReservaController implements Serializable {
     private Usuario user;
     private Date fechaActual;
     private List<Reserva> Lista_reserva = null;
+    private String tipo_reserva="Locativas";
 
     public ReservaController() {
+    }
+
+    public String getTipo_reserva() {
+        return tipo_reserva;
+    }
+
+    public void setTipo_reserva(String tipo_reserva) {
+        this.tipo_reserva = tipo_reserva;
     }
 
     public ScheduleModel getEventModel() {
@@ -234,12 +243,19 @@ public class ReservaController implements Serializable {
          cargarCalendario();  
       }  
   }
-  
+  public void iniciarEventMondel(){
+      eventModel=new DefaultScheduleModel();
+  }
      public void cargarCalendario(){
          user =(Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
        calendarioReserva=new Reserva();
        eventModel=new DefaultScheduleModel(); 
-       itemsReserva = ejbFacade.obtenerReserva(user.getId());       
+       if("Administrador".equals(user.getIdRol().getNombre())){
+            itemsReserva = ejbFacade.obtenerReservaPorTipo(tipo_reserva);
+       }else{
+            itemsReserva = ejbFacade.obtenerReserva(user.getId());
+       }
+       
        for(Reserva  ev: itemsReserva){
            DefaultScheduleEvent evt =new DefaultScheduleEvent();          
            evt.setEndDate(LocalDateTime.ofInstant(ev.getFechaInicio().toInstant(),ZoneId.systemDefault()));

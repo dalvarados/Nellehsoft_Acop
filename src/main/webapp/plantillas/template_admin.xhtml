@@ -26,8 +26,12 @@
                                 <p:menuitem value="Administrar" outcome="/objetos/pqr/List.xhtml"/>                                  
                                 <p:menuitem value="Agenda Nuevos" outcome="/objetos/pqr/View_calendario_pqr_nuevos.xhtml" />
                                 <p:menuitem value="Agenda Revisados" outcome="/objetos/pqr/View_calendario_pqr_revisados.xhtml" />                            
-                            </p:submenu>                             
-                            <p:menuitem value="Reserva" outcome="/objetos/reserva/List.xhtml" />
+                            </p:submenu>
+                            <p:submenu label="Reserva">
+                            <p:menuitem value="administrar" outcome="/objetos/reserva/List.xhtml" />
+                            <p:menuitem value="Citas admin" outcome="/objetos/reserva/View_calendario_reserva_citas_adm.xhtml" />
+                            <p:menuitem value="reservas locativas" outcome="/objetos/reserva/View_calendario_reserva_locativas" />
+                            </p:submenu>
                             <p:menuitem value="SegumientoMantno" outcome="/objetos/segumientoMantno/List.xhtml" />
                         </p:submenu>
                         <p:submenu label="Copropietario">

@@ -40,7 +40,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Reserva.findByFechaFin", query = "SELECT r FROM Reserva r WHERE r.fechaFin = :fechaFin")
     , @NamedQuery(name = "Reserva.findByAsunto", query = "SELECT r FROM Reserva r WHERE r.asunto = :asunto")
     , @NamedQuery(name = "Reserva.findByDescripcion", query = "SELECT r FROM Reserva r WHERE r.descripcion = :descripcion")
-    , @NamedQuery(name = "Reserva.findByIdUsuario", query = "SELECT e FROM Reserva e JOIN E.idUsuario AS a WHERE a.id=e.idUsuario.id and  a.id = :id")        
+    , @NamedQuery(name = "Reserva.findByIdUsuario", query = "SELECT e FROM Reserva e JOIN E.idUsuario AS a WHERE a.id=e.idUsuario.id and  a.id = :id") 
+    , @NamedQuery(name = "Reserva.findByTipoReserva", query = "SELECT e FROM Reserva e JOIN E.idTipoReserva AS a WHERE a.id=e.idTipoReserva.id and  a.nombre = :tipo")
     , @NamedQuery(name = "Reserva.findByEstado", query = "SELECT r FROM Reserva r WHERE r.estado = :estado")})
 public class Reserva implements Serializable {
 
