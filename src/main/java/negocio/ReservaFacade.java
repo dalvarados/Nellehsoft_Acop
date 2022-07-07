@@ -35,4 +35,10 @@ public class ReservaFacade extends AbstractFacade<Reserva> {
         Query sm = em.createNamedQuery("Reserva.findByIdUsuario").setParameter("id",idReserva_usuario);
         return sm.getResultList(); 
      }
+     
+      public List<Reserva> obtenerReservaPorTipo (String tipo){
+        Query sm = em.createNamedQuery("Reserva.findByTipoReserva").setParameter("nombre",tipo);
+        return sm.getResultList(); 
+     }
+             
 }
