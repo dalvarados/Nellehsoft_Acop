@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{usuarioController.templateDinamico()}">
+        <ui:define name="title">
+             <f:event type="preRenderView" listener="#{seguimientoAdmPqrController.inicializarCalendario()}"/>            
+        </ui:define> 
+       <ui:define name="body" >        
+
+    <h:panelGrid columns="5" cellpadding="0">
+    <script>
+       PrimeFaces.locales['es'] = {
+                closeText: 'Cerrar',
+                prevText: 'Anterior',
+                nextText: 'Siguiente',
+                monthNames: ['Enero','Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
+                dayNames: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+                dayNamesShort: ['Dom','Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+                dayNamesMin: ['D','L','M','M','J','V','S'],
+                weekHeader: 'Semana',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Sólo hora',
+                timeText: 'Tiempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                currentText: 'Fecha actual',
+                ampm: false,
+                month: 'Mes',
+                week: 'Semana',
+                day: 'Día',
+                allDayText : 'Todo el día'
+        };       
+        </script>
+      
+              <h:form id="CalendarioListForm"> 
+                <p:growl id="msgGrowl" showDetail="true" />
+                  <h3 style="margin-top: 0">Reservas Locativas</h3>
+                  <p:schedule style="width: 50%" widgetVar="menuCalendario" value="#{reservaController.eventModel}" 
+                              id="shEvento" draggable="false" timeZone="America/Bogota" locale="es">
+                      
+                    <p:ajax event="eventSelect" listener="#{reservaController.seleccionado}" 
+                            update="eventoDetalle" oncomplete="PF('dialog').show();"/>
+                 </p:schedule> 
+                
+            <p:dialog widgetVar="dialog" header="Nueva Agenda" resizable="false" modal="false" showEffect="clip" >
+                <p:outputPanel id="eventoDetalle">
+                    <p:panelGrid columns="2" rendered="#{reservaController.selected != null}">
+                        <h:outputText value="#{bundle.ViewReservaLabel_fechaCreacion}"/>
+                        <h:outputText value="#{reservaController.selected.fechaCreacion}" title="#{bundle.ViewReservaTitle_fechaCreacion}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewReservaLabel_cantAsistentes}"/>
+                        <h:outputText value="#{reservaController.selected.cantAsistentes}" title="#{bundle.ViewReservaTitle_cantAsistentes}"/>
+                        <h:outputText value="#{bundle.ViewReservaLabel_fechaInicio}"/>
+                        <h:outputText value="#{reservaController.selected.fechaInicio}" title="#{bundle.ViewReservaTitle_fechaInicio}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewReservaLabel_fechaFin}"/>
+                        <h:outputText value="#{reservaController.selected.fechaFin}" title="#{bundle.ViewReservaTitle_fechaFin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewReservaLabel_asunto}"/>
+                        <h:outputText value="#{reservaController.selected.asunto}" title="#{bundle.ViewReservaTitle_asunto}"/>
+                        <h:outputText value="#{bundle.ViewReservaLabel_descripcion}"/>
+                        <h:outputText value="#{reservaController.selected.descripcion}" title="#{bundle.ViewReservaTitle_descripcion}"/>
+                        <h:outputText value="#{bundle.ViewReservaLabel_estado}"/>
+                        <h:outputText value="#{reservaController.selected.estado}" title="#{bundle.ViewReservaTitle_estado}"/>
+                        <h:outputText value="#{bundle.ViewReservaLabel_idTipoReserva}"/>
+                        <h:outputText value="#{reservaController.selected.idTipoReserva.nombre}" title="#{bundle.ViewReservaTitle_idTipoReserva}"/>
+                        <h:outputText value="#{bundle.ViewReservaLabel_idNivel2}"/>
+                        <h:outputText value="#{reservaController.selected.idNivel2.referencia}" title="#{bundle.ViewReservaTitle_idNivel2}"/>
+                        <h:outputText value="#{bundle.ViewReservaLabel_idNivel3}"/>
+                        <h:outputText value="#{reservaController.selected.idNivel3.referencia}" title="#{bundle.ViewReservaTitle_idNivel3}"/>
+                        <h:outputText value="#{bundle.ViewReservaLabel_idUsuario}"/>
+                        <h:outputText value="#{reservaController.selected.idUsuario.nombres}" title="#{bundle.ViewReservaTitle_idUsuario}"/>
+                    </p:panelGrid>
+                </p:outputPanel>
+             </p:dialog>     
+    </h:form>  
+            <p:spacer width="210" height="20"> </p:spacer>
+       </h:panelGrid>
+           
+      </ui:define>
+       </ui:composition>
+</html>
