@@ -11,7 +11,7 @@
         <p:dialog id="MantenimientoCreateDlg" widgetVar="MantenimientoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateMantenimientoTitle}">
             <h:form id="MantenimientoCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{mantenimientoController.selected != null}">
+                    <p:panelGrid columns="4" rendered="#{mantenimientoController.selected != null}">
                         <p:outputLabel value="#{bundle.CreateMantenimientoLabel_fechaCreacion}" for="fechaCreacion" />
                         <p:calendar disabled="true" id="fechaCreacion" pattern="MM/dd/yyyy" value="#{mantenimientoController.fechaActual}" title="#{bundle.EditMantenimientoTitle_fechaCreacion}" showOn="button"/>
                         <p:outputLabel value="#{bundle.CreateMantenimientoLabel_fechaInicio}" for="fechaInicio" />

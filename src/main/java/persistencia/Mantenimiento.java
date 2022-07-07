@@ -62,16 +62,23 @@ public class Mantenimiento implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "fecha_fin")
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
-    @Size(max = 85)
+    @Size(max = 145)
     @Column(name = "descripcion")
     private String descripcion;
     @Size(max = 85)
     @Column(name = "estado")
     private String estado;
+    @Size(max = 45)
+    @Column(name = "frecuencia")
+    private String frecuencia;  
+    @Column(name = "valor_presupuesto")
+    private Integer valorPresupuesto; 
+    @Size(max = 45)
+    @Column(name = "valorFinal")
+    private String valor_final;     
     @JoinColumn(name = "id_nivel2", referencedColumnName = "id")
     @ManyToOne
     private Nivel2 idNivel2;
@@ -88,6 +95,30 @@ public class Mantenimiento implements Serializable {
     private Collection<SegumientoMantno> segumientoMantnoCollection;
 
     public Mantenimiento() {
+    }
+
+    public String getFrecuencia() {
+        return frecuencia;
+    }
+
+    public void setFrecuencia(String frecuencia) {
+        this.frecuencia = frecuencia;
+    }
+
+    public Integer getValorPresupuesto() {
+        return valorPresupuesto;
+    }
+
+    public void setValorPresupuesto(Integer valorPresupuesto) {
+        this.valorPresupuesto = valorPresupuesto;
+    }
+
+    public String getValor_final() {
+        return valor_final;
+    }
+
+    public void setValor_final(String valor_final) {
+        this.valor_final = valor_final;
     }
 
     public Mantenimiento(Integer id) {

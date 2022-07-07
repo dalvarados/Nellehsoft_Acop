@@ -71,6 +71,7 @@ public class MantenimientoController implements Serializable {
 
     public void create() {
         selected.setIdUsuario(user);
+        selected.setFechaCreacion(fechaActual);
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("MantenimientoCreated"));
         if (!JsfUtil.isValidationFailed()) {
             items = null;    // Invalidate list of items to trigger re-query.

@@ -15,10 +15,12 @@
 
         <ui:define name="body">
             <h:form id="MantenimientoListForm">
-                <p:panel header="#{bundle.ListMantenimientoTitle}">
+                <br></br><br></br>
+                <p:panel header="Listado de Mantenimientos Vigentes">
+                    <br></br><br></br>
                     <p:dataTable id="datalist" value="#{mantenimientoController.items}" var="item"
                                  selectionMode="single" selection="#{mantenimientoController.selected}"
-                                 paginator="true"
+                                 paginator="true" paginatorPosition="bottom"
                                  rowKey="#{item.id}"
                                  rows="10"
                                  rowsPerPageTemplate="10,20,30,40,50"
