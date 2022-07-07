@@ -4,7 +4,6 @@
  */
 package negocio;
 
-import java.math.BigInteger;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -32,17 +31,22 @@ public class EstadosPqrFacade extends AbstractFacade<EstadosPqr> {
         super(EstadosPqr.class);
     }
     
-    public Integer obtener_nombre_estado_pqr( String nombre){
+    public Integer obtener_id_x_nombre_estado_pqr( String nombre){
         String sql = "select id from estados_pqr where nombre=?1"; 
         TypedQuery<Integer> lQuery = (TypedQuery<Integer>) em.createNativeQuery(sql, Integer.class).setParameter(1,nombre);
         Integer idEstadoPqr = lQuery.getSingleResult();    
     return idEstadoPqr;       
     }
     
+    public EstadosPqr obtener_nombre_estado_pqr( String nombre){
+        Query esreg = em.createNamedQuery("EstadosPqr.findByNombre").setParameter("nombre",nombre);                    
+    return (EstadosPqr) esreg.getSingleResult();       
+    }    
+    
     public List<EstadosPqr> obtenerEstadoPqrNoCerrada (){
         Query esp = em.createNamedQuery("EstadosPqr.findByNombreNoCerrada");
         return esp.getResultList();
-    }
+    }        
 
     public List<EstadosPqr> obtenerEstadoPpal (String nombreEstado,Integer id){
         Query espp = em.createNamedQuery("EstadosPqr.findByEstadoPpal").setParameter("nombreEstado",nombreEstado).setParameter("id",id);

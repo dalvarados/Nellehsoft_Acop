@@ -8,7 +8,7 @@
 
     <ui:composition>
 
-        <p:dialog id="PqrEditDlg"  style="width:10%" widgetVar="PqrEditDialog" modal="true" resizable="false" 
+        <p:dialog id="PqrEditDlg"  style="width:10%" widgetVar="PqrEditDialog" closable="false" modal="true" resizable="false" 
                   appendTo="@(body)" header="#{bundle.EditPqrTitle}">
             <h:form id="PqrEditForm"> 
                 <h:panelGroup id="display">
@@ -102,7 +102,7 @@
                             </f:facet>
                             <h:outputText value="#{item.estado}"/>
                         </p:column>
-                        <p:column style="width:40%">
+                        <p:column style="width:70%">
                             <f:facet name="header">
                                 <h:outputText value="Usuario"/>
                             </f:facet>
@@ -114,6 +114,11 @@
                                              update=":SeguimientoAdmPqrEditForm,:PqrDatalistForm:datalist" 
                                              oncomplete="PF('SeguimientoAdmPqrEditDialog').show()"
                                              disabled="#{empty pqrController.selectedEditSeguimientoAdmPqr}"/>
+                            <p:commandButton id="CerrarButton"   value="Cerrar" 
+                                             actionListener="#{pqrController.cerrarPqr}" 
+                                             update=":PqrDatalistForm:datalist" 
+                                             onclick="PqrEditDialog.hide()"
+                                             />                             
                         </f:facet>                
                     </p:dataTable>
                     </p:panel>

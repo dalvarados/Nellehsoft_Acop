@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <p:dialog id="AcercaDe" widgetVar="AcercaDeDialog" header="Informacion de Producto" modal="true" resizable="false" appendTo="@(body)"> 
+          <f:event type="preRenderView" listener="#{empresaController.obtener_empresa()}"/>        
+            <h:form id="AcercaDeForm">
+                    <table border="0"> 
+                        <tr>     
+                        <p:separator></p:separator>                            
+                        <h:outputLabel value="Producto: #{empresaController.objeto_empresa.productoNellehsoft.toUpperCase()}"/><br></br>
+                        <h:outputLabel value="Version: #{empresaController.objeto_empresa.version.toUpperCase()}"/>
+                        <br></br><br></br>
+                        <h:outputLabel value="Licenciado a:"/>
+                        <br></br>
+                        <h:outputLabel value="Empresa: #{empresaController.objeto_empresa.nombre.toUpperCase()}"/><br></br>
+                        <h:outputLabel value="Nit: #{empresaController.objeto_empresa.nit}"/><br></br>
+                        <h:outputLabel value="Licencia: #{empresaController.objeto_empresa.licencia.toUpperCase()}"/>
+                        <br></br><br></br>
+                        </tr>                     
+                        <tr>
+                            <p:separator></p:separator>
+                        <h:outputLabel value="Contactanos:"/>                           
+                        <td>
+                        <h:graphicImage  library="imagenes"  style="width: 80px; height: 40px;" 
+                                         name="logo_nellehsoft_INICIALES.png"/>                                                       
+                        </td> 
+                            <td><p:spacer width="15"></p:spacer></td>
+                            <td>                                                    
+                             <h:outputLabel value="Correo: dalvarado@nellehsoft.com.co"/><br></br>  
+                             <h:outputLabel value="Web: www.nellehsoft.com.co"/><br></br>  
+<!--                             <h:outputLabel value="Telefono: 8888812"/><br></br> -->
+                             <h:outputLabel value="Ciudad: Bogota"/><br></br> 
+                            </td>
+                            <br></br>
+                        </tr>
+                    </table> 
+                <table>
+                    <tr>
+                        <br></br>
+                        <p:separator></p:separator>
+                       <h:outputLabel value="Nuestros productos en Nellehsoft: "/><br></br><br></br>   
+                       <h:outputLabel value="* Control y gestion de proyectos empresariales."/><br></br> 
+                       <h:outputLabel value="* Facturacion pos e inventarios para diferentes tipos de negocios."/><br></br> 
+                       <h:outputLabel value="* Administracion de Iglesias."/><br></br>                        
+                    </tr>
+                </table>
+            </h:form>
+        </p:dialog>
+</html>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="#{usuarioController.templateDinamico()}">
+        <ui:define name="title">
+                <h:outputText value="::: Nelleh- POS"> </h:outputText>
+
+        </ui:define>
+
+        <ui:define name="body" >
+            <style type="text/css">
+                .ui-layout-unit-content{background-image:url('../resources/imagenes/fondo_principal.jpg');background-size:100% auto; margin:0px;}
+            </style>
+            <table  border="0"  align="left"> 
+            <tr>
+                <td align="left" valign="top">
+                        <h:graphicImage  library="imagenes"  style="width: 380px; height: 100px;" 
+                                         name="logo_nellehsoft_ok.png"/>  
+                    <br></br>
+                </td>                
+                <td align="left" valign="top">
+                    <br></br>
+                </td> 
+            </tr>
+            <tr>  
+                <td align="left" valign="top">
+
+                    <br></br>
+                </td>                 
+            <td align="center" valign="top">           
+               <h:form>               
+                   <table width="30%" border="0"   cellpadding="0" cellspacing="35">                    
+                    <tr>
+                        <td>
+                        <br></br><br></br>                           
+                        <p:commandLink  ajax="false" action="PrimeFaces.monitorDownload(start, stop);">
+                        <h:graphicImage   library="imagenes"  style="width: 90px; height: 85px;"  name="manual.png"/>                          
+                        <p:fileDownload  value="#{descargarManual.file}"/>                        
+                        </p:commandLink>  
+                        <h:outputLabel value="Manual"/>
+                        </td>
+                        <td>
+                        <br></br><br></br>
+                        <p:commandLink  ajax="false" actionListener="#{ejecutarBatch.ejecutaBacth()}">
+                        <h:graphicImage   library="imagenes"  style="width: 90px; height: 95px;"  name="backup.png"/>                   
+                        </p:commandLink>  
+                        
+                        <h:outputLabel value="Backup"/>  
+                        </td>
+
+
+                        <td>
+                        <br></br><br></br>
+                        <p:commandLink  oncomplete="PF('AccesosLinkDialog').show()">
+                        <h:graphicImage   library="imagenes"  style="width: 90px; height: 85px;"  name="link.png"/>                                        
+                        </p:commandLink>                        
+                        <h:outputLabel value="Accesos"/>  
+                        </td>
+                        <td>
+                        <br></br><br></br>                        
+                        <p:commandLink  oncomplete="PF('AcercaDeDialog').show()">
+                        <h:graphicImage   library="imagenes"  style="width: 90px; height: 85px;"  name="acerca_de.png"/>                   
+                        </p:commandLink> 
+                        <h:outputLabel value="Acerca De"/>  
+                        </td>
+                    </tr>                       
+                 </table>                   
+                </h:form>  
+            </td>
+            </tr>
+        </table>  
+        <ui:include src="../paginas/accesos_link.xhtml"/>     
+        <ui:include src="../paginas/AcercaDe.xhtml"/> 
+        </ui:define>
+    </ui:composition>
+
+</html>

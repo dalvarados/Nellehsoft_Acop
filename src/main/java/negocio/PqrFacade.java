@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import persistencia.EstadosPqr;
 import persistencia.Pqr;
 
 /**
@@ -51,6 +52,11 @@ public class PqrFacade extends AbstractFacade<Pqr> {
                   + "WHERE id=?2";       
           em.createNativeQuery(sql).setParameter(1, idEstadoPqr ) 
           .setParameter(2, id).executeUpdate();
-    }    
+    }
+
+    public Pqr obtenerEstadoPqrId (int id){
+        Query esp = em.createNamedQuery("Pqr.findById").setParameter("id",id);
+        return (Pqr) esp.getSingleResult();
+    }         
     
 }

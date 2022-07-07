@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "EstadosPqr.findById", query = "SELECT e FROM EstadosPqr e WHERE e.id = :id"),
     @NamedQuery(name = "EstadosPqr.findByNombre", query = "SELECT e FROM EstadosPqr e WHERE e.nombre = :nombre"),
     @NamedQuery(name = "EstadosPqr.findByEstadoPpal", query = "SELECT e FROM EstadosPqr e WHERE e.estadoPpal = :nombreEstado and e.idRol.id=:id"),
-    @NamedQuery(name = "EstadosPqr.findByNombreNoCerrada", query = "SELECT e FROM EstadosPqr e WHERE e.nombre <> 'Cerrada'")
+    @NamedQuery(name = "EstadosPqr.findByNombreNoCerrada", query = "SELECT e FROM EstadosPqr e WHERE e.id IN (SELECT MIN(e.id) FROM EstadosPqr e WHERE e.nombre <> 'Cerrada' GROUP BY e.nombre)")
+    //@NamedQuery(name = "EstadosPqr.findByNombreNoCerrada", query = "SELECT e FROM EstadosPqr e WHERE e.nombre <> 'Cerrada'")
 })
 public class EstadosPqr implements Serializable {
 

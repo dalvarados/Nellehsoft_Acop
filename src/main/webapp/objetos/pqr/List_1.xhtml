@@ -45,12 +45,19 @@
                             </f:facet>
                             <h:outputText value="#{item.asunto}"/>
                         </p:column>
-                        <p:column style="width: 10%" filterBy="#{item.idEstadoPqr.nombre}"  filterMatchMode="startsWith">
-                            <f:facet name="header">
-                                <h:outputText value="Estado"/>
+                        <p:column filterBy="#{item.idEstadoPqr}" headerText="Estado" filterMatchMode="exact">
+                            <f:facet name="filter"> 
+                                <p:selectOneMenu onchange="PF('estadoPqr').filter()">
+                                    <f:selectItem itemLabel="Todas" itemValue="#{item.idEstadoPqr.nombre}" 
+                                                  noSelectionOption="true" />
+                                    <f:selectItems value="#{pqrController.itemsEstadoNoCerrada}" 
+                                                   var="idestadoItem"
+                                                           itemValue="#{idestadoItem}" itemLabel="#{idestadoItem.nombre}"/>
+                                </p:selectOneMenu>
                             </f:facet>
-                            <h:outputText value="#{item.idEstadoPqr.nombre}"/>                                                            
-                        </p:column>
+                            <h:outputText value="#{item.idEstadoPqr.nombre}" />
+                        </p:column>                    
+                        
                         <p:column>
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListPqrTitle_idTipoPqr}"/>

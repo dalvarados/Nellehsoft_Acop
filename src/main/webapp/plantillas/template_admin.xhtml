@@ -21,7 +21,10 @@
                     <p:menubar autoDisplay="false">
                         <p:menuitem  value="#{bundle.Home}" outcome="/paginas/principal_admin.xhtml" icon="ui-icon-home"/>
                         <p:submenu label="Servicios">
-                            <p:menuitem value="Mantenimiento" outcome="/objetos/mantenimiento/List_adm.xhtml" />
+                            <p:submenu label="Mantenimiento">
+                                <p:menuitem value="Administrar" outcome="/objetos/mantenimiento/List_adm.xhtml"/>                                  
+                                <p:menuitem value="Agenda Programados" outcome="/paginas/paginaConstruccion.xhtml" />                         
+                            </p:submenu>                            
                             <p:submenu label="Pqr">
                                 <p:menuitem value="Administrar" outcome="/objetos/pqr/List.xhtml"/>                                  
                                 <p:menuitem value="Agenda Nuevos" outcome="/objetos/pqr/View_calendario_pqr_nuevos.xhtml" />
@@ -38,20 +41,24 @@
                             <p:menuitem value="Propietario" outcome="/objetos/propietario/List.xhtml" />                        
                             <p:menuitem value="EstadoDeCuenta" outcome="/objetos/estadoDeCuenta/List.xhtml" /> 
                         </p:submenu>    
-                        <p:submenu label="Configuracion">
+                        <p:submenu label="Parametrizacion">
                             <p:menuitem value="Tercero" outcome="/objetos/tercero/List.xhtml" />                            
                             <p:menuitem value="TipoNivel" outcome="/objetos/tipoNivel/List.xhtml" />
                             <p:menuitem value="EstadosPqr" outcome="/objetos/estadosPqr/List.xhtml" />
                             <p:menuitem value="TipoPqr" outcome="/objetos/tipoPqr/List.xhtml" />
                             <p:menuitem value="TipoReserva" outcome="/objetos/tipoReserva/List.xhtml" />
-                            <p:menuitem value="Usuario" outcome="/objetos/usuario/List.xhtml" />
-                            <p:menuitem value="Rol" outcome="/objetos/rol/List.xhtml" />
+                            <p:submenu label="Niveles">
                             <p:menuitem value="Nivel1" outcome="/objetos/nivel1/List.xhtml" />
                             <p:menuitem value="Nivel2" outcome="/objetos/nivel2/List.xhtml" />
-                            <p:menuitem value="Nivel3" outcome="/objetos/nivel3/List.xhtml" />
+                            <p:menuitem value="Nivel3" outcome="/objetos/nivel3/List.xhtml" />                             </p:submenu>                             
+                        </p:submenu>                             
+                        <p:submenu label="Sistema">    
+                            <p:menuitem value="Usuario" outcome="/objetos/usuario/List.xhtml" />
+                            <p:menuitem value="Rol" outcome="/objetos/rol/List.xhtml" />
                             <p:menuitem value="Ciudad" outcome="/objetos/ciudad/List.xhtml" />
                             <p:menuitem value="Copropiedad" outcome="/objetos/copropiedad/List.xhtml" />                            
                         </p:submenu>
+                        <p:menuitem value="Ayuda" outcome="/paginas/paginaConstruccion.xhtml" />
                     </p:menubar>
                 </h:form>
                 <table  border="0" cellpadding="5" cellspacing="0" width="105%">
@@ -75,7 +82,7 @@
                 </table>                 
             </p:layoutUnit>
 
-            <p:layoutUnit position="south" size="40">
+            <p:layoutUnit position="south" size="20">
                 <ui:insert name="footer"/>
             </p:layoutUnit>
 
